@@ -1,0 +1,13 @@
+{
+    "create_acc": "CREATE ACCOUNT",
+    "sign_in": "SIGN IN",
+
+    "agreement1": "By tapping ‘Sign in’ you agree to our ",
+    "agreement2": "Terms. ",
+    "agreement3": "Learn how we process your data in our ",
+    "agreement4": "Privacy Policy",
+
+    "sign_in_with_apple": "SIGN IN WITH APPLE",
+    "sign_in_with_google": "SIGN IN WITH GOOGLE ",
+    "sign_in_with_phone_number": "SIGN IN WITH PHONE NUMBER"
+}
