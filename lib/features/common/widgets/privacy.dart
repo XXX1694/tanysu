@@ -41,8 +41,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
 
   Future<String> readFileContents() async {
     try {
-      final file = File(
-          'assets/privacy.txt'); // Replace 'example.txt' with your file's name
+      final file = File('assets/privacy.txt');
 
       if (await file.exists()) {
         final contents = await file.readAsString();

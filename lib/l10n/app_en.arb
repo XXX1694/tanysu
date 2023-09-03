@@ -9,5 +9,28 @@
 
     "sign_in_with_apple": "SIGN IN WITH APPLE",
     "sign_in_with_google": "SIGN IN WITH GOOGLE ",
-    "sign_in_with_phone_number": "SIGN IN WITH PHONE NUMBER"
+    "sign_in_with_phone_number": "SIGN IN WITH PHONE NUMBER",
+
+    "get_number_main_text": "Can we get your number?",
+    "get_number_second_text": "We’ll text you a code to verify you’re really you. Message and data rates may apply.",
+    "phone_number": "Phone number",
+    "next": "Next",
+
+    "otp_main_text": "Enter your code",
+    "resend": "Resend",
+    "email_main_text": "Your email?",
+    "email_second_text": "Don’t lose access to your account, verify your email.",
+    "enter_email": "Enter email",
+
+    "password_page_main_text": "Create password",
+    "password_page_second_text": "Your password must be at least 8 characters long, be of mixed case and also contain a digit or symbol.",
+    "password": "Password",
+    "repeat_password": "Repeat password",
+    "create": "Create",
+
+    "create_profile_main_text": "Create profile",
+    "enter_first_name": "Enter first name *",
+    "enter_birth_date": "Birth date *",
+    "enter_gender": "Enter your gender *",
+    "enter_city": "City *"
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:tanysu/features/common/widgets/privacy.dart';
+import 'package:tanysu/features/create_profile/presentation/pages/create_profile_page.dart';
 import 'package:tanysu/features/login/presentation/pages/login_page.dart';
+import 'package:tanysu/features/registration/presentation/pages/get_number_page.dart';
+import 'package:tanysu/features/registration/presentation/pages/otp_verification_page.dart';
+import 'package:tanysu/features/registration/presentation/pages/password_page.dart';
 import 'package:tanysu/l10n/l10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -40,6 +44,10 @@ class _MainAppState extends State<MainApp> {
       routes: {
         '/': (context) => const LoginPage(),
         '/privacy': (context) => const PrivacyPage(),
+        '/get_number': (context) => const GetNumberPage(),
+        '/otp': (context) => const OTPVerificationPage(),
+        '/password/create': (context) => const CreatePasswordPage(),
+        '/profile/create': (context) => const CreateProfilePage(),
       },
     );
   }

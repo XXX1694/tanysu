@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/features/common/widgets/colors.dart';
 
-class MainButtonFilled extends StatelessWidget {
-  const MainButtonFilled({
+class MainButtonFilledWhite extends StatelessWidget {
+  const MainButtonFilledWhite({
     super.key,
     required this.text,
     required this.onPressed,
@@ -20,14 +20,14 @@ class MainButtonFilled extends StatelessWidget {
         width: double.infinity,
         height: 50,
         decoration: BoxDecoration(
-          color: secondColor,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(100),
         ),
         child: Center(
           child: Text(
             text,
             style: GoogleFonts.montserrat(
-              color: Colors.white,
+              color: secondColor,
               fontSize: 14,
               fontWeight: FontWeight.w700,
             ),
