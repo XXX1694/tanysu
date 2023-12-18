@@ -1,0 +1,70 @@
+{
+  "project_info": {
+    "project_number": "848296565441",
+    "project_id": "tanysu-a540c",
+    "storage_bucket": "tanysu-a540c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848296565441:android:1305e6b53cf60e086ad240",
+        "android_client_info": {
+          "package_name": "com.tanysu.kz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848296565441-71k2ui01gvuhsfja4uvm2r2ds4vor975.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tanysu.kz",
+            "certificate_hash": "b9a88d483a6246610d0ae1b0444c3b32c5227d51"
+          }
+        },
+        {
+          "client_id": "848296565441-c82l4ftfohshsk89oqsrqal4qpba644t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tanysu.kz",
+            "certificate_hash": "6fcc55f1fd93792d6c3ba255bb5a6dd0abf1a849"
+          }
+        },
+        {
+          "client_id": "848296565441-hqgucoqmk683rr1iorn4mqrg6mokorov.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tanysu.kz",
+            "certificate_hash": "cac0549f33a5180a6058cc1f06b063829c7094a1"
+          }
+        },
+        {
+          "client_id": "848296565441-26q724o07sudf8repm7eucl38a6ft38g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5aFQqEo3LdVYeVOvi6a7s9XCjMS28QxU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848296565441-26q724o07sudf8repm7eucl38a6ft38g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848296565441-1elfje98klslc3rh5pns80rmo4ghm194.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tanysu.kz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

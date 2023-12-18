@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:tanysu/features/registration/presentation/pages/user_auth_data_page.dart';
 
 import '../../../../l10n/translate.dart';
-import '../../../common/widgets/main_button_filled_white.dart';
-import '../../../common/widgets/main_button_outlined.dart';
+import '../../../../common/widgets/main_button_filled_white.dart';
+import '../../../../common/widgets/main_button_outlined.dart';
 import 'agreement.dart';
 
 class MainSignInBlock extends StatelessWidget {
-  const MainSignInBlock({super.key, required this.callback});
+  const MainSignInBlock({
+    super.key,
+    required this.callback,
+  });
   final Function(bool) callback;
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,11 @@ class MainSignInBlock extends StatelessWidget {
             MainButtonFilledWhite(
               text: translation(context).create_acc,
               onPressed: () {
-                Navigator.pushNamed(context, '/get_number');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const UserAuthDataPage(),
+                    ));
               },
             ),
             const SizedBox(height: 20),

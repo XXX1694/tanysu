@@ -7,13 +7,13 @@
     "agreement3": "Learn how we process your data in our ",
     "agreement4": "Privacy Policy",
 
-    "sign_in_with_apple": "SIGN IN WITH APPLE",
-    "sign_in_with_google": "SIGN IN WITH GOOGLE ",
-    "sign_in_with_phone_number": "SIGN IN WITH PHONE NUMBER",
+    "sign_in_with_apple": "WITH APPLE",
+    "sign_in_with_google": "WITH GOOGLE ",
+    "sign_in_with_phone_number": "WITH EMAIL",
 
-    "get_number_main_text": "Can we get your number?",
+    "get_number_main_text": "Can we get your email?",
     "get_number_second_text": "We’ll text you a code to verify you’re really you. Message and data rates may apply.",
-    "phone_number": "Phone number",
+    "phone_number": "Email",
     "next": "Next",
 
     "otp_main_text": "Enter your code",
@@ -32,5 +32,153 @@
     "enter_first_name": "Enter first name *",
     "enter_birth_date": "Birth date *",
     "enter_gender": "Enter your gender *",
-    "enter_city": "City *"
+    "enter_city": "City *",
+
+    "pic_main_text": "Add your recent pics",
+    "pic_second_text": "Upload 2 photos to start. Add 4 photos to make your profile stand out.",
+    
+    "choose_partner_main": "Who are you interested in seeing?",
+    "woman": "Woman",
+    "man": "Man",
+    "everyone": "Everyone",
+
+    "choose_main": "Want to start instant?",
+    "start_using_app": "Start using the app",
+    "continue_registration": "Continue registration",
+
+    "main": "Main",
+    "likes": "Likes",
+    "chat": "Chat",
+    "profile": "Profile",
+
+    "skip": "Skip",
+    
+    "school_page_main_text": "If school’s your thing...",
+    "school_page_field_text": "Choose where you study or studing",
+    "job_main_text": "Your job title",
+    "job_field_text": "Doctor, teacher, e.t.c",
+    "company_field_text": "Company name",
+    "looking_for_main_text": "I’m looking for ...",
+    "loogin_for_second_text": "Increase compatibility by sharing yours!",
+    "about_me_main_text": "About me ...",
+    "about_me_second_text": "Write about yourself",
+    "about_me_field_text": "Write your interests",
+    "juz_main_text": "Choose your JUZ",
+    "juz_second_text": "Choose your juz and after your ru. If you don’t know your juz, just delete this app. ",
+    "orta_juz": "Orta jüz",
+    "kishi_juz": "Kışı jüz",
+    "ulu_juz": "Ūly jüz",
+    "other": "Other",
+
+    "login_main_text": "Log in",
+    "login_second_text": "Write your data to enter to the system",
+    "login": "Log in",
+
+    "theme": "Theme",
+    "language": "Language",
+    "faq": "FAQ",
+
+    "coins": "coins",
+    "complete": "COMPLETE",
+    "followers": "followers",
+    "taken": "taken",
+    "buy_a_coin": "Buy a coin",
+    "write_first": "Write first",
+
+    "liled_me": "Liked me",
+    "i_liked": "I Liked",
+
+    "yes": "Yes",
+    "no": "No",
+    "empty": "Empty",
+    "select_city": "Select city",
+    "error": "Error",
+    "choose_gender": "Choose gender",
+    "chat_get_error": "Chat ger error",
+    "something": "Something went wrong",
+    "not_found": "Not found",
+
+    "settings": "Settings",
+    "change_language": "Change language",
+    "log_out": "Log out",
+
+    "location_pr": "Location: ",
+    "work_pr": "Work: ",
+    "study_pr": "Study: ",
+    "about_pr": "About: ",
+    "followers": "followers",
+    "coins": "coins",
+    "send_a_gift": "Send a gift",
+
+    "report": "Report",
+    "no_internet_connection": "No internet connection!",
+    "privacy_policy": "Privacy Policy",
+    "block": "Block",
+    "block_sub": "You won’t see them, and they won’t see you.",
+    "do_you_really": "Do you really want to block that person",
+    "report_sub": "Don’t worry - we won’t tell them.",
+    "unmatch": "Unmatch",
+    "success_t": "Succeess",
+    "filter": "Filter",
+    "city": "City",
+    "try_to_find": "Try to find",
+    "age": "Age",
+    "search": "Seaarch",
+    "notification": "Notification",
+
+    "short_term": "Short-term fun",
+    "long_term": "Long-term partner",
+    "short_term_l": "Short-term, but long-term OK",
+    "long_term_s": "Long-term, but short-term OK",
+    "new_friends": "New friends",
+    "still": "Still figuring it out",
+    "email_exist": "Email already exist!",
+    "write_reason": "Write reason",
+    "report_second": "It will be hidden from that person",
+    "send_gift_to" : "Send gift to",
+    "you_have": "You have: ",
+    "rose": "Rose",
+
+    "change_image": "Edit image",
+    "delete_image": "Delete image",
+    "are_you_sure" : "Are you sure?",
+    "confirm": "Confirm",
+
+    "support": "Support",
+    "support_text": "If there are errors and suggestions, write",
+    "account_delete": "Delete account",
+    "message": "Message...",
+
+    "user_blocked": "User blocked!",
+    "user_block_error": "User block error!",
+
+    "welcome": "Welcome to tanysu",
+    "welcome_text": "You have successfully logged into the tanysu app",
+
+    "user_reported": "The complaint has been sent!",
+    "user_report_error": "The complaint has not been sent!",
+
+    "why_report": "Why you want to report?",
+    "image_uploaded": "Image was successfully uploaded",
+
+    "fake_profile": "Fake profile",
+    "inapropriate_content": "Inappropriate content",
+    "adv": "Fraud or advertising",
+    "disc": "Discrimination",
+    "y_user": "A minor user",
+    "not_interested": "I'm not interested in this profile",
+    "other_p": "Other",
+
+    "email_empty": "Email field is empty!",
+    "password_empty": "Password field is empty!",
+
+    "name_empty": "Name is required",
+    "birth_date_empty": "Birthday is required",
+    "city_empty": "City is required",
+    "gender_required": "Gender is required",
+
+    "juz_field": "Adai, Naiman e.t.c."
+
+
+
 }
