@@ -6,10 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tanysu/common/constants/colors.dart';
 import 'package:tanysu/features/profile_page/presentation/bloc/profile_page_bloc.dart';
+import 'package:tanysu/features/profile_page/presentation/widgets/coins_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/name_block.dart';
 
 import 'package:tanysu/features/profile_page/presentation/widgets/photo_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/profile_page_app_bar.dart';
+import 'package:tanysu/features/profile_page/presentation/widgets/user_main_info.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -54,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
             } else if (state is ProfileGot) {
               return SmartRefresher(
                 enablePullDown: true,
-                enablePullUp: true,
+                enablePullUp: false,
                 controller: _refreshController,
                 onRefresh: () async {
                   await Future.delayed(const Duration(milliseconds: 500));
@@ -71,18 +73,18 @@ class _ProfilePageState extends State<ProfilePage> {
                         age: state.model.age ?? 0,
                       ),
                       const SizedBox(height: 20),
-                      // UserMainInfo(
-                      //   followers: state.model.followers_count ?? 0,
-                      //   coins: 0,
-                      // ),
-                      // const SizedBox(height: 28),
+                      UserMainInfo(
+                        followers: state.model.followers_count ?? 0,
+                        coins: 0,
+                      ),
+                      const SizedBox(height: 28),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 35),
                         child: Divider(color: Colors.black26),
                       ),
                       const SizedBox(height: 16),
-                      // const CoinsBlock(coins: 0),
-                      // const SizedBox(height: 40),
+                      const CoinsBlock(coins: 0),
+                      const SizedBox(height: 40),
                     ],
                   ),
                 ),

@@ -18,6 +18,7 @@ class UpdateProfile extends EditProfileEvent {
   final String? school;
   final String? about;
   final String? juz;
+  final String? tryToFind;
 
   const UpdateProfile({
     required this.about,
@@ -30,5 +31,6 @@ class UpdateProfile extends EditProfileEvent {
     required this.profileId,
     required this.school,
     required this.juz,
+    required this.tryToFind,
   });
 }

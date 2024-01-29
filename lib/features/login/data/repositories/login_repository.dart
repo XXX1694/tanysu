@@ -13,18 +13,29 @@ class LoginRepository {
     required String password,
   }) async {
     final storage = await _storage;
+    String? firebaseToken = storage.getString('firebase_token');
     final url = mainUrl;
-    String finalUrl = '${url}auth/token/login/';
+    String finalUrl = '${url}users/login/';
     final dio = Dio();
     Uri? uri = Uri.tryParse(finalUrl);
     if (uri != null) {
       try {
+        print(
+          jsonEncode(
+            {
+              'email': email,
+              'password': password,
+              "firebase": firebaseToken ?? '',
+            },
+          ),
+        );
         final response = await dio.post(
           finalUrl,
           data: jsonEncode(
             {
               'email': email,
               'password': password,
+              "firebase": firebaseToken ?? '',
             },
           ),
         );

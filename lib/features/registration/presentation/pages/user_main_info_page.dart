@@ -73,6 +73,11 @@ class _UserMainInfoPageState extends State<UserMainInfoPage> {
                     showSnackBar(context, translation(context).city_empty);
                   } else if (genderController.text.isEmpty) {
                     showSnackBar(context, translation(context).gender_required);
+                  } else if (nameController.text.length > 25) {
+                    showSnackBar(
+                        context,
+                        translation(context)
+                            .name_can_not_be_more_than_25_symbols);
                   } else {
                     Navigator.push(
                       context,

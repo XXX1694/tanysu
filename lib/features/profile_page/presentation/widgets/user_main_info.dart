@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/common/functions/show_snack_bar.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class UserMainInfo extends StatelessWidget {
@@ -82,7 +83,9 @@ class UserMainInfo extends StatelessWidget {
               ),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            showSnackBar(context, translation(context).payment_not_working);
+          },
         ),
       ],
     );

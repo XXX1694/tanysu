@@ -12,6 +12,7 @@ import 'package:tanysu/common/providers/home_provider.dart';
 import 'package:tanysu/features/message/presentation/pages/message_page.dart';
 import 'package:tanysu/features/chat_page/presentation/bloc/chat_page_bloc.dart';
 import 'package:tanysu/features/get_user_id/presentation/bloc/get_user_id_bloc.dart';
+import 'package:tanysu/features/message/presentation/pages/message_page_public.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class ChatPage extends StatefulWidget {
@@ -39,8 +40,8 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     // bloc.add(GetAllChats());
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        actions: const [],
         elevation: 0,
         backgroundColor: Colors.white,
         centerTitle: true,
@@ -62,12 +63,19 @@ class _ChatPageState extends State<ChatPage> {
               Expanded(
                 child: BlocBuilder<GetUserIdBloc, GetUserIdState>(
                   builder: (context, state1) {
-                    return BlocBuilder<ChatPageBloc, ChatPageState>(
+                    return BlocConsumer<ChatPageBloc, ChatPageState>(
+                      listener: (context, state) {
+                        if (state is ChatDeleted || state is ChatDeleteError) {
+                          bloc.add(
+                            GetAllChats(),
+                          );
+                        }
+                      },
                       builder: (context, state) {
                         if (state is ChatListGot && state1 is GotUserId) {
                           return SmartRefresher(
                             enablePullDown: true,
-                            enablePullUp: true,
+                            enablePullUp: false,
                             controller: _refreshController,
                             onRefresh: () async {
                               await Future.delayed(
@@ -99,39 +107,73 @@ class _ChatPageState extends State<ChatPage> {
                                 onDismissed: (direction) {
                                   setState(
                                     () {
-                                      bloc.add(DeleteChat(
-                                          chatId: state.chats[index].id));
+                                      bloc.add(
+                                        DeleteChat(
+                                          chatId: state.chats[index].id,
+                                        ),
+                                      );
                                     },
                                   );
                                 },
                                 child: CupertinoButton(
                                   padding: const EdgeInsets.only(bottom: 20),
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            ChangeNotifierProvider(
-                                          create: (context) => HomeProvider(),
-                                          child: MessagePage(
-                                            name: state
-                                                    .chats[index].is_admin_chat
-                                                ? translation(context).support
-                                                : (state.chats[index].profile[
-                                                        'first_name'] ??
-                                                    ''),
-                                            image: state.chats[index]
-                                                        .profile['image']
-                                                    ['image_url'] ??
-                                                '',
-                                            chatId: state.chats[index].id,
-                                            userId: state1.userId,
-                                            profileId: state
-                                                .chats[index].profile['id'],
+                                    if (state.chats[index].is_public) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ChangeNotifierProvider(
+                                            create: (context) => HomeProvider(),
+                                            child: PublicMessagePage(
+                                              name: state.chats[index]
+                                                      .is_admin_chat
+                                                  ? translation(context).support
+                                                  : (state.chats[index].name ??
+                                                      ''),
+                                              image: state
+                                                      .chats[index].is_public
+                                                  ? state.chats[index]
+                                                          .group_photo ??
+                                                      ''
+                                                  : state.chats[index]
+                                                              .profile?['image']
+                                                          ['image_url'] ??
+                                                      '',
+                                              chatId: state.chats[index].id,
+                                              userId: state1.userId,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
+                                      );
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ChangeNotifierProvider(
+                                            create: (context) => HomeProvider(),
+                                            child: MessagePage(
+                                              name: state.chats[index]
+                                                      .is_admin_chat
+                                                  ? translation(context).support
+                                                  : (state.chats[index]
+                                                              .profile?[
+                                                          'first_name'] ??
+                                                      ''),
+                                              image: state.chats[index]
+                                                          .profile?['image']
+                                                      ['image_url'] ??
+                                                  '',
+                                              chatId: state.chats[index].id,
+                                              userId: state1.userId,
+                                              profileId: state
+                                                  .chats[index].profile?['id'],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
                                   },
                                   child: SizedBox(
                                     height: 50,
@@ -139,11 +181,15 @@ class _ChatPageState extends State<ChatPage> {
                                     child: Row(
                                       children: [
                                         CircleAvatar(
-                                          backgroundImage: NetworkImage(state
-                                                      .chats[index]
-                                                      .profile['image']
-                                                  ['image_url'] ??
-                                              ''),
+                                          backgroundImage: NetworkImage(
+                                              state.chats[index].is_public
+                                                  ? state.chats[index]
+                                                          .group_photo ??
+                                                      ''
+                                                  : state.chats[index]
+                                                              .profile?['image']
+                                                          ['image_url'] ??
+                                                      ''),
                                           onBackgroundImageError:
                                               (exception, stackTrace) =>
                                                   Container(
@@ -170,10 +216,14 @@ class _ChatPageState extends State<ChatPage> {
                                                             .is_admin_chat
                                                         ? translation(context)
                                                             .support
-                                                        : (state.chats[index]
-                                                                    .profile[
-                                                                'first_name'] ??
-                                                            ''),
+                                                        : state.chats[index]
+                                                                .is_public
+                                                            ? state.chats[index]
+                                                                .name
+                                                            : state.chats[index]
+                                                                        .profile?[
+                                                                    'first_name'] ??
+                                                                '',
                                                     style:
                                                         GoogleFonts.montserrat(
                                                       color: Colors.black,
@@ -219,6 +269,8 @@ class _ChatPageState extends State<ChatPage> {
                                                     : state.chats[index]
                                                             .last_message?[
                                                         'content'],
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: GoogleFonts.montserrat(
                                                   color: Colors.black54,
                                                   fontWeight: FontWeight.w400,

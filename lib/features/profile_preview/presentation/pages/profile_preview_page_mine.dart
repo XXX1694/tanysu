@@ -1,4 +1,4 @@
-import 'package:appinio_swiper/controllers.dart';
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

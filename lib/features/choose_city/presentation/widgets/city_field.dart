@@ -21,8 +21,6 @@ class CityField extends StatefulWidget {
   State<CityField> createState() => _CityFieldState();
 }
 
-CityModel? selectedValue;
-
 class _CityFieldState extends State<CityField> {
   late ChooseCityBloc bloc;
   @override
@@ -32,6 +30,7 @@ class _CityFieldState extends State<CityField> {
     super.initState();
   }
 
+  CityModel? selectedValue;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ChooseCityBloc, ChooseCityState>(

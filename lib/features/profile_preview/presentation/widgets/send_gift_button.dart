@@ -7,8 +7,10 @@ import 'package:tanysu/features/show_gifts/presentation/pages/show_gifts.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class SendGiftButton extends StatelessWidget {
-  const SendGiftButton({super.key, required this.userName});
+  const SendGiftButton(
+      {super.key, required this.userName, required this.profileId});
   final String userName;
+  final int profileId;
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
@@ -47,7 +49,11 @@ class SendGiftButton extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        showGifts(context, userName);
+        showGifts(
+          context,
+          userName,
+          profileId,
+        );
       },
     );
   }

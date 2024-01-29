@@ -5,7 +5,6 @@ import 'package:tanysu/l10n/translate.dart';
 
 class Agreement extends StatelessWidget {
   const Agreement({super.key});
-
   @override
   Widget build(BuildContext context) {
     return RichText(
@@ -32,7 +31,7 @@ class Agreement extends StatelessWidget {
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, '/privacy');
+                  Navigator.pushNamed(context, '/terms');
                 }),
           TextSpan(
             text: translation(context).agreement3,

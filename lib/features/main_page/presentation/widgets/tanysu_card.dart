@@ -1,4 +1,4 @@
-import 'package:appinio_swiper/controllers.dart';
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';

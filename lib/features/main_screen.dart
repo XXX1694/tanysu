@@ -5,6 +5,7 @@ import 'package:tanysu/features/chat_page/presentation/pages/chat_page.dart';
 import 'package:tanysu/common/constants/colors.dart';
 import 'package:tanysu/features/like_page/presentation/pages/like_page.dart';
 import 'package:tanysu/features/profile_page/presentation/pages/profile_page.dart';
+import 'package:tanysu/features/stream/presentation/pages/stream_page.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 import 'main_page/presentation/pages/main_page.dart';
@@ -35,6 +36,13 @@ class MainScreen extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(
+                'assets/icons/navigation_icons/stream_filled.svg'),
+            icon: SvgPicture.asset(
+                'assets/icons/navigation_icons/stream_outlined.svg'),
+            label: translation(context).stream,
+          ),
+          BottomNavigationBarItem(
+            activeIcon: SvgPicture.asset(
                 'assets/icons/navigation_icons/chat_filled.svg'),
             icon: SvgPicture.asset(
                 'assets/icons/navigation_icons/chat_outlined.svg'),
@@ -56,8 +64,10 @@ class MainScreen extends StatelessWidget {
           case 1:
             return const LikePage();
           case 2:
-            return const ChatPage();
+            return const StreamPage();
           case 3:
+            return const ChatPage();
+          case 4:
             return const ProfilePage();
           default:
             return const MainPage();

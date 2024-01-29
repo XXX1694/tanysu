@@ -14,7 +14,7 @@ class PrivacyPage extends StatefulWidget {
 class _PrivacyPageState extends State<PrivacyPage> {
   late WebViewPlusController _controller;
   double _height = 1;
-
+  bool loading = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,10 +25,11 @@ class _PrivacyPageState extends State<PrivacyPage> {
           translation(context).privacy_policy,
           style: GoogleFonts.montserrat(
             color: Colors.black,
-            fontSize: 18,
+            fontSize: 14,
             fontWeight: FontWeight.w500,
           ),
         ),
+        centerTitle: true,
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
@@ -46,12 +47,19 @@ class _PrivacyPageState extends State<PrivacyPage> {
             child: WebViewPlus(
               onWebViewCreated: (controller) {
                 _controller = controller;
-                controller.loadUrl('assets/index.html');
+                controller.loadUrl(
+                  translation(context).clang == 'en'
+                      ? 'assets/privacy.html'
+                      : translation(context).clang == 'ru'
+                          ? 'assets/privacy_ru.html'
+                          : 'assets/privacy_kk.html',
+                );
               },
               onPageFinished: (url) {
                 _controller.getHeight().then((double height) {
                   setState(() {
                     _height = height;
+                    loading = false;
                   });
                 });
               },

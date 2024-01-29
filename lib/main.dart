@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get/get.dart';
 import 'package:tanysu/api/firebase_api.dart';
 import 'package:tanysu/common/connection/dependency_injection.dart';
 import 'package:tanysu/common/constants/language_constants.dart';
 import 'package:tanysu/common/widgets/privacy.dart';
+import 'package:tanysu/common/widgets/terms.dart';
 import 'package:tanysu/features/add_image/data/repositories/add_image_repo.dart';
 import 'package:tanysu/features/add_image/presentation/bloc/add_image_bloc.dart';
 import 'package:tanysu/features/block_user/data/repositories/block_repostitory.dart';
@@ -65,15 +65,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'features/registration/presentation/bloc/registration_bloc/registration_bloc.dart';
 
 void main() async {
-  await AwesomeNotifications().initialize(null, [
-    NotificationChannel(
-      channelKey: 'basic_channel',
-      channelName: 'Basic notifications',
-      channelDescription: 'Notificationg channel for basic tests',
-    )
-  ]);
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await FirebaseApi().initNotifications();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   // await FirebaseAppCheck.instance.activate(
@@ -81,11 +76,16 @@ void main() async {
   //   androidProvider: AndroidProvider.debug,
   //   appleProvider: AppleProvider.appAttest,
   // );
+  await AwesomeNotifications().initialize(null, [
+    NotificationChannel(
+      channelKey: 'basic_channel',
+      channelName: 'Basic notifications',
+      channelDescription: 'Notificationg channel for basic tests',
+    )
+  ]);
   DependencyInjection.init();
   runApp(
-    Phoenix(
-      child: const MainApp(),
-    ),
+    const MainApp(),
   );
 }
 
@@ -303,6 +303,7 @@ class _MainAppState extends State<MainApp> {
             '/login/phone': (context) => const LoginByEmail(),
             '/main': (context) => const MainScreen(),
             '/privacy': (context) => const PrivacyPage(),
+            '/terms': (context) => const TermsPage(),
             '/choose': (context) => const ChoosePage(),
             '/search': (context) => const SearchPage(),
             '/filter': (context) => const FilterPage(),

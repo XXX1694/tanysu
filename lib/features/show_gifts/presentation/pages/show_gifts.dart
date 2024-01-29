@@ -8,7 +8,7 @@ import 'package:tanysu/common/constants/colors.dart';
 import 'package:tanysu/common/functions/show_snack_bar.dart';
 import 'package:tanysu/features/show_gifts/presentation/bloc/show_gifts_bloc.dart';
 
-Future showGifts(BuildContext context, String userName) {
+Future showGifts(BuildContext context, String userName, int profileId) {
   return showModalBottomSheet(
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
@@ -16,13 +16,17 @@ Future showGifts(BuildContext context, String userName) {
       ),
     ),
     context: context,
-    builder: (context) => Gifts(userName: userName),
+    builder: (context) => Gifts(
+      userName: userName,
+      profileId: profileId,
+    ),
   );
 }
 
 class Gifts extends StatefulWidget {
-  const Gifts({super.key, required this.userName});
+  const Gifts({super.key, required this.userName, required this.profileId});
   final String userName;
+  final int profileId;
   @override
   State<Gifts> createState() => _GiftsState();
 }
@@ -40,7 +44,16 @@ class _GiftsState extends State<Gifts> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocConsumer<ShowGiftsBloc, ShowGiftsState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is GiftSendSuccess) {
+          Navigator.pop(context);
+          showSnackBar(context, 'Подарок отправлен');
+        }
+        if (state is GiftSendError) {
+          Navigator.pop(context);
+          showSnackBar(context, 'Подарок не отправлен');
+        }
+      },
       builder: (context, state) {
         if (state is GotGifts) {
           return Container(
@@ -69,8 +82,12 @@ class _GiftsState extends State<Gifts> {
                         itemBuilder: (context, index) => CupertinoButton(
                           padding: const EdgeInsets.all(0),
                           onPressed: () {
-                            Navigator.pop(context);
-                            showSnackBar(context, 'Подарок отправлен');
+                            bloc.add(
+                              SendGift(
+                                giftId: state.gifts[index]['id'],
+                                receiver: widget.profileId,
+                              ),
+                            );
                           },
                           child: Column(
                             children: [

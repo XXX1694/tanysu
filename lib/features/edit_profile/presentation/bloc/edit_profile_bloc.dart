@@ -27,6 +27,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
             school: event.school,
             about: event.about,
             juz: event.juz,
+            tryToFind: event.tryToFind,
           );
           if (kDebugMode) {
             print(res);

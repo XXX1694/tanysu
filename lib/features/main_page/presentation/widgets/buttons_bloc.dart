@@ -1,21 +1,21 @@
-import 'package:appinio_swiper/controllers.dart';
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tanysu/common/constants/colors.dart';
-import 'package:tanysu/features/main_page/data/models/user.dart';
 import 'package:tanysu/features/main_page/presentation/bloc/swipe_bloc/swipe_bloc.dart';
+import 'package:tanysu/features/profile_preview/data/models/profile_model.dart';
 import 'package:tanysu/features/profile_preview/presentation/pages/profile_preview_page.dart';
 import 'package:tanysu/features/show_gifts/presentation/pages/show_gifts.dart';
 
 class ButtonsList extends StatelessWidget {
   const ButtonsList({
     super.key,
-    required this.user,
+    required this.profile,
     required this.controller,
   });
-  final UserModel user;
+  final ProfileModel profile;
   final AppinioSwiperController controller;
 
   @override
@@ -78,7 +78,8 @@ class ButtonsList extends StatelessWidget {
             onPressed: () {
               showGifts(
                 context,
-                user.first_name ?? '',
+                profile.first_name ?? '',
+                profile.id ?? 0,
               );
             },
             child: Container(
@@ -131,7 +132,7 @@ class ButtonsList extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ProfilePreviewPage(
-                    profileId: user.id ?? 0,
+                    profile: profile,
                     controller: controller,
                   ),
                 ),

@@ -17,3 +17,7 @@ class GotGifts extends ShowGiftsState {
 }
 
 class GetGiftError extends ShowGiftsState {}
+
+class GiftSendSuccess extends ShowGiftsState {}
+
+class GiftSendError extends ShowGiftsState {}

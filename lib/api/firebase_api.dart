@@ -18,7 +18,7 @@ class FirebaseApi {
       sound: true,
     );
     final fCMToken = await _firebaseMessaging.getToken();
-    storage.setString('firebase_token', fCMToken ?? '');
+    await storage.setString('firebase_token', fCMToken ?? '');
     if (kDebugMode) {
       print('Token: $fCMToken');
     }

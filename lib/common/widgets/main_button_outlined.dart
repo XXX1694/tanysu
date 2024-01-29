@@ -40,3 +40,31 @@ class MainButtonOutlined extends StatelessWidget {
     );
   }
 }
+
+class MainButtonOutlinedLoading extends StatelessWidget {
+  const MainButtonOutlinedLoading({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoButton(
+      padding: const EdgeInsets.all(0),
+      onPressed: () {},
+      child: Container(
+        width: double.infinity,
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          border: Border.all(
+            color: Colors.white,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(100),
+        ),
+        child: const Center(
+          child: CupertinoActivityIndicator(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}

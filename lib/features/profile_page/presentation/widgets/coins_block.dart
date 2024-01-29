@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/common/functions/show_snack_bar.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class CoinsBlock extends StatelessWidget {
@@ -82,7 +83,9 @@ class CoinsBlock extends StatelessWidget {
                 ),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              showSnackBar(context, translation(context).payment_not_working);
+            },
           ),
           const SizedBox(height: 16),
           CupertinoButton(
@@ -127,7 +130,9 @@ class CoinsBlock extends StatelessWidget {
                 ),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              showSnackBar(context, translation(context).payment_not_working);
+            },
           ),
           const SizedBox(height: 16),
           CupertinoButton(
@@ -172,7 +177,9 @@ class CoinsBlock extends StatelessWidget {
                 ),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              showSnackBar(context, translation(context).payment_not_working);
+            },
           ),
         ],
       ),

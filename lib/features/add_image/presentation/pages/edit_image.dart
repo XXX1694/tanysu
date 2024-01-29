@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tanysu/common/functions/show_snack_bar.dart';
 import 'package:tanysu/features/add_image/presentation/bloc/add_image_bloc.dart';
 import 'package:tanysu/features/registration/presentation/widgets/add_picture_page/image_picker.dart';
 import 'package:tanysu/l10n/translate.dart';
 
-Future showEditImage(BuildContext context, int imageId) {
+Future showEditImage(BuildContext context, int imageId, bool last) {
   return showModalBottomSheet(
     context: context,
     shape: const RoundedRectangleBorder(
@@ -17,6 +18,7 @@ Future showEditImage(BuildContext context, int imageId) {
     builder: (context) {
       return ImageEdit(
         imageId: imageId,
+        last: last,
       );
     },
   );
@@ -26,14 +28,17 @@ class ImageEdit extends StatefulWidget {
   const ImageEdit({
     super.key,
     required this.imageId,
+    required this.last,
   });
   final int imageId;
+  final bool last;
   @override
   State<ImageEdit> createState() => _ImageEditState();
 }
 
 class _ImageEditState extends State<ImageEdit> {
   late AddImageBloc bloc;
+
   @override
   void initState() {
     bloc = BlocProvider.of<AddImageBloc>(context);
@@ -87,7 +92,13 @@ class _ImageEditState extends State<ImageEdit> {
                 ),
               ),
               onPressed: () {
-                bloc.add(DeleteImage(id: widget.imageId));
+                if (widget.last) {
+                  Navigator.pop(context);
+                  showSnackBar(
+                      context, translation(context).at_least_one_image);
+                } else {
+                  bloc.add(DeleteImage(id: widget.imageId));
+                }
               },
             ),
           ],

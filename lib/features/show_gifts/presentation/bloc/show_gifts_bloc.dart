@@ -31,5 +31,25 @@ class ShowGiftsBloc extends Bloc<ShowGiftsEvent, ShowGiftsState> {
         }
       },
     );
+    on<SendGift>(
+      (event, emit) async {
+        try {
+          int res = await repo.sendGift(
+            giftId: event.giftId,
+            receiver: event.receiver,
+          );
+          if (res == 201) {
+            emit(GiftSendSuccess());
+          } else {
+            emit(GiftSendError());
+          }
+        } catch (e) {
+          if (kDebugMode) {
+            print(e);
+          }
+          emit(GiftSendError());
+        }
+      },
+    );
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:appinio_swiper/controllers.dart';
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tanysu/common/constants/colors.dart';
-import 'package:tanysu/features/profile_preview/presentation/pages/profile_preview_page.dart';
+import 'package:tanysu/features/profile_preview/presentation/pages/profile_preview_page_main.dart';
 import 'package:tanysu/features/search/presentation/bloc/search_bloc.dart';
 import 'package:tanysu/l10n/translate.dart';
 
@@ -136,7 +136,7 @@ class _SearchPageState extends State<SearchPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ProfilePreviewPage(
+                            builder: (context) => ProfilePreviewPageMain(
                               profileId: state.users[index]['id'],
                               controller: cardController,
                             ),

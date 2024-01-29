@@ -13,6 +13,10 @@ class MessageModel {
   final String? timestamp;
   final bool? is_svg;
   final bool? is_read;
+  final String? name;
+  final String? photo;
+  final int? profile_id;
+  final Map<String, dynamic>? profile;
   MessageModel({
     required this.id,
     required this.chat,
@@ -21,6 +25,10 @@ class MessageModel {
     required this.timestamp,
     required this.is_svg,
     required this.is_read,
+    required this.name,
+    required this.photo,
+    required this.profile_id,
+    required this.profile,
   });
   factory MessageModel.fromJson(Map<String, dynamic> json) =>
       _$MessageModelFromJson(json);

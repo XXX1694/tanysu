@@ -59,12 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBp8VNewCILJgEIdEKdA7KEaSYuT2iLqM0',
-    appId: '1:848296565441:ios:f498c1a7b39d47386ad240',
+    appId: '1:848296565441:ios:65dddaeec8d0ba536ad240',
     messagingSenderId: '848296565441',
     projectId: 'tanysu-a540c',
     storageBucket: 'tanysu-a540c.appspot.com',
     androidClientId: '848296565441-71k2ui01gvuhsfja4uvm2r2ds4vor975.apps.googleusercontent.com',
-    iosClientId: '848296565441-kqlsv3s0203ta80d273d9e145vu9uodf.apps.googleusercontent.com',
-    iosBundleId: 'com.tanysu.tanysu',
+    iosClientId: '848296565441-1elfje98klslc3rh5pns80rmo4ghm194.apps.googleusercontent.com',
+    iosBundleId: 'com.tanysu.kz',
   );
 }

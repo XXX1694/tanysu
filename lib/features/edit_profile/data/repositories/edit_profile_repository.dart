@@ -19,6 +19,7 @@ class EditProfileRepository {
     required String? school,
     required String? about,
     required String? juz,
+    required String? tryToFind,
   }) async {
     final storage = await _storage;
     final url = mainUrl;
@@ -43,6 +44,7 @@ class EditProfileRepository {
                 'company_name': company,
                 'about_me': about,
                 'juz': juz,
+                'try_to_find': tryToFind,
               },
             ),
           );
@@ -60,6 +62,7 @@ class EditProfileRepository {
               'company_name': company,
               'about_me': about,
               'juz': juz,
+              'try_to_find': tryToFind,
             },
           ),
         );

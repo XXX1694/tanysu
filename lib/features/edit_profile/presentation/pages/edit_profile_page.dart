@@ -91,6 +91,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           schoolController.text = state.model.school_name ?? '';
           aboutMeController.text = state.model.about_me ?? '';
           juzController.text = state.model.juz ?? '';
+          tryToFindController.text = state.model.try_to_find ?? '';
         }
       },
       builder: (context, state) {
@@ -203,7 +204,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         ),
                                       );
                                     } else {
-                                      showEditImage(context, e['id']);
+                                      showEditImage(
+                                        context,
+                                        e['id'],
+                                        images.length <= 2 ? true : false,
+                                      );
                                     }
                                   },
                                   child: Container(
@@ -310,7 +315,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               ),
                               const SizedBox(height: 4),
                               GenderField(
-                                controller: genderController,
+                                controller: tryToFindController,
                                 selctedGender: state.model.try_to_find == 'male'
                                     ? translation(context).man
                                     : translation(context).woman,
@@ -354,6 +359,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       juz: juzController.text == ''
                                           ? null
                                           : juzController.text,
+                                      tryToFind: tryToFindController.text,
                                     ),
                                   );
                                 },

@@ -14,6 +14,10 @@ MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
       timestamp: json['timestamp'] as String?,
       is_svg: json['is_svg'] as bool?,
       is_read: json['is_read'] as bool?,
+      name: json['name'] as String?,
+      photo: json['photo'] as String?,
+      profile_id: json['profile_id'] as int?,
+      profile: json['profile'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
@@ -25,4 +29,8 @@ Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
       'timestamp': instance.timestamp,
       'is_svg': instance.is_svg,
       'is_read': instance.is_read,
+      'name': instance.name,
+      'photo': instance.photo,
+      'profile_id': instance.profile_id,
+      'profile': instance.profile,
     };

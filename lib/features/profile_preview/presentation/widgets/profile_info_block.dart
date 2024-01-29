@@ -1,21 +1,43 @@
-import 'package:appinio_swiper/controllers.dart';
+import 'package:appinio_swiper/appinio_swiper.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/features/main_page/presentation/bloc/main_page_bloc.dart';
 import 'package:tanysu/l10n/translate.dart';
 
-class ProfileInfoBlock extends StatelessWidget {
+class ProfileInfoBlock extends StatefulWidget {
   const ProfileInfoBlock({
     super.key,
     required this.coins,
     required this.followers,
     required this.controller,
+    required this.isLiked,
+    required this.profileId,
   });
   final int followers;
   final int coins;
   final AppinioSwiperController controller;
+  final bool isLiked;
+  final int profileId;
+
+  @override
+  State<ProfileInfoBlock> createState() => _ProfileInfoBlockState();
+}
+
+class _ProfileInfoBlockState extends State<ProfileInfoBlock> {
+  late bool liked;
+  late MainPageBloc bloc;
+  @override
+  void initState() {
+    bloc = BlocProvider.of<MainPageBloc>(context);
+    liked = widget.isLiked;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -24,7 +46,7 @@ class ProfileInfoBlock extends StatelessWidget {
         Column(
           children: [
             Text(
-              '$followers',
+              '${widget.followers}',
               style: GoogleFonts.montserrat(
                 color: mainColor70,
                 fontWeight: FontWeight.w700,
@@ -45,7 +67,7 @@ class ProfileInfoBlock extends StatelessWidget {
         Column(
           children: [
             Text(
-              '${coins}K',
+              '${widget.coins}K',
               style: GoogleFonts.montserrat(
                 color: mainColor70,
                 fontWeight: FontWeight.w700,
@@ -66,14 +88,22 @@ class ProfileInfoBlock extends StatelessWidget {
         CupertinoButton(
           padding: const EdgeInsets.all(0),
           child: SvgPicture.asset(
-            'assets/icons/like_profile.svg',
+            liked
+                ? 'assets/icons/like_filled.svg'
+                : 'assets/icons/like_profile.svg',
             height: 36,
             width: 36,
           ),
           onPressed: () async {
+            !liked
+                ? bloc.add(Like(profileId: widget.profileId))
+                : bloc.add(UnLike(profileId: widget.profileId));
+            setState(() {
+              liked = !liked;
+            });
             Navigator.pop(context);
             await Future.delayed(const Duration(milliseconds: 200));
-            controller.swipeRight();
+            widget.controller.swipeRight();
           },
         ),
       ],

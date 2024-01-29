@@ -33,7 +33,7 @@ dependencies:
   percent_indicator: ^4.2.3
   carousel_slider: ^4.2.1
   fluttertoast: ^8.2.2
-  appinio_swiper: ^2.0.3
+  appinio_swiper: 2.0.3
   socket_io_client: ^2.0.3+1
   webview_flutter_plus: ^0.3.0+2
   shimmer: ^3.0.0
@@ -46,18 +46,23 @@ dependencies:
   firebase_auth: ^4.12.1
   awesome_notifications: ^0.8.2
   firebase_messaging: ^14.7.5
+  font_awesome_flutter: ^9.2.0
+
   
   flutter_localizations:
     sdk: flutter
-
   intl: ^0.18.0
 
 flutter_native_splash:
   android: true
   ios: true
 
-  color: '#DEDEDE'
-  image: "assets/images/app_icon.png"
+  color: '#FFFFFF'
+  image: assets/images/app_icon.png
+  android_12:
+    color: '#FFFFFF'
+    image: assets/images/123.png
+
 
 dev_dependencies:
   flutter_test:
@@ -76,4 +81,9 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/icons/navigation_icons/
-    - assets/privacy.txt
+    - assets/privacy.html
+    - assets/privacy_ru.html
+    - assets/privacy_kk.html
+    - assets/terms.html
+    - assets/terms_ru.html
+    - assets/terms_kk.html

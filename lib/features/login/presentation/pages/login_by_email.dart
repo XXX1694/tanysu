@@ -64,9 +64,12 @@ class _LoginByEmailState extends State<LoginByEmail> {
                     return MainButtonFilled(
                       text: translation(context).login,
                       onPressed: () {
-                        bloc.add(LogIn(
+                        bloc.add(
+                          LogIn(
                             email: _emailController.text,
-                            password: _passwordController.text));
+                            password: _passwordController.text,
+                          ),
+                        );
                       },
                     );
                   }

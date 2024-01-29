@@ -1,4 +1,5 @@
 {
+    "clang": "en",
     "create_acc": "CREATE ACCOUNT",
     "sign_in": "SIGN IN",
 
@@ -48,6 +49,7 @@
 
     "main": "Main",
     "likes": "Likes",
+    "stream": "Live",
     "chat": "Chat",
     "profile": "Profile",
 
@@ -113,6 +115,7 @@
     "report": "Report",
     "no_internet_connection": "No internet connection!",
     "privacy_policy": "Privacy Policy",
+    "terms_of_conditions": "Terms of Condition",
     "block": "Block",
     "block_sub": "You won’t see them, and they won’t see you.",
     "do_you_really": "Do you really want to block that person",
@@ -177,8 +180,14 @@
     "city_empty": "City is required",
     "gender_required": "Gender is required",
 
-    "juz_field": "Adai, Naiman e.t.c."
+    "juz_field": "Adai, Naiman e.t.c.",
+    "list_end": "That's it for today! Come back in 12 hours!",
 
+    "soon": "Soon!",
 
+    "payment_not_working": "The payment system is temporarily unavailable!",
+
+    "name_can_not_be_more_than_25_symbols": "The name must not contain more than 25 characters!",
+    "at_least_one_image": "Should be at least 1 image!"
 
 }

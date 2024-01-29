@@ -9,8 +9,8 @@ part of 'profile_model.dart';
 ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) => ProfileModel(
       json['is_liked'] as bool,
       json['id'] as int?,
-      (json['images'] as List<dynamic>)
-          .map((e) => e as Map<String, dynamic>)
+      (json['images'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
           .toList(),
       json['age'] as int?,
       json['city_name'] as String?,

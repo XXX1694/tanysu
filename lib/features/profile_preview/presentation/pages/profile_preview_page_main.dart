@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:appinio_swiper/controllers.dart';
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -200,7 +200,9 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
                           // ),
                           const SizedBox(height: 12),
                           SendGiftButton(
-                              userName: state.model.first_name ?? ''),
+                            userName: state.model.first_name ?? '',
+                            profileId: state.model.id ?? 0,
+                          ),
                           const SizedBox(height: 12),
                           const Divider(color: Colors.black26),
                           const SizedBox(height: 12),
@@ -208,7 +210,7 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
                             about: state.model.about_me ?? '',
                             city: state.model.city_name ?? '',
                             job: state.model.profession ?? '',
-                            ru: '',
+                            ru: state.model.juz ?? '',
                             study: state.model.school_name ?? '',
                             work: state.model.company_name ?? '',
                           ),

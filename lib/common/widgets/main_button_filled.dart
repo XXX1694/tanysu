@@ -53,9 +53,10 @@ class MainButtonFilledLoading extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
       ),
       child: const Center(
-          child: CupertinoActivityIndicator(
-        color: Colors.black,
-      )),
+        child: CupertinoActivityIndicator(
+          color: Colors.black,
+        ),
+      ),
     );
   }
 }

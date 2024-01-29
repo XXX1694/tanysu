@@ -3,7 +3,6 @@
 import 'dart:async';
 
 import 'package:appinio_swiper/appinio_swiper.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -31,23 +30,23 @@ class _MainPageState extends State<MainPage> {
   late AppinioSwiperController cardController;
   late MainPageBloc bloc;
   late SwipeBloc bloc1;
-  List<ProfileModel> users = [];
+  List<ProfileModel>? users;
   @override
   void initState() {
     cardController = AppinioSwiperController();
     bloc = BlocProvider.of<MainPageBloc>(context);
     bloc1 = BlocProvider.of<SwipeBloc>(context);
     bloc.add(GetUsers());
-    Future.delayed(Duration.zero, () {
-      AwesomeNotifications().createNotification(
-        content: NotificationContent(
-          id: 10,
-          channelKey: 'basic_channel',
-          title: translation(context).welcome,
-          body: translation(context).welcome_text,
-        ),
-      );
-    });
+    // Future.delayed(Duration.zero, () {
+    //   AwesomeNotifications().createNotification(
+    //     content: NotificationContent(
+    //       id: 10,
+    //       channelKey: 'basic_channel',
+    //       title: translation(context).welcome,
+    //       body: translation(context).welcome_text,
+    //     ),
+    //   );
+    // });
 
     super.initState();
   }
@@ -64,7 +63,8 @@ class _MainPageState extends State<MainPage> {
               child: BlocConsumer<MainPageBloc, MainPageState>(
                 listener: (context, state) {
                   if (state is UserGot) {
-                    users.addAll(state.users);
+                    users = [];
+                    users!.addAll(state.users);
                   } else if (state is UserGetError) {
                     setState(() {
                       users = [];
@@ -72,132 +72,149 @@ class _MainPageState extends State<MainPage> {
                   }
                 },
                 builder: (context, state) {
-                  return users.isEmpty
-                      ? Center(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 35),
-                            child: Column(
-                              children: [
-                                const Spacer(),
-                                Expanded(
-                                  child: SizedBox(
-                                    height: 150,
-                                    width: 150,
-                                    child: PlayButton(
-                                      onPressed: () {},
+                  return users == null
+                      ? const SizedBox()
+                      : users!.isEmpty
+                          ? Center(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 35),
+                                child: Column(
+                                  children: [
+                                    const Spacer(),
+                                    Expanded(
+                                      child: SizedBox(
+                                        height: 150,
+                                        width: 150,
+                                        child: PlayButton(
+                                          onPressed: () {},
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 20),
+                                    Text(
+                                      translation(context).list_end,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: mainColor,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                              child: Stack(
+                                children: [
+                                  AppinioSwiper(
+                                    cardsSpacing: 25,
+                                    threshold: 100,
+                                    controller: cardController,
+                                    padding: const EdgeInsets.all(0),
+                                    backgroundCardsCount: 4,
+                                    unswipe: (unswiped) {
+                                      if (unswiped) {
+                                        counter--;
+                                      }
+                                    },
+                                    onSwiping:
+                                        (AppinioSwiperDirection direction) {
+                                      if (direction ==
+                                          AppinioSwiperDirection.right) {
+                                        bloc1.add(GoRight());
+                                      }
+
+                                      if (direction ==
+                                          AppinioSwiperDirection.left) {
+                                        bloc1.add(GoLeft());
+                                      }
+
+                                      if (direction ==
+                                          AppinioSwiperDirection.top) {
+                                        bloc1.add(GoTop());
+                                      }
+
+                                      if (direction ==
+                                          AppinioSwiperDirection.bottom) {
+                                        bloc1.add(GoBottom());
+                                      }
+                                    },
+                                    onSwipeCancelled: () {
+                                      bloc1.add(GoBottom());
+                                    },
+                                    onEnd: () {
+                                      // setState(() {
+                                      //   users = [];
+                                      // });
+                                      bloc1.add(GoBottom());
+                                      // bloc.add(GetUsers());
+                                    },
+                                    onSwipe: (index, direction) async {
+                                      counter++;
+                                      if (counter % 12 == 0) {
+                                        bloc.add(GetUsers());
+                                      }
+                                      bloc1.add(GoBottom());
+                                      if (kDebugMode) {
+                                        print(direction);
+                                      }
+                                      if (direction ==
+                                          AppinioSwiperDirection.right) {
+                                        bloc.add(Like(
+                                            profileId:
+                                                users![index - 1].id ?? 0));
+                                      } else if (direction ==
+                                          AppinioSwiperDirection.left) {
+                                        bloc.add(DisLike(
+                                            profileId:
+                                                users![index - 1].id ?? 0));
+                                      } else if (direction ==
+                                          AppinioSwiperDirection.top) {
+                                        await Future.delayed(
+                                            const Duration(milliseconds: 100));
+                                        cardController.unswipe();
+                                        await Future.delayed(
+                                            const Duration(milliseconds: 200));
+                                        showGifts(
+                                          context,
+                                          users![index - 1].first_name ?? '',
+                                          users![index - 1].id ?? 0,
+                                        );
+                                      } else if (direction ==
+                                          AppinioSwiperDirection.bottom) {
+                                        await Future.delayed(
+                                            const Duration(milliseconds: 50));
+                                        cardController.unswipe();
+                                      }
+                                    },
+                                    cardsBuilder: (context, index) {
+                                      return TanysuCard(
+                                        user: users![index],
+                                        controller: cardController,
+                                      );
+                                    },
+                                    cardsCount: users!.length,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 15,
+                                        vertical: 20,
+                                      ),
+                                      child: users!.isNotEmpty
+                                          ? ButtonsList()
+                                          : null,
                                     ),
                                   ),
-                                ),
-                                const SizedBox(height: 20),
-                                Text(
-                                  'На сегодня все! Возвращайтесь через 12 часов!',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: mainColor,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                const Spacer(),
-                              ],
-                            ),
-                          ),
-                        )
-                      : Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                          child: Stack(
-                            children: [
-                              AppinioSwiper(
-                                cardsSpacing: 25,
-                                threshold: 100,
-                                controller: cardController,
-                                padding: const EdgeInsets.all(0),
-                                backgroundCardsCount: 4,
-                                onSwiping: (AppinioSwiperDirection direction) {
-                                  if (direction ==
-                                      AppinioSwiperDirection.right) {
-                                    bloc1.add(GoRight());
-                                  }
-
-                                  if (direction ==
-                                      AppinioSwiperDirection.left) {
-                                    bloc1.add(GoLeft());
-                                  }
-
-                                  if (direction == AppinioSwiperDirection.top) {
-                                    bloc1.add(GoTop());
-                                  }
-
-                                  if (direction ==
-                                      AppinioSwiperDirection.bottom) {
-                                    bloc1.add(GoBottom());
-                                  }
-                                },
-                                onSwipeCancelled: () {
-                                  bloc1.add(GoBottom());
-                                },
-                                onEnd: () {
-                                  // setState(() {
-                                  //   users = [];
-                                  // });
-                                  bloc1.add(GoBottom());
-                                  // bloc.add(GetUsers());
-                                },
-                                onSwipe: (index, direction) async {
-                                  counter++;
-                                  if (counter % 12 == 0) {
-                                    bloc.add(GetUsers());
-                                  }
-                                  bloc1.add(GoBottom());
-                                  if (kDebugMode) {
-                                    print(direction);
-                                  }
-                                  if (direction ==
-                                      AppinioSwiperDirection.right) {
-                                    bloc.add(Like(
-                                        profileId: users[index - 1].id ?? 0));
-                                  } else if (direction ==
-                                      AppinioSwiperDirection.left) {
-                                    bloc.add(DisLike(
-                                        profileId: users[index - 1].id ?? 0));
-                                  } else if (direction ==
-                                      AppinioSwiperDirection.top) {
-                                    await Future.delayed(
-                                        const Duration(milliseconds: 100));
-                                    cardController.unswipe();
-                                    await Future.delayed(
-                                        const Duration(milliseconds: 200));
-                                    showGifts(context,
-                                        users[index - 1].first_name ?? '');
-                                  } else if (direction ==
-                                      AppinioSwiperDirection.bottom) {
-                                    await Future.delayed(
-                                        const Duration(milliseconds: 50));
-                                    cardController.unswipe();
-                                  }
-                                },
-                                cardsBuilder: (context, index) {
-                                  return TanysuCard(
-                                    user: users[index],
-                                    controller: cardController,
-                                  );
-                                },
-                                cardsCount: users.length,
+                                ],
                               ),
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 15,
-                                    vertical: 20,
-                                  ),
-                                  child:
-                                      users.isNotEmpty ? ButtonsList() : null,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
+                            );
                 },
               ),
             ),
@@ -267,7 +284,8 @@ class _MainPageState extends State<MainPage> {
             onPressed: () {
               showGifts(
                 context,
-                users[counter].first_name ?? '',
+                users![counter].first_name ?? '',
+                users![counter].id ?? 0,
               );
             },
             child: Container(
@@ -320,7 +338,7 @@ class _MainPageState extends State<MainPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ProfilePreviewPage(
-                    profileId: users[counter].id ?? 0,
+                    profile: users![counter],
                     controller: cardController,
                   ),
                 ),
