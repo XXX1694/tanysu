@@ -52,8 +52,16 @@ class _ProfilePreviewPageState extends State<ProfilePreviewPage> {
           ),
         ),
         foregroundColor: Colors.black,
-        surfaceTintColor: Colors.black,
+        surfaceTintColor: Colors.transparent,
         elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(
+            height: 1,
+            width: double.infinity,
+            color: Colors.black12,
+          ),
+        ),
         actions: [
           CupertinoButton(
             padding: const EdgeInsets.all(0),

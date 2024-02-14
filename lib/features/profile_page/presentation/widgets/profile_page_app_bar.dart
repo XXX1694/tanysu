@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../../../../common/constants/colors.dart';
 
 class ProfilePageAppBar extends StatelessWidget {
   const ProfilePageAppBar({super.key});
@@ -16,14 +13,6 @@ class ProfilePageAppBar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
-              Text(
-                'tanysu',
-                style: GoogleFonts.montserrat(
-                  color: secondColor,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
               const Spacer(),
               GestureDetector(
                 onTap: () {

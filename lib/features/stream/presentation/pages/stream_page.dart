@@ -17,6 +17,14 @@ class _StreamPageState extends State<StreamPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(
+            height: 1,
+            width: double.infinity,
+            color: Colors.black12,
+          ),
+        ),
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(

@@ -109,6 +109,7 @@ class _FilterPageState extends State<FilterPage> {
                       cityId: int.parse(_cityController.text),
                       gender: _genderController.text,
                       maxAge: int.parse(_ageController.text),
+                      page: 1,
                     ),
                   );
                   Navigator.pop(context);

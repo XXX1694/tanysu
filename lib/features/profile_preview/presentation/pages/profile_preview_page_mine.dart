@@ -31,8 +31,16 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
           ),
         ),
         foregroundColor: Colors.black,
-        surfaceTintColor: Colors.black,
+        surfaceTintColor: Colors.transparent,
         elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(
+            height: 1,
+            width: double.infinity,
+            color: Colors.black12,
+          ),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

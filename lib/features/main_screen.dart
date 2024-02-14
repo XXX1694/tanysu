@@ -4,11 +4,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:tanysu/features/chat_page/presentation/pages/chat_page.dart';
 import 'package:tanysu/common/constants/colors.dart';
 import 'package:tanysu/features/like_page/presentation/pages/like_page.dart';
+import 'package:tanysu/features/main_page/presentation/pages/main_page_new.dart';
 import 'package:tanysu/features/profile_page/presentation/pages/profile_page.dart';
 import 'package:tanysu/features/stream/presentation/pages/stream_page.dart';
 import 'package:tanysu/l10n/translate.dart';
-
-import 'main_page/presentation/pages/main_page.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});

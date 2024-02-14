@@ -20,15 +20,17 @@ class LoginRepository {
     Uri? uri = Uri.tryParse(finalUrl);
     if (uri != null) {
       try {
-        print(
-          jsonEncode(
-            {
-              'email': email,
-              'password': password,
-              "firebase": firebaseToken ?? '',
-            },
-          ),
-        );
+        if (kDebugMode) {
+          print(
+            jsonEncode(
+              {
+                'email': email,
+                'password': password,
+                "firebase": firebaseToken ?? '',
+              },
+            ),
+          );
+        }
         final response = await dio.post(
           finalUrl,
           data: jsonEncode(

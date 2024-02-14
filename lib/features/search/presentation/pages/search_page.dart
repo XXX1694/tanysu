@@ -24,12 +24,18 @@ class _SearchPageState extends State<SearchPage> {
   late AppinioSwiperController cardController;
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+  int page = 1;
   @override
   void initState() {
     cardController = AppinioSwiperController();
     bloc = BlocProvider.of<SearchBloc>(context);
     bloc.add(
-      const GetUsers(cityId: null, gender: null, maxAge: null),
+      GetUsers(
+        cityId: null,
+        gender: null,
+        maxAge: null,
+        page: page,
+      ),
     );
     super.initState();
   }
@@ -50,6 +56,7 @@ class _SearchPageState extends State<SearchPage> {
         ),
         // leading: null,
         foregroundColor: Colors.black,
+        surfaceTintColor: Colors.transparent,
         centerTitle: true,
         actions: [
           Padding(
@@ -125,10 +132,17 @@ class _SearchPageState extends State<SearchPage> {
                   controller: _refreshController,
                   onRefresh: () async {
                     await Future.delayed(const Duration(milliseconds: 500));
+                    page++;
                     bloc.add(
-                      const GetUsers(cityId: null, gender: null, maxAge: null),
+                      GetUsers(
+                        cityId: null,
+                        gender: null,
+                        maxAge: null,
+                        page: page,
+                      ),
                     );
                   },
+                  onLoading: () {},
                   child: ListView.builder(
                     itemCount: state.users.length,
                     itemBuilder: (context, index) => GestureDetector(

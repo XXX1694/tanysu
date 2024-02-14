@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/common/constants/colors.dart';
 
@@ -41,16 +40,6 @@ class MainPageAppBar extends StatelessWidget {
             //   },
             // ),
             const SizedBox(width: 16),
-            GestureDetector(
-              child: SvgPicture.asset(
-                'assets/icons/search.svg',
-                height: 24,
-                width: 24,
-              ),
-              onTap: () {
-                Navigator.pushNamed(context, '/search');
-              },
-            ),
           ],
         ),
       ),

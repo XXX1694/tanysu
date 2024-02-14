@@ -53,6 +53,14 @@ class _ChatPageState extends State<ChatPage> {
             fontWeight: FontWeight.w700,
           ),
         ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(
+            height: 1,
+            width: double.infinity,
+            color: Colors.black12,
+          ),
+        ),
       ),
       body: SafeArea(
         child: Padding(

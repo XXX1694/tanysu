@@ -16,8 +16,13 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       (event, emit) async {
         emit(GettingUsers());
         try {
-          List res =
-              await repo.getUserList(event.gender, event.maxAge, event.cityId);
+          List res = await repo.getUserList(
+            gender: event.gender,
+            maxAge: event.maxAge,
+            minAge: null,
+            page: event.page,
+            cityId: event.cityId,
+          );
           emit(GotUsers(users: res));
         } catch (e) {
           if (kDebugMode) {

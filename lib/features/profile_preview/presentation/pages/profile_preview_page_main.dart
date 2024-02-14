@@ -67,6 +67,14 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
         } else if (state is ProfilePreviewDataGot) {
           return Scaffold(
             appBar: AppBar(
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(1),
+                child: Container(
+                  height: 1,
+                  width: double.infinity,
+                  color: Colors.black12,
+                ),
+              ),
               backgroundColor: Colors.transparent,
               title: Text(
                 'tanysu',
@@ -77,7 +85,7 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
                 ),
               ),
               foregroundColor: Colors.black,
-              surfaceTintColor: Colors.black,
+              surfaceTintColor: Colors.transparent,
               elevation: 0,
               actions: [
                 CupertinoButton(

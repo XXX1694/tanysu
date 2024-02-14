@@ -11,9 +11,11 @@ class GetUsers extends SearchEvent {
   final String? gender;
   final int? cityId;
   final int? maxAge;
+  final int page;
   const GetUsers({
     required this.cityId,
     required this.gender,
     required this.maxAge,
+    required this.page,
   });
 }
