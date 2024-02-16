@@ -79,7 +79,7 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
               title: Text(
                 'tanysu',
                 style: GoogleFonts.montserrat(
-                  color: secondColor,
+                  color: mainColor,
                   fontSize: 22,
                   fontWeight: FontWeight.w700,
                 ),
