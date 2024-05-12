@@ -1,8 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:dio/dio.dart';
-import 'package:tanysu/common/constants/constants.dart';
+import 'package:tanysu/core/constants/constants.dart';
 import 'package:tanysu/features/profile_preview/data/models/profile_model.dart';
 
 final _storage = SharedPreferences.getInstance();
@@ -16,32 +14,25 @@ class UserGetRepository {
     String? token = storage.getString('auth_token');
     if (token == null) return null;
     dio.options.headers["authorization"] = "Token $token";
-    Uri? uri = Uri.tryParse(finalUrl);
-    if (uri != null) {
-      try {
-        final response = await dio.get(finalUrl);
-        if (kDebugMode) {
-          print(response.statusCode);
-          print(response.data);
-        }
-        if (response.statusCode == 200) {
-          List data = response.data;
-          List<ProfileModel> result = [];
-          for (int i = 0; i < data.length; i++) {
-            final user = ProfileModel.fromJson(data[i]);
 
-            result.add(user);
-          }
+    try {
+      final response = await dio.get(finalUrl);
 
-          return result;
-        } else {
-          return null;
+      if (response.statusCode == 200) {
+        List data = response.data;
+        List<ProfileModel> result = [];
+        for (int i = 0; i < data.length; i++) {
+          final user = ProfileModel.fromJson(data[i]);
+
+          result.add(user);
         }
-      } catch (e) {
-        if (kDebugMode) {
-          print('Error: $e');
-        }
+
+        return result;
+      } else {
+        return null;
       }
+    } catch (e) {
+      return null;
     }
   }
 
@@ -53,13 +44,8 @@ class UserGetRepository {
     String? token = storage.getString('auth_token');
     if (token == null) return null;
     dio.options.headers["authorization"] = "Token $token";
-    Uri? uri = Uri.tryParse(finalUrl);
-    if (uri != null) {
-      final response = await dio.post(finalUrl);
-      if (kDebugMode) {
-        print(response.data);
-      }
-    }
+
+    await dio.post(finalUrl);
   }
 
   dislike({required int profileId}) async {
@@ -70,13 +56,7 @@ class UserGetRepository {
     String? token = storage.getString('auth_token');
     if (token == null) return null;
     dio.options.headers["authorization"] = "Token $token";
-    Uri? uri = Uri.tryParse(finalUrl);
-    if (uri != null) {
-      final response = await dio.post(finalUrl);
-      if (kDebugMode) {
-        print(response.data);
-      }
-    }
+    await dio.post(finalUrl);
   }
 
   unlike({required int profileId}) async {
@@ -88,13 +68,7 @@ class UserGetRepository {
     String? token = storage.getString('auth_token');
     if (token == null) return null;
     dio.options.headers["authorization"] = "Token $token";
-    Uri? uri = Uri.tryParse(finalUrl);
 
-    if (uri != null) {
-      final response = await dio.post(finalUrl);
-      if (kDebugMode) {
-        print(response.data);
-      }
-    }
+    await dio.post(finalUrl);
   }
 }

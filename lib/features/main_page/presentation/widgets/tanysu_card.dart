@@ -1,9 +1,7 @@
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:tanysu/common/constants/colors.dart';
-
+import 'package:tanysu/core/widgets/placeholers.dart';
 import 'package:tanysu/features/main_page/presentation/widgets/city_block.dart';
 import 'package:tanysu/features/main_page/presentation/widgets/name_block.dart';
 import 'package:tanysu/features/main_page/presentation/widgets/ru_block.dart';
@@ -37,32 +35,18 @@ class _TanysuCardState extends State<TanysuCard> {
             widget.user.images!.isNotEmpty
                 ? CachedNetworkImage(
                     imageUrl: widget.user.images![0]['image_url'],
-                    placeholder: (context, url) => Shimmer.fromColors(
-                      baseColor: secondColor,
-                      highlightColor: mainColor,
-                      child: Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        color: Colors.white,
-                      ),
-                    ),
-                    errorWidget: (context, url, error) => Container(
+                    placeholder: (context, url) => const ShrimerPlaceholder(
                       height: double.infinity,
                       width: double.infinity,
-                      color: Colors.black,
                     ),
-                    imageBuilder: (context, imageProvider) {
-                      return Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
-                    },
+                    errorWidget: (context, url, error) =>
+                        const ErrorPlaceholder(
+                      height: double.infinity,
+                      width: double.infinity,
+                    ),
+                    fit: BoxFit.cover,
+                    height: double.infinity,
+                    width: double.infinity,
                   )
                 : Container(
                     height: double.infinity,

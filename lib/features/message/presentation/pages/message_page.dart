@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:convert';
 import 'dart:io';
 
@@ -8,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/block_user/presentation/widgets/show_block.dart';
 import 'package:tanysu/features/chat_page/presentation/bloc/chat_page_bloc.dart';
 import 'package:tanysu/features/message/data/models/message_model.dart';
 import 'package:tanysu/features/message/presentation/bloc/message_bloc.dart';
 import 'package:tanysu/features/message/presentation/widgets/main_message_block.dart';
+import 'package:tanysu/features/message/presentation/widgets/message_field.dart';
 import 'package:tanysu/features/profile_preview/presentation/pages/profile_preview_page_main.dart';
-import 'package:tanysu/features/show_gifts/presentation/pages/show_gifts.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 // ignore: depend_on_referenced_packages
@@ -51,13 +49,61 @@ class _MessagePageState extends State<MessagePage> {
       channel.sink.add(
         jsonEncode(
           {
+            "type": "chat_message",
             "message": textController.text,
             "user_id": widget.userId,
           },
         ),
       );
+      // print(
+      //   jsonEncode(
+      //     {
+      //       "type": "chat_message",
+      //       "message": textController.text,
+      //       "user_id": widget.userId,
+      //     },
+      //   ),
+      // );
       textController.text = '';
     }
+  }
+
+  void sendGift({required int giftId}) {
+    channel.sink.add(
+      jsonEncode(
+        {
+          "type": "send_gift",
+          "message": giftId,
+          "user_id": widget.userId,
+        },
+      ),
+    );
+    // print('send gift function activated!');
+    // print(
+    //   jsonEncode(
+    //     {
+    //       "type": "send_gift",
+    //       "message": giftId,
+    //       "user_id": widget.userId,
+    //     },
+    //   ),
+    // );
+  }
+
+  void deleteMessage(
+    int messageId,
+    int userId,
+  ) {
+    channel.sink.add(
+      jsonEncode(
+        {
+          'type': 'delete',
+          'message_id': messageId,
+          'user_id': userId,
+        },
+      ),
+    );
+    messages.removeWhere((item) => (item.id ?? 0) == messageId);
   }
 
   // void readed(int messageId) {
@@ -83,7 +129,8 @@ class _MessagePageState extends State<MessagePage> {
     bloc1 = BlocProvider.of<ChatPageBloc>(context);
     bloc.add(GetAllMessages(chatId: widget.chatId));
     channel = WebSocketChannel.connect(
-      Uri.parse('wss://tanysu.net/ws/chat/${widget.chatId}/${widget.userId}/'),
+      Uri.parse(
+          'wss://tanysu.net/ws/v3/chat/${widget.chatId}/${widget.userId}/'),
     );
     textController = TextEditingController();
     super.initState();
@@ -99,17 +146,15 @@ class _MessagePageState extends State<MessagePage> {
         elevation: 0,
         leading: Row(
           children: [
-            const SizedBox(width: 20),
-            BackButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding: MaterialStateProperty.all(EdgeInsets.zero),
-              ),
-              onPressed: () {
+            const SizedBox(width: 12),
+            InkWell(
+              child: SvgPicture.asset('assets/icons/back_button.svg'),
+              onTap: () {
                 bloc1.add(GetAllChats());
                 Navigator.pop(context);
               },
             ),
+            const SizedBox(width: 8),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -148,7 +193,7 @@ class _MessagePageState extends State<MessagePage> {
             padding: const EdgeInsets.only(right: 20),
             child: GestureDetector(
               onTap: () {
-                showBlock(context, widget.name, widget.userId);
+                showBlockIOS(context, widget.name, widget.userId);
               },
               child: SvgPicture.asset(
                 'assets/icons/info.svg',
@@ -168,11 +213,12 @@ class _MessagePageState extends State<MessagePage> {
         ),
       ),
       body: Scaffold(
+        backgroundColor: mainColor.withOpacity(0.05),
         body: SafeArea(
           child: Stack(
             children: [
               SvgPicture.asset(
-                'assets/images/message_back.svg',
+                'assets/background/message_background_pattern.svg',
                 fit: BoxFit.cover,
               ),
               Padding(
@@ -184,29 +230,43 @@ class _MessagePageState extends State<MessagePage> {
                         builder: (context, state) {
                           if (state is MessageGot) {
                             messages = state.messages;
-                            // print(messages);
                             return StreamBuilder(
                               stream: channel.stream,
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
                                   Map<String, dynamic> info =
                                       jsonDecode(snapshot.data);
-                                  if (info['message'] !=
-                                      'You are now connected!') {
-                                    print(info);
+                                  debugPrint(info.toString());
+                                  if (info['message_type'] == 'chat_message') {
                                     messages.add(
                                       MessageModel(
                                         chat: widget.chatId,
-                                        content: info['message'],
+                                        content: '${info['message']}',
                                         sender: info['user'],
                                         timestamp: info['timestamp'],
-                                        is_svg: null,
+                                        message_type: info['message_type'],
                                         is_read: false,
-                                        id: null,
-                                        name: null,
-                                        photo: null,
-                                        profile_id: null,
-                                        profile: null,
+                                        id: info['message_id'] ?? 0,
+                                        name: info['name'] ?? '',
+                                        photo: info['photo'] ?? '',
+                                        profile_id: info['profile_id'] ?? 0,
+                                        is_svg: false,
+                                      ),
+                                    );
+                                  } else {
+                                    messages.add(
+                                      MessageModel(
+                                        chat: widget.chatId,
+                                        content: '${info['message']}',
+                                        sender: info['user'],
+                                        timestamp: info['timestamp'],
+                                        message_type: info['message_type'],
+                                        is_read: false,
+                                        id: info['message_id'] ?? 0,
+                                        name: info['name'] ?? '',
+                                        photo: info['photo'] ?? '',
+                                        profile_id: info['profile_id'] ?? 0,
+                                        is_svg: true,
                                       ),
                                     );
                                   }
@@ -214,6 +274,7 @@ class _MessagePageState extends State<MessagePage> {
                                 return MainMessageBlock(
                                   userId: widget.userId,
                                   messages: messages,
+                                  deleteMessageFunction: deleteMessage,
                                 );
                               },
                             );
@@ -221,11 +282,11 @@ class _MessagePageState extends State<MessagePage> {
                             return Center(
                               child: Platform.isAndroid
                                   ? CircularProgressIndicator(
-                                      color: secondColor,
+                                      color: mainColor,
                                       strokeWidth: 3,
                                     )
                                   : CupertinoActivityIndicator(
-                                      color: secondColor,
+                                      color: mainColor,
                                     ),
                             );
                           } else {
@@ -236,78 +297,11 @@ class _MessagePageState extends State<MessagePage> {
                         },
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black26),
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              showGifts(
-                                context,
-                                widget.name,
-                                widget.profileId,
-                              );
-                            },
-                            child: SvgPicture.asset(
-                              'assets/icons/gift_button.svg',
-                              height: 36,
-                              width: 36,
-                              alignment: Alignment.center,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Center(
-                              child: TextField(
-                                cursorHeight: 18,
-                                textAlignVertical: TextAlignVertical.center,
-                                textAlign: TextAlign.left,
-                                maxLines: 1,
-                                controller: textController,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: translation(context).message,
-                                  hintStyle: GoogleFonts.montserrat(
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                onSubmitted: (value) {
-                                  sendMessage();
-                                },
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          GestureDetector(
-                            onTap: () {
-                              sendMessage();
-                            },
-                            child: Container(
-                              height: 36,
-                              width: 36,
-                              decoration: BoxDecoration(
-                                color: secondColor,
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.send,
-                                  color: Colors.white,
-                                  size: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    MessageField(
+                      sendMessageFunction: sendMessage,
+                      sendGiftFunction: sendGift,
+                      messageController: textController,
+                      profileId: widget.profileId,
                     ),
                     const SizedBox(height: 20),
                   ],

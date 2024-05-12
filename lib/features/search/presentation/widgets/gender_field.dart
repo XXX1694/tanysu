@@ -6,10 +6,8 @@ class GenderField extends StatefulWidget {
   const GenderField({
     super.key,
     required this.controller,
-    required this.selctedGender,
   });
   final TextEditingController controller;
-  final String? selctedGender;
   @override
   State<GenderField> createState() => _GenderFieldState();
 }
@@ -19,7 +17,7 @@ String? selectedValue;
 class _GenderFieldState extends State<GenderField> {
   @override
   void initState() {
-    selectedValue = widget.selctedGender;
+    // selectedValue = widget.controller.text;
     super.initState();
   }
 
@@ -29,14 +27,27 @@ class _GenderFieldState extends State<GenderField> {
       translation(context).man,
       translation(context).woman,
     ];
+    if (widget.controller.text == translation(context).man) {
+      selectedValue = dropdownList[0];
+    } else if (widget.controller.text == translation(context).woman) {
+      selectedValue = dropdownList[1];
+    }
+
     return DropdownButton<String>(
       value: selectedValue,
       style: GoogleFonts.montserrat(
-        color: Colors.black.withOpacity(0.7),
-        fontSize: 14,
+        color: Colors.black,
         fontWeight: FontWeight.w500,
+        fontSize: 14,
       ),
-      hint: Text(translation(context).choose_gender),
+      hint: Text(
+        translation(context).choose_gender,
+        style: GoogleFonts.montserrat(
+          color: Colors.black54,
+          fontWeight: FontWeight.w400,
+          fontSize: 14,
+        ),
+      ),
       isExpanded: true,
       items: dropdownList.map(
         (String value) {
@@ -50,7 +61,7 @@ class _GenderFieldState extends State<GenderField> {
       elevation: 1,
       underline: Container(
         height: 1,
-        color: Colors.black,
+        color: Colors.black54,
       ),
       onChanged: (value) {
         setState(() {

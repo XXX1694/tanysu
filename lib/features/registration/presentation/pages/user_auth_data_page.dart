@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/registration/presentation/bloc/check_email_bloc/check_email_bloc.dart';
 import 'package:tanysu/features/registration/presentation/pages/user_main_info_page.dart';
 import 'package:tanysu/features/registration/presentation/widgets/user_auth_data_page/registration_email_field.dart';
 import 'package:tanysu/features/registration/presentation/widgets/user_auth_data_page/registration_password_field.dart';
 import 'package:tanysu/l10n/translate.dart';
-import '../../../../common/widgets/main_button_filled.dart';
+import '../../../../core/widgets/main_button_filled.dart';
 import '../widgets/get_number_main_text.dart';
 
 class UserAuthDataPage extends StatefulWidget {
@@ -56,7 +57,7 @@ class _UserAuthDataPageState extends State<UserAuthDataPage> {
                   if (state is EmailChecking) {
                     return const MainButtonFilledLoading();
                   } else {
-                    return MainButtonFilled(
+                    return MainButton(
                       text: translation(context).next,
                       onPressed: () {
                         if (emailController.text.isEmpty) {
@@ -93,6 +94,7 @@ class _UserAuthDataPageState extends State<UserAuthDataPage> {
                           bloc.add(CheckEmail(email: emailController.text));
                         }
                       },
+                      status: 'active',
                     );
                   }
                 },

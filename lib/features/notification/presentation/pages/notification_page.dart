@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/l10n/translate.dart';
 
@@ -17,9 +18,27 @@ class NotificationPage extends StatelessWidget {
           translation(context).notification,
           style: GoogleFonts.montserrat(
             color: Colors.black,
-            fontSize: 22,
-            fontWeight: FontWeight.w500,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
           ),
+        ),
+        leadingWidth: 40,
+        leading: Row(
+          children: [
+            const SizedBox(
+              width: 12,
+            ),
+            GestureDetector(
+              child: SvgPicture.asset(
+                'assets/icons/back_button.svg',
+                height: 24,
+                width: 24,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
@@ -41,6 +60,7 @@ class NotificationPage extends StatelessWidget {
                     color: Colors.black54,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
+                    letterSpacing: -0.41,
                   ),
                 ),
               ),

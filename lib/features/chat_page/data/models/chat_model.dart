@@ -13,6 +13,8 @@ class ChatModel {
   final bool is_admin_chat;
   final bool is_public;
   final String? group_photo;
+  final int? unread;
+  final bool? online;
   ChatModel({
     required this.id,
     required this.profile,
@@ -21,6 +23,8 @@ class ChatModel {
     required this.is_admin_chat,
     required this.is_public,
     required this.group_photo,
+    required this.online,
+    required this.unread,
   });
   factory ChatModel.fromJson(Map<String, dynamic> json) =>
       _$ChatModelFromJson(json);

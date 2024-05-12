@@ -1,8 +1,9 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tanysu/common/functions/show_snack_bar.dart';
-import 'package:tanysu/common/widgets/main_button_filled.dart';
+import 'package:tanysu/core/functions/show_snack_bar.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
+import 'package:tanysu/core/widgets/main_button_filled.dart';
 import 'package:tanysu/features/login/presentation/bloc/login_bloc.dart';
 import 'package:tanysu/features/login/presentation/widgets/login_main_text.dart';
 import 'package:tanysu/features/login/presentation/widgets/login_second_text.dart';
@@ -43,7 +44,7 @@ class _LoginByEmailState extends State<LoginByEmail> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 35),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -61,7 +62,7 @@ class _LoginByEmailState extends State<LoginByEmail> {
                   if (state is LogingIn) {
                     return const MainButtonFilledLoading();
                   } else {
-                    return MainButtonFilled(
+                    return MainButton(
                       text: translation(context).login,
                       onPressed: () {
                         bloc.add(
@@ -71,6 +72,7 @@ class _LoginByEmailState extends State<LoginByEmail> {
                           ),
                         );
                       },
+                      status: 'active',
                     );
                   }
                 },

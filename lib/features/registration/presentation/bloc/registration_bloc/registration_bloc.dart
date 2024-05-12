@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/registration/data/repositories/registration_repository.dart';
 
@@ -32,9 +31,6 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
             emit(const UserCreateError(error: 'Profile create error'));
           }
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(const UserCreateError(error: "Profile create error"));
         }
       },

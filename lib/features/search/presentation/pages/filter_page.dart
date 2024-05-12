@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/widgets/main_button_filled.dart';
+import 'package:tanysu/core/widgets/main_button_filled.dart';
 import 'package:tanysu/features/choose_city/presentation/widgets/city_field.dart';
 import 'package:tanysu/features/search/presentation/bloc/search_bloc.dart';
 import 'package:tanysu/features/search/presentation/widgets/gender_field.dart';
@@ -9,22 +10,33 @@ import 'package:tanysu/features/search/presentation/widgets/slider.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class FilterPage extends StatefulWidget {
-  const FilterPage({super.key});
-
+  const FilterPage({
+    super.key,
+    required this.callback,
+    required this.cityController,
+    required this.genderController,
+    required this.maxAgeController,
+    required this.minAgeController,
+  });
+  final Function({
+    required int? cityId,
+    required int? maxAge,
+    required int? minAge,
+    required String? gender,
+  }) callback;
+  final TextEditingController cityController;
+  final TextEditingController genderController;
+  final TextEditingController minAgeController;
+  final TextEditingController maxAgeController;
   @override
   State<FilterPage> createState() => _FilterPageState();
 }
 
 class _FilterPageState extends State<FilterPage> {
-  late TextEditingController _cityController;
-  late TextEditingController _genderController;
-  late TextEditingController _ageController;
   late SearchBloc bloc;
+
   @override
   void initState() {
-    _cityController = TextEditingController();
-    _genderController = TextEditingController();
-    _ageController = TextEditingController();
     bloc = BlocProvider.of<SearchBloc>(context);
     super.initState();
   }
@@ -32,16 +44,35 @@ class _FilterPageState extends State<FilterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
         title: Text(
-          'Filter',
+          translation(context).filter,
           style: GoogleFonts.montserrat(
             color: Colors.black,
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
           ),
+        ),
+        leadingWidth: 40,
+        leading: Row(
+          children: [
+            const SizedBox(
+              width: 12,
+            ),
+            GestureDetector(
+              child: SvgPicture.asset(
+                'assets/icons/back_button.svg',
+                height: 24,
+                width: 24,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
         centerTitle: true,
         foregroundColor: Colors.black,
@@ -72,8 +103,7 @@ class _FilterPageState extends State<FilterPage> {
               ),
               const SizedBox(height: 8),
               CityField(
-                controller: _cityController,
-                cityId: null,
+                controller: widget.cityController,
               ),
               const SizedBox(height: 24),
               Text(
@@ -86,8 +116,7 @@ class _FilterPageState extends State<FilterPage> {
               ),
               const SizedBox(height: 8),
               GenderField(
-                controller: _genderController,
-                selctedGender: null,
+                controller: widget.genderController,
               ),
               const SizedBox(height: 24),
               Text(
@@ -99,18 +128,27 @@ class _FilterPageState extends State<FilterPage> {
                 ),
               ),
               const SizedBox(height: 8),
-              AgeSlider(controller: _ageController),
+              AgeSlider(
+                maxAgeController: widget.maxAgeController,
+                minAgeController: widget.minAgeController,
+              ),
               const Spacer(),
               MainButtonFilled(
                 text: translation(context).search,
                 onPressed: () {
-                  bloc.add(
-                    GetUsers(
-                      cityId: int.parse(_cityController.text),
-                      gender: _genderController.text,
-                      maxAge: int.parse(_ageController.text),
-                      page: 1,
-                    ),
+                  widget.callback(
+                    cityId: widget.cityController.text.isEmpty
+                        ? null
+                        : int.parse(widget.cityController.text),
+                    gender: widget.genderController.text.isEmpty
+                        ? null
+                        : widget.genderController.text,
+                    maxAge: widget.maxAgeController.text.isEmpty
+                        ? null
+                        : int.parse(widget.maxAgeController.text),
+                    minAge: widget.minAgeController.text.isEmpty
+                        ? null
+                        : int.parse(widget.minAgeController.text),
                   );
                   Navigator.pop(context);
                 },
@@ -121,11 +159,5 @@ class _FilterPageState extends State<FilterPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _cityController.dispose();
-    super.dispose();
   }
 }

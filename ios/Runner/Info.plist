@@ -61,8 +61,15 @@
 			<string>UIInterfaceOrientationLandscapeLeft</string>
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
-		<key>io.flutter.embedded_views_preview</key>
-		<true/>
+		<key>NSCameraUsageDescription</key>
+		<string>Tanysu Camera Usage!</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>Tanysu Microphone Usage!</string>
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+		</dict>
 		<key>UIStatusBarHidden</key>
 		<false/>
 	</dict>

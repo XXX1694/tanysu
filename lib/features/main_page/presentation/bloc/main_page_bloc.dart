@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/main_page/data/repositories/user_get_repository.dart';
 import 'package:tanysu/features/profile_preview/data/models/profile_model.dart';
@@ -24,9 +23,6 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
             emit(UserGetError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(UserGetError());
         }
       },
@@ -44,9 +40,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
         try {
           await repo.like(profileId: event.profileId);
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
+          return;
         }
       },
     );
@@ -55,23 +49,16 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
         try {
           await repo.dislike(profileId: event.profileId);
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
+          return;
         }
       },
     );
     on<UnLike>(
       (event, emit) async {
         try {
-          if (kDebugMode) {
-            print(event.profileId);
-          }
           await repo.unlike(profileId: event.profileId);
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
+          return;
         }
       },
     );

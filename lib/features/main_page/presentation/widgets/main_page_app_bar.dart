@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/core/constants/colors.dart';
 
 class MainPageAppBar extends StatelessWidget {
   const MainPageAppBar({super.key});
@@ -16,7 +16,7 @@ class MainPageAppBar extends StatelessWidget {
           children: [
             Text(
               'tanysu',
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.montserratAlternates(
                 color: mainColor,
                 fontSize: 22,
                 fontWeight: FontWeight.w700,

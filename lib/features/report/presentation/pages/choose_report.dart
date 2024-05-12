@@ -2,6 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/features/report/presentation/bloc/report_bloc.dart';
 import 'package:tanysu/features/report/presentation/pages/report_page.dart';
@@ -34,12 +35,38 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         centerTitle: true,
+        leadingWidth: 40,
+        leading: Row(
+          children: [
+            const SizedBox(
+              width: 12,
+            ),
+            GestureDetector(
+              child: SvgPicture.asset(
+                'assets/icons/back_button.svg',
+                height: 24,
+                width: 24,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
         title: Text(
           translation(context).report,
           style: GoogleFonts.montserrat(
             color: Colors.black,
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: FontWeight.w600,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(
+            height: 1,
+            width: double.infinity,
+            color: Colors.black12,
           ),
         ),
       ),
@@ -71,22 +98,29 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
         },
         builder: (context, state) => SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 35),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 12),
+                const SizedBox(height: 20),
                 CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
-                      translation(context).fake_profile,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/report_icons/fake_profile.svg',
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      Text(
+                        translation(context).fake_profile,
+                        style: GoogleFonts.montserrat(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
                   ),
                   onPressed: () {
                     bloc.add(
@@ -98,18 +132,24 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                     );
                   },
                 ),
-                const Divider(),
                 CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
-                      translation(context).inapropriate_content,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/report_icons/innapropriate_content.svg',
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      Text(
+                        translation(context).inapropriate_content,
+                        style: GoogleFonts.montserrat(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
                   ),
                   onPressed: () {
                     bloc.add(
@@ -121,18 +161,24 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                     );
                   },
                 ),
-                const Divider(),
                 CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
-                      translation(context).adv,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/report_icons/fraud.svg',
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      Text(
+                        translation(context).adv,
+                        style: GoogleFonts.montserrat(
+                          color: const Color.fromARGB(255, 66, 62, 62),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
                   ),
                   onPressed: () {
                     bloc.add(
@@ -144,18 +190,24 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                     );
                   },
                 ),
-                const Divider(),
                 CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
-                      translation(context).disc,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/report_icons/discrimination.svg',
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      Text(
+                        translation(context).disc,
+                        style: GoogleFonts.montserrat(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
                   ),
                   onPressed: () {
                     bloc.add(
@@ -167,18 +219,24 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                     );
                   },
                 ),
-                const Divider(),
                 CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
-                      translation(context).y_user,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/report_icons/minor_user.svg',
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      Text(
+                        translation(context).y_user,
+                        style: GoogleFonts.montserrat(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
                   ),
                   onPressed: () {
                     bloc.add(
@@ -190,18 +248,24 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                     );
                   },
                 ),
-                const Divider(),
                 CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
-                      translation(context).not_interested,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/report_icons/not_interested.svg',
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      Text(
+                        translation(context).not_interested,
+                        style: GoogleFonts.montserrat(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
                   ),
                   onPressed: () {
                     bloc.add(
@@ -213,18 +277,24 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                     );
                   },
                 ),
-                const Divider(),
                 CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
-                      translation(context).other_p,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/report_icons/other.svg',
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      Text(
+                        translation(context).other_p,
+                        style: GoogleFonts.montserrat(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
                   ),
                   onPressed: () {
                     Navigator.push(

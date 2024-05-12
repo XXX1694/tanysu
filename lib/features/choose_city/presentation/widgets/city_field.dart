@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/choose_city/data/models/city.dart';
 import 'package:tanysu/features/choose_city/presentation/bloc/choose_city_bloc.dart';
 import 'package:tanysu/l10n/translate.dart';
@@ -13,10 +13,8 @@ class CityField extends StatefulWidget {
   const CityField({
     super.key,
     required this.controller,
-    required this.cityId,
   });
   final TextEditingController controller;
-  final int? cityId;
   @override
   State<CityField> createState() => _CityFieldState();
 }
@@ -36,9 +34,10 @@ class _CityFieldState extends State<CityField> {
     return BlocConsumer<ChooseCityBloc, ChooseCityState>(
       listener: (context, state) {
         if (state is CityGot) {
-          if (widget.cityId != null) {
+          debugPrint(widget.controller.text);
+          if (widget.controller.text.isNotEmpty) {
             for (int i = 0; i < state.cities.length; i++) {
-              if (state.cities[i].id == widget.cityId) {
+              if (state.cities[i].id == int.parse(widget.controller.text)) {
                 selectedValue = state.cities[i];
               }
             }
@@ -49,11 +48,19 @@ class _CityFieldState extends State<CityField> {
         if (state is CityGot) {
           return DropdownButton<CityModel>(
             value: selectedValue,
+            hint: Text(
+              translation(context).select_city,
+              style: GoogleFonts.montserrat(
+                color: Colors.black54,
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+              ),
+            ),
             style: GoogleFonts.montserrat(
-              color: Colors.black87,
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
               fontSize: 14,
             ),
-            hint: Text(translation(context).select_city),
             isExpanded: true,
             items: state.cities.map(
               (value) {

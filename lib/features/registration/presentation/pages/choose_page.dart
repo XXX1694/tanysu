@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/main_screen.dart';
 
 import '../../../../l10n/translate.dart';
@@ -64,38 +64,18 @@ class _ChoosePageState extends State<ChoosePage> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const MainScreen(),
                     ),
+                    (route) => false,
                   );
                 },
               ),
               const SizedBox(height: 12),
-              CupertinoButton(
-                padding: const EdgeInsets.all(0),
-                child: Container(
-                  height: 50,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    // border: Border.all(
-                    //   color: Colors.black45,
-                    //   width: 2,
-                    // ),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Center(
-                    child: Text(
-                      translation(context).continue_registration,
-                      style: GoogleFonts.montserrat(
-                        color: secondColor70,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ),
+              MainButton(
+                text: translation(context).continue_registration,
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -104,6 +84,7 @@ class _ChoosePageState extends State<ChoosePage> {
                     ),
                   );
                 },
+                status: 'active',
               ),
             ],
           ),

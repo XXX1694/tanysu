@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class ProfileAboutBlock extends StatelessWidget {
@@ -31,7 +31,7 @@ class ProfileAboutBlock extends StatelessWidget {
                     TextSpan(
                       text: translation(context).location_pr,
                       style: GoogleFonts.montserrat(
-                        color: secondColor70,
+                        color: mainColor70,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
@@ -56,7 +56,7 @@ class ProfileAboutBlock extends StatelessWidget {
                     TextSpan(
                       text: translation(context).work_pr,
                       style: GoogleFonts.montserrat(
-                        color: secondColor70,
+                        color: mainColor70,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
@@ -81,7 +81,7 @@ class ProfileAboutBlock extends StatelessWidget {
                     TextSpan(
                       text: translation(context).study_pr,
                       style: GoogleFonts.montserrat(
-                        color: secondColor70,
+                        color: mainColor70,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
@@ -106,7 +106,7 @@ class ProfileAboutBlock extends StatelessWidget {
                     TextSpan(
                       text: 'Ру: ',
                       style: GoogleFonts.montserrat(
-                        color: secondColor70,
+                        color: mainColor70,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
@@ -131,7 +131,7 @@ class ProfileAboutBlock extends StatelessWidget {
                     TextSpan(
                       text: translation(context).about_pr,
                       style: GoogleFonts.montserrat(
-                        color: secondColor70,
+                        color: mainColor70,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),

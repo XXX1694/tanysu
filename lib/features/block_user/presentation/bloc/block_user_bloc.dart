@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/block_user/data/repositories/block_repostitory.dart';
 
@@ -25,10 +24,7 @@ class BlockUserBloc extends Bloc<BlockUserEvent, BlockUserState> {
             emit(UserBlockError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            emit(UserBlockError());
-            print('Error: $e');
-          }
+          emit(UserBlockError());
         }
       },
     );

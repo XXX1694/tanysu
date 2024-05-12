@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
-import 'package:tanysu/common/widgets/main_button_filled.dart';
+import 'package:tanysu/core/constants/colors.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/profile_add_info/presentation/pages/job_page.dart';
 import 'package:tanysu/features/profile_add_info/presentation/widgets/school_page_widgets/school_page_main_text.dart';
 import 'package:tanysu/l10n/translate.dart';
@@ -49,6 +49,7 @@ class _SchoolPageState extends State<SchoolPage> {
                 color: secondColor,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
+                letterSpacing: -0.41,
               ),
             ),
           ),
@@ -63,9 +64,9 @@ class _SchoolPageState extends State<SchoolPage> {
                 color: Colors.black26,
               ),
               Container(
-                width: deviceWidth * 1 / 6,
+                width: deviceWidth * 1 / 4,
                 height: 5,
-                color: accentColor,
+                color: mainColor,
               ),
             ],
           ),
@@ -75,7 +76,7 @@ class _SchoolPageState extends State<SchoolPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 35),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
               const SizedBox(height: 36),
@@ -83,7 +84,7 @@ class _SchoolPageState extends State<SchoolPage> {
               const SizedBox(height: 32),
               SchoolPageField(controller: _schoolNameController),
               const Spacer(),
-              MainButtonFilled(
+              MainButton(
                 text: translation(context).next,
                 onPressed: () {
                   if (_schoolNameController.text.isEmpty) {
@@ -106,6 +107,7 @@ class _SchoolPageState extends State<SchoolPage> {
                     );
                   }
                 },
+                status: 'active',
               ),
               const SizedBox(height: 40),
             ],

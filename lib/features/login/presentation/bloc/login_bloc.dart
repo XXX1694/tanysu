@@ -28,6 +28,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         }
       },
     );
+    on<LogInWithGoogle>(
+      (event, emit) async {
+        emit(LogingInWithGoogle());
+        final res = await repo.logIn(
+          email: event.email,
+          password: 'Qweasdzxc1!',
+        );
+        if (res == 200) {
+          emit(LogedInWithGoogle());
+        } else {
+          emit(LoginErrorWithGoogle());
+        }
+      },
+    );
     on<GetUserStatus>(
       (event, emit) async {
         final storage = await _storage;

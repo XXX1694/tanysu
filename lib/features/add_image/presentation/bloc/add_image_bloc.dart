@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/add_image/data/repositories/add_image_repo.dart';
 
@@ -24,9 +23,6 @@ class AddImageBloc extends Bloc<AddImageEvent, AddImageState> {
             emit(AddImageError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(AddImageError());
         }
       },
@@ -51,9 +47,6 @@ class AddImageBloc extends Bloc<AddImageEvent, AddImageState> {
             emit(AddImageError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(AddImageError());
         }
       },
@@ -69,9 +62,6 @@ class AddImageBloc extends Bloc<AddImageEvent, AddImageState> {
             emit(AddImageError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(AddImageError());
         }
       },
@@ -88,9 +78,6 @@ class AddImageBloc extends Bloc<AddImageEvent, AddImageState> {
             emit(AddImageError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(AddImageError());
         }
       },

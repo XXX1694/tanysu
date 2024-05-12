@@ -12,7 +12,7 @@ class PicMainText extends StatelessWidget {
       translation(context).pic_main_text,
       style: GoogleFonts.montserrat(
         color: Colors.black,
-        fontSize: 22,
+        fontSize: 24,
         fontWeight: FontWeight.w700,
       ),
     );

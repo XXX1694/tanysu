@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/registration/presentation/widgets/add_picture_page/image_picker.dart';
 
 class PhotosBlock extends StatefulWidget {
@@ -91,14 +91,20 @@ class _PhotosBlockState extends State<PhotosBlock> {
                   width: 30,
                   decoration: BoxDecoration(
                     color: widget.path[index].text.isEmpty
-                        ? secondColor
+                        ? mainColor
                         : accentColor,
                     borderRadius: BorderRadius.circular(100),
                   ),
                   child: Center(
-                    child: SvgPicture.asset(widget.path[index].text.isEmpty
-                        ? 'assets/icons/select.svg'
-                        : 'assets/icons/cancel_new.svg'),
+                    child: SvgPicture.asset(
+                      widget.path[index].text.isEmpty
+                          ? 'assets/icons/select.svg'
+                          : 'assets/icons/cancel_new.svg',
+                      // ignore: deprecated_member_use
+                      color: widget.path[index].text.isEmpty
+                          ? Colors.white
+                          : Colors.black,
+                    ),
                   ),
                 ),
               ),
@@ -109,9 +115,3 @@ class _PhotosBlockState extends State<PhotosBlock> {
     );
   }
 }
-
-// Future _pickImageFromGallery() async {
-//   final reutnedImage =
-//       await ImagePicker().pickImage(source: ImageSource.gallery);
-//   print(reutnedImage?.path);
-// }

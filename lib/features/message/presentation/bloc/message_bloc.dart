@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/message/data/models/message_model.dart';
 import 'package:tanysu/features/message/data/repositories/message_repository.dart';
@@ -22,9 +21,19 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
 
           emit(MessageGot(messages: res));
         } catch (e) {
-          if (kDebugMode) {
-            print('Error: $e');
-          }
+          emit(MessageGetError());
+        }
+      },
+    );
+    on<GetAllGroupMessages>(
+      (event, emit) async {
+        emit(MessageGetting());
+        try {
+          List<MessageModel> res = await repo.getPublicChatInfo(
+            page: event.page,
+          );
+          emit(MessageGot(messages: res));
+        } catch (e) {
           emit(MessageGetError());
         }
       },

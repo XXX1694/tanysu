@@ -1,5 +1,4 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final _storage = SharedPreferences.getInstance();
@@ -19,8 +18,5 @@ class FirebaseApi {
     );
     final fCMToken = await _firebaseMessaging.getToken();
     await storage.setString('firebase_token', fCMToken ?? '');
-    if (kDebugMode) {
-      print('Token: $fCMToken');
-    }
   }
 }

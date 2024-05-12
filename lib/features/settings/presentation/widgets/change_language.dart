@@ -3,8 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/language_constants.dart';
+import 'package:tanysu/core/constants/language_constants.dart';
 import 'package:tanysu/features/settings/presentation/bloc/settings_bloc.dart';
 import 'package:tanysu/l10n/translate.dart';
 import 'package:tanysu/main.dart';
@@ -36,8 +37,8 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
           translation(context).change_language,
           style: GoogleFonts.montserrat(
             color: Colors.black,
-            fontSize: 22,
-            fontWeight: FontWeight.w500,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
           ),
         ),
         bottom: PreferredSize(
@@ -48,6 +49,24 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
             color: Colors.black26,
           ),
         ),
+        leadingWidth: 40,
+        leading: Row(
+          children: [
+            const SizedBox(
+              width: 12,
+            ),
+            GestureDetector(
+              child: SvgPicture.asset(
+                'assets/icons/back_button.svg',
+                height: 24,
+                width: 24,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
       body: SafeArea(
         child: Padding(
@@ -55,22 +74,20 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 4),
               CupertinoButton(
-                padding: const EdgeInsets.all(0),
-                child: Column(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 16),
                     Text(
-                      'Kz',
+                      'Қазақша',
                       style: GoogleFonts.montserrat(
                         color: Colors.black,
                         fontSize: 18,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const Spacer(),
                   ],
                 ),
                 onPressed: () async {
@@ -78,22 +95,24 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                   MainApp.setLocale(context, locale);
                 },
               ),
-              const Divider(color: Colors.black26),
+              const Divider(
+                color: Colors.black26,
+                height: 1,
+              ),
               CupertinoButton(
-                padding: const EdgeInsets.all(0),
-                child: Column(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 16),
                     Text(
-                      'Ru',
+                      'Русский',
                       style: GoogleFonts.montserrat(
                         color: Colors.black,
                         fontSize: 18,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const Spacer(),
                   ],
                 ),
                 onPressed: () async {
@@ -101,22 +120,24 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                   MainApp.setLocale(context, locale);
                 },
               ),
-              const Divider(color: Colors.black26),
+              const Divider(
+                color: Colors.black26,
+                height: 1,
+              ),
               CupertinoButton(
-                padding: const EdgeInsets.all(0),
-                child: Column(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 16),
                     Text(
-                      'En',
+                      'English',
                       style: GoogleFonts.montserrat(
                         color: Colors.black,
                         fontSize: 18,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const Spacer(),
                   ],
                 ),
                 onPressed: () async {
@@ -124,7 +145,10 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                   MainApp.setLocale(context, locale);
                 },
               ),
-              const Divider(color: Colors.black26),
+              const Divider(
+                color: Colors.black26,
+                height: 1,
+              ),
             ],
           ),
         ),

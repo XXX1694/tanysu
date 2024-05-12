@@ -3,14 +3,14 @@
     "create_acc": "АККАУНТ ЖАСАУ",
     "sign_in": "КІРУ",
 
-    "agreement1": "Кіру түймесін басу арқылы сіз біздің ",
-    "agreement2": "шарттармен келісесіз. ",
-    "agreement3": "Біздің деректеріңізді қалай өңдейтінімізді біліңіз - ",
+    "agreement1": "Кіру түймесін басу арқылы сіз біздің",
+    "agreement2": "шарттармен келісесіз.",
+    "agreement3": "Біздің деректеріңізді қалай өңдейтінімізді біліңіз -",
     "agreement4": "құпиялылық саясаты",
 
-    "sign_in_with_apple": "Apple",
-    "sign_in_with_google": "Google ",
-    "sign_in_with_phone_number": "Email",
+    "with_apple": "Apple",
+    "with_google": "Google",
+    "with_email": "Пошта",
 
     "get_number_main_text": "Электрондық поштаңызды ала аламыз ба?",
     "get_number_second_text": "Сіз шынымен сіз екеніңізді растау үшін сізге код жібереміз. Хабарламалар мен деректерді беру тарифтері қолданылуы мүмкін.",
@@ -188,7 +188,22 @@
     "payment_not_working": "Төлем жүйесі уақытша қол жетімді емес!",
 
     "name_can_not_be_more_than_25_symbols": "Атыңыз 25 таңбадан артық болмауы керек!",
-    "at_least_one_image": "Кем дегенде 1 cурет қалуы тиіс!"
-    
+    "at_least_one_image": "Кем дегенде 1 cурет қалуы тиіс!",
 
+    "pull_to_refresh": "Жаңарту үшін тартыңыз",
+    "release_to_refresh": "Жаңарту үшін жіберіңіз",
+    "refreshing_text": "Жаңартылуда...",
+
+    "delete": "Жою",
+
+    "creating_stream": "Стрим жасалуда...",
+    "joining_stream": "Стримға кіруде...",
+
+    "go_live": "Эфирге шығу",
+
+    "temporarily_not_working": "Уақытша жұмыс істемейді",
+    "temporarily_not_working_second": "Кешіріңіз, бұл функция әлі жұмыс істемейді!",
+    
+    "edit_photo": "Фотосуретті өңдеу",
+    "edit_photo_second": "Фотосуретті жойғыңыз немесе өзгерткіңіз келе ме?"
 }

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/report/data/repositories/report_repository.dart';
 
@@ -27,9 +26,6 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
             emit(UserReportError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print('Error: $e');
-          }
           emit(UserReportError());
         }
       },

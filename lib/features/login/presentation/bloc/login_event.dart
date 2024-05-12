@@ -13,4 +13,9 @@ class LogIn extends LoginEvent {
   const LogIn({required this.email, required this.password});
 }
 
+class LogInWithGoogle extends LoginEvent {
+  final String email;
+  const LogInWithGoogle({required this.email});
+}
+
 class GetUserStatus extends LoginEvent {}

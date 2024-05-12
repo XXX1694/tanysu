@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tanysu/common/constants/constants.dart';
+import 'package:tanysu/core/constants/constants.dart';
 import 'package:tanysu/features/like_page/data/models/like_person.dart';
 
 final _storage = SharedPreferences.getInstance();
@@ -15,28 +14,23 @@ class LikeRepository {
     String? token = storage.getString('auth_token');
     if (token == null) return null;
     dio.options.headers["authorization"] = "Token $token";
-    Uri? uri = Uri.tryParse(finalUrl);
-    if (uri != null) {
-      try {
-        final response = await dio.get(
-          finalUrl,
-        );
-        List data = response.data;
-        List<LikePersonModel> result = [];
-        if (response.statusCode == 200) {
-          for (int i = 0; i < data.length; i++) {
-            final user = LikePersonModel.fromJson(data[i]);
-            result.add(user);
-          }
-          return result;
-        } else {
-          return null;
+    try {
+      final response = await dio.get(
+        finalUrl,
+      );
+      List data = response.data;
+      List<LikePersonModel> result = [];
+      if (response.statusCode == 200) {
+        for (int i = 0; i < data.length; i++) {
+          final user = LikePersonModel.fromJson(data[i]);
+          result.add(user);
         }
-      } catch (e) {
-        if (kDebugMode) {
-          print(e);
-        }
+        return result;
+      } else {
+        return null;
       }
+    } catch (e) {
+      return null;
     }
   }
 
@@ -48,28 +42,24 @@ class LikeRepository {
     String? token = storage.getString('auth_token');
     if (token == null) return null;
     dio.options.headers["authorization"] = "Token $token";
-    Uri? uri = Uri.tryParse(finalUrl);
-    if (uri != null) {
-      try {
-        final response = await dio.get(
-          finalUrl,
-        );
-        List data = response.data;
-        List<LikePersonModel> result = [];
-        if (response.statusCode == 200) {
-          for (int i = 0; i < data.length; i++) {
-            final user = LikePersonModel.fromJson(data[i]);
-            result.add(user);
-          }
-          return result;
-        } else {
-          return null;
+
+    try {
+      final response = await dio.get(
+        finalUrl,
+      );
+      List data = response.data;
+      List<LikePersonModel> result = [];
+      if (response.statusCode == 200) {
+        for (int i = 0; i < data.length; i++) {
+          final user = LikePersonModel.fromJson(data[i]);
+          result.add(user);
         }
-      } catch (e) {
-        if (kDebugMode) {
-          print(e);
-        }
+        return result;
+      } else {
+        return null;
       }
+    } catch (e) {
+      return null;
     }
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/main_page/presentation/bloc/swipe_bloc/swipe_bloc.dart';
 import 'package:tanysu/features/profile_preview/data/models/profile_model.dart';
 import 'package:tanysu/features/profile_preview/presentation/pages/profile_preview_page.dart';

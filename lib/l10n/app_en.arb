@@ -3,14 +3,14 @@
     "create_acc": "CREATE ACCOUNT",
     "sign_in": "SIGN IN",
 
-    "agreement1": "By tapping ‘Sign in’ you agree to our ",
-    "agreement2": "Terms. ",
-    "agreement3": "Learn how we process your data in our ",
+    "agreement1": "By tapping ‘Sign in’ you agree to our",
+    "agreement2": "Terms.",
+    "agreement3": "Learn how we process your data in our",
     "agreement4": "Privacy Policy",
 
-    "sign_in_with_apple": "WITH APPLE",
-    "sign_in_with_google": "WITH GOOGLE ",
-    "sign_in_with_phone_number": "WITH EMAIL",
+    "with_apple": "Apple",
+    "with_google": "Google",
+    "with_email": "Email",
 
     "get_number_main_text": "Can we get your email?",
     "get_number_second_text": "We’ll text you a code to verify you’re really you. Message and data rates may apply.",
@@ -188,6 +188,23 @@
     "payment_not_working": "The payment system is temporarily unavailable!",
 
     "name_can_not_be_more_than_25_symbols": "The name must not contain more than 25 characters!",
-    "at_least_one_image": "Should be at least 1 image!"
+    "at_least_one_image": "Should be at least 1 image!",
+
+    "pull_to_refresh": "Pull to refresh",
+    "release_to_refresh": "Release to refresh",
+    "refreshing_text": "Refreshing...",
+
+    "delete": "Delete",
+
+    "creating_stream": "Creating stream...",
+    "joining_stream": "Joining stream...",
+
+    "go_live": "Go live",
+
+    "temporarily_not_working": "Temporarily not working",
+    "temporarily_not_working_second": "We sorry, this function not working yet!",
+
+    "edit_photo": "Edit photos",
+    "edit_photo_second": "Do you want to delete or change a photo?"
 
 }

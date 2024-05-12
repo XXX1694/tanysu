@@ -1,13 +1,11 @@
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/main_page/presentation/bloc/main_page_bloc.dart';
 import 'package:tanysu/features/main_page/presentation/bloc/swipe_bloc/swipe_bloc.dart';
-import 'package:tanysu/features/main_page/presentation/widgets/play_button.dart';
 import 'package:tanysu/features/main_page/presentation/widgets/tanysu_card.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tanysu/features/profile_preview/data/models/profile_model.dart';
@@ -33,151 +31,151 @@ class _MainPageState extends State<MainPage> {
     bloc = BlocProvider.of<MainPageBloc>(context);
     bloc1 = BlocProvider.of<SwipeBloc>(context);
     bloc.add(GetUsers());
-    // Future.delayed(const Duration(seconds: 1)).then((_) {
-    //   _shakeCard();
-    // });
-    // Future.delayed(Duration.zero, () {
-    //   AwesomeNotifications().createNotification(
-    //     content: NotificationContent(
-    //       id: 10,
-    //       channelKey: 'basic_channel',
-    //       title: translation(context).welcome,
-    //       body: translation(context).welcome_text,
-    //     ),
-    //   );
-    // });
-
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    cardController.dispose();
+    super.dispose();
   }
 
   int counter = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'tanysu',
-          style: GoogleFonts.montserrat(
-            color: mainColor,
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        actions: [
-          GestureDetector(
-            child: SvgPicture.asset(
-              'assets/icons/search.svg',
-              height: 24,
-              width: 24,
-            ),
-            onTap: () {
-              Navigator.pushNamed(context, '/search');
-            },
-          ),
-          const SizedBox(width: 20),
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(
-            height: 1,
-            width: double.infinity,
-            color: Colors.black12,
-          ),
-        ),
-      ),
+      backgroundColor: Colors.white,
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            Expanded(
-              child: BlocConsumer<MainPageBloc, MainPageState>(
-                listener: (context, state) {
-                  if (state is UserGot) {
-                    users.addAll(state.users);
-                  }
-                },
-                builder: (context, state) {
-                  return users.isEmpty
-                      ? Center(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 35),
-                            child: Column(
-                              children: [
-                                const Spacer(),
-                                Expanded(
-                                  child: SizedBox(
-                                    height: 150,
-                                    width: 150,
-                                    child: PlayButton(
-                                      onPressed: () {},
+            Row(
+              children: [
+                const SizedBox(
+                  width: 20,
+                  height: 40,
+                ),
+                Text(
+                  'tanysu',
+                  style: GoogleFonts.montserratAlternates(
+                    color: mainColor,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const Spacer(),
+                GestureDetector(
+                  child: SvgPicture.asset(
+                    'assets/icons/search.svg',
+                    height: 24,
+                    width: 24,
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/search');
+                  },
+                ),
+                const SizedBox(
+                  width: 20,
+                  height: 40,
+                )
+              ],
+            ),
+            Column(
+              children: [
+                const SizedBox(height: 40),
+                Expanded(
+                  child: BlocConsumer<MainPageBloc, MainPageState>(
+                    listener: (context, state) {
+                      if (state is UserGot) {
+                        users.addAll(state.users);
+                      }
+                    },
+                    builder: (context, state) {
+                      return users.isEmpty
+                          ? Center(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 35),
+                                child: Column(
+                                  children: [
+                                    const Spacer(),
+                                    Text(
+                                      'tanysu',
+                                      style: GoogleFonts.montserratAlternates(
+                                        color: mainColor,
+                                        fontSize: 42,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 12),
+                                    Text(
+                                      translation(context).list_end,
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.montserratAlternates(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                              child: Stack(
+                                children: [
+                                  AppinioSwiper(
+                                    threshold: 100,
+                                    controller: cardController,
+                                    backgroundCardCount: 15,
+                                    maxAngle: 30,
+                                    backgroundCardScale: 0.85,
+                                    swipeOptions: const SwipeOptions.all(),
+                                    onSwipeEnd: _swipeEnd,
+                                    onEnd: _onEnd,
+                                    onCardPositionChanged: (position) {
+                                      if (position.offset.dx <= -20) {
+                                        bloc1.add(GoLeft());
+                                      } else if (position.offset.dx >= 20) {
+                                        bloc1.add(GoRight());
+                                      } else if (position.offset.dx <= 20 &&
+                                          position.offset.dx >= -20 &&
+                                          position.offset.dy <= -20) {
+                                        bloc1.add(GoTop());
+                                      } else {
+                                        bloc1.add(GoBottom());
+                                      }
+                                    },
+                                    cardBuilder: (context, index) {
+                                      counter = index - 1;
+                                      return TanysuCard(
+                                        user: users[index],
+                                        controller: cardController,
+                                      );
+                                    },
+                                    cardCount: users.length,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 15,
+                                        vertical: 20,
+                                      ),
+                                      child: users.isNotEmpty
+                                          ? ButtonsList()
+                                          : null,
                                     ),
                                   ),
-                                ),
-                                const SizedBox(height: 20),
-                                Text(
-                                  translation(context).list_end,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: mainColor,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                const Spacer(),
-                              ],
-                            ),
-                          ),
-                        )
-                      : Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                          child: Stack(
-                            children: [
-                              AppinioSwiper(
-                                threshold: 100,
-                                controller: cardController,
-                                backgroundCardCount: 6,
-                                maxAngle: 30,
-                                backgroundCardScale: 0.87,
-                                swipeOptions: const SwipeOptions.all(),
-                                onSwipeEnd: _swipeEnd,
-                                onEnd: _onEnd,
-                                onCardPositionChanged: (position) {
-                                  if (position.offset.dx <= -20) {
-                                    bloc1.add(GoLeft());
-                                  } else if (position.offset.dx >= 20) {
-                                    bloc1.add(GoRight());
-                                  } else if (position.offset.dx <= 20 &&
-                                      position.offset.dx >= -20 &&
-                                      position.offset.dy <= -20) {
-                                    bloc1.add(GoTop());
-                                  } else {
-                                    bloc1.add(GoBottom());
-                                  }
-                                },
-                                cardBuilder: (context, index) {
-                                  counter = index - 1;
-                                  return TanysuCard(
-                                    user: users[index],
-                                    controller: cardController,
-                                  );
-                                },
-                                cardCount: users.length,
+                                ],
                               ),
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 15,
-                                    vertical: 20,
-                                  ),
-                                  child:
-                                      users.isNotEmpty ? ButtonsList() : null,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                },
-              ),
+                            );
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -217,7 +215,7 @@ class _MainPageState extends State<MainPage> {
     switch (activity) {
       case Swipe():
         if (activity.direction == AxisDirection.left) {
-          // bloc.add(DisLike(profileId: users[previousIndex].id ?? 0));
+          bloc.add(DisLike(profileId: users[previousIndex].id ?? 0));
         } else if (activity.direction == AxisDirection.right) {
           bloc.add(Like(profileId: users[previousIndex].id ?? 0));
         } else if (activity.direction == AxisDirection.up) {
@@ -234,28 +232,13 @@ class _MainPageState extends State<MainPage> {
           await Future.delayed(const Duration(milliseconds: 50));
           cardController.unswipe();
         } else {}
-        if (kDebugMode) {
-          print('The card was swiped to the : ${activity.direction}');
-          print('previous index: $previousIndex, target index: $targetIndex');
-        }
 
         break;
       case Unswipe():
-        if (kDebugMode) {
-          print('A ${activity.direction.name} swipe was undone.');
-          print('previous index: $previousIndex, target index: $targetIndex');
-        }
-
         break;
       case CancelSwipe():
-        if (kDebugMode) {
-          print('A swipe was cancelled');
-        }
         break;
       case DrivenActivity():
-        if (kDebugMode) {
-          print('Driven Activity');
-        }
         break;
     }
   }
@@ -263,19 +246,12 @@ class _MainPageState extends State<MainPage> {
   void _onEnd() {
     users = [];
     bloc.add(GetUsers());
-    if (kDebugMode) {
-      print('end reached!');
-    }
   }
 
   // ignore: non_constant_identifier_names
   Widget ButtonsList() {
     return BlocConsumer<SwipeBloc, SwipeState>(
-      listener: (context, state) {
-        if (kDebugMode) {
-          print(state);
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -6,3 +6,5 @@ abstract class StreamEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetAllStream extends StreamEvent {}

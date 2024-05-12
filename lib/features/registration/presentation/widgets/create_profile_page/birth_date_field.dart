@@ -3,8 +3,7 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../../../../../l10n/translate.dart';
-import '../../../../../common/constants/colors.dart';
-import 'package:flutter/foundation.dart';
+import '../../../../../core/constants/colors.dart';
 
 var formatter = DateFormat('dd/MM/yyyy');
 
@@ -33,15 +32,8 @@ class _BirthDateFieldState extends State<BirthDateField> {
           showTitleActions: true,
           minTime: DateTime.now().subtract(const Duration(days: 365 * 100)),
           maxTime: DateTime.now().subtract(const Duration(days: 6574)),
-          onChanged: (date) {
-            if (kDebugMode) {
-              print('change $date');
-            }
-          },
+          onChanged: (date) {},
           onConfirm: (date) {
-            if (kDebugMode) {
-              print('confirm $date');
-            }
             setState(
               () {
                 widget.controller.text =
@@ -53,11 +45,17 @@ class _BirthDateFieldState extends State<BirthDateField> {
         );
       },
       style: GoogleFonts.montserrat(
-        color: Colors.black87,
+        color: Colors.black,
+        fontWeight: FontWeight.w500,
         fontSize: 14,
       ),
       decoration: InputDecoration(
         hintText: translation(context).enter_birth_date,
+        hintStyle: GoogleFonts.montserrat(
+          color: Colors.black54,
+          fontWeight: FontWeight.w400,
+          fontSize: 14,
+        ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: secondColor,

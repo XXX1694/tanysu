@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/widgets/main_button_filled.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
+import 'package:tanysu/core/widgets/main_button_filled.dart';
 import 'package:tanysu/features/report/presentation/bloc/report_bloc.dart';
 import 'package:tanysu/features/report/presentation/widgets/report_field.dart';
 import 'package:tanysu/features/report/presentation/widgets/report_main_text.dart';
@@ -42,9 +44,27 @@ class _ReportPageState extends State<ReportPage> {
           translation(context).report,
           style: GoogleFonts.montserrat(
             color: Colors.black,
-            fontSize: 20,
+            fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
+        ),
+        leadingWidth: 40,
+        leading: Row(
+          children: [
+            const SizedBox(
+              width: 12,
+            ),
+            GestureDetector(
+              child: SvgPicture.asset(
+                'assets/icons/back_button.svg',
+                height: 24,
+                width: 24,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -57,7 +77,7 @@ class _ReportPageState extends State<ReportPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 35),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -82,7 +102,7 @@ class _ReportPageState extends State<ReportPage> {
                   if (state is UserReporting) {
                     return const MainButtonFilledLoading();
                   } else {
-                    return MainButtonFilled(
+                    return MainButton(
                       text: translation(context).report,
                       onPressed: () {
                         bloc.add(
@@ -93,6 +113,7 @@ class _ReportPageState extends State<ReportPage> {
                           ),
                         );
                       },
+                      status: 'active',
                     );
                   }
                 },

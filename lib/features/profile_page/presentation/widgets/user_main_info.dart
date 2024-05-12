@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
-import 'package:tanysu/common/functions/show_snack_bar.dart';
+import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class UserMainInfo extends StatelessWidget {
@@ -25,7 +23,7 @@ class UserMainInfo extends StatelessWidget {
             Text(
               '$followers',
               style: GoogleFonts.montserrat(
-                color: mainColor70,
+                color: mainColor,
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
               ),
@@ -47,7 +45,7 @@ class UserMainInfo extends StatelessWidget {
             Text(
               '$coins',
               style: GoogleFonts.montserrat(
-                color: mainColor70,
+                color: mainColor,
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
               ),
@@ -63,30 +61,30 @@ class UserMainInfo extends StatelessWidget {
           ],
         ),
         const SizedBox(width: 40),
-        CupertinoButton(
-          padding: const EdgeInsets.all(0),
-          child: Container(
-            height: 39,
-            width: 119,
-            decoration: BoxDecoration(
-              color: mainColor,
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: Center(
-              child: Text(
-                translation(context).buy_a_coin,
-                style: GoogleFonts.montserrat(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ),
-          onPressed: () {
-            showSnackBar(context, translation(context).payment_not_working);
-          },
-        ),
+        // CupertinoButton(
+        //   padding: const EdgeInsets.all(0),
+        //   child: Container(
+        //     height: 39,
+        //     width: 119,
+        //     decoration: BoxDecoration(
+        //       color: mainColor,
+        //       borderRadius: BorderRadius.circular(100),
+        //     ),
+        //     child: Center(
+        //       child: Text(
+        //         translation(context).buy_a_coin,
+        //         style: GoogleFonts.montserrat(
+        //           color: Colors.white,
+        //           fontSize: 14,
+        //           fontWeight: FontWeight.w600,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        //   onPressed: () {
+        //     showSnackBar(context, translation(context).payment_not_working);
+        //   },
+        // ),
       ],
     );
   }

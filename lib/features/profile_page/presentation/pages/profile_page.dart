@@ -6,9 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/profile_page/presentation/bloc/profile_page_bloc.dart';
-import 'package:tanysu/features/profile_page/presentation/widgets/coins_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/name_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/photo_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/user_main_info.dart';
@@ -35,10 +34,12 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text(
           'tanysu',
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.montserratAlternates(
             color: mainColor,
             fontSize: 22,
             fontWeight: FontWeight.w700,
@@ -51,7 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Navigator.pushNamed(context, '/notification');
             },
             child: SvgPicture.asset(
-              'assets/icons/ring.svg',
+              'assets/icons/notification.svg',
               height: 24,
               width: 24,
             ),
@@ -69,14 +70,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           const SizedBox(width: 20),
         ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(
-            height: 1,
-            width: double.infinity,
-            color: Colors.black12,
-          ),
-        ),
       ),
       body: SafeArea(
         child: BlocBuilder<ProfilePageBloc, ProfilePageState>(
@@ -94,11 +87,23 @@ class _ProfilePageState extends State<ProfilePage> {
               );
             } else if (state is ProfileGot) {
               return SmartRefresher(
+                header: ClassicHeader(
+                  textStyle: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    decoration: TextDecoration.none,
+                    letterSpacing: -0.41,
+                  ),
+                  idleText: translation(context).pull_to_refresh,
+                  releaseText: translation(context).release_to_refresh,
+                  refreshingText: translation(context).refreshing_text,
+                ),
                 enablePullDown: true,
                 enablePullUp: false,
                 controller: _refreshController,
                 onRefresh: () async {
-                  await Future.delayed(const Duration(milliseconds: 500));
+                  // await Future.delayed(const Duration(milliseconds: 500));
                   bloc.add(GetMyData());
                 },
                 child: SingleChildScrollView(
@@ -122,8 +127,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Divider(color: Colors.black26),
                       ),
                       const SizedBox(height: 16),
-                      const CoinsBlock(coins: 0),
-                      const SizedBox(height: 40),
+                      // const CoinsBlock(coins: 0),
+                      // const SizedBox(height: 40),
                     ],
                   ),
                 ),

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/profile_add_info/data/repositories/profile_add_info_repository.dart';
 
@@ -30,9 +29,6 @@ class ProfileAddInfoBloc
             emit(AddProfileInfoError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(AddProfileInfoError());
         }
       },

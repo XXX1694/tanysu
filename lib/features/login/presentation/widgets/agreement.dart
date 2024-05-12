@@ -14,42 +14,46 @@ class Agreement extends StatelessWidget {
           TextSpan(
             text: translation(context).agreement1,
             style: GoogleFonts.montserrat(
-              color: Colors.white,
+              color: Colors.black87,
               fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
           ),
+          const TextSpan(text: ' '),
           TextSpan(
-              text: translation(context).agreement2,
-              style: GoogleFonts.montserrat(
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                decoration: TextDecoration.underline,
-                decorationColor: Colors.white,
-                decorationThickness: 2,
-              ),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.pushNamed(context, '/terms');
-                }),
-          TextSpan(
-            text: translation(context).agreement3,
+            text: translation(context).agreement2,
             style: GoogleFonts.montserrat(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          TextSpan(
-            text: translation(context).agreement4,
-            style: GoogleFonts.montserrat(
-              color: Colors.white,
+              color: Colors.black87,
               fontSize: 12,
               fontWeight: FontWeight.w500,
               decoration: TextDecoration.underline,
-              decorationColor: Colors.white,
-              decorationThickness: 2,
+              decorationColor: Colors.black87,
+              decorationThickness: 1,
+            ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.pushNamed(context, '/terms');
+              },
+          ),
+          const TextSpan(text: ' '),
+          TextSpan(
+            text: translation(context).agreement3,
+            style: GoogleFonts.montserrat(
+              color: Colors.black87,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const TextSpan(text: ' '),
+          TextSpan(
+            text: translation(context).agreement4,
+            style: GoogleFonts.montserrat(
+              color: Colors.black87,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              decoration: TextDecoration.underline,
+              decorationColor: Colors.black87,
+              decorationThickness: 1,
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {

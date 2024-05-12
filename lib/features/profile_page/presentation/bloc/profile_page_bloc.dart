@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/profile_page/data/repositories/profile_page_repository.dart';
 import 'package:tanysu/features/profile_preview/data/models/profile_model.dart';
@@ -29,11 +28,7 @@ class ProfilePageBloc extends Bloc<ProfilePageEvent, ProfilePageState> {
         int res = await repo.deleteProfile();
         if (res == 201) {
           emit(ProfileDeleted());
-        } else {
-          if (kDebugMode) {
-            print(res);
-          }
-        }
+        } else {}
       },
     );
   }

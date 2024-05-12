@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
-import 'package:tanysu/common/functions/show_snack_bar.dart';
+import 'package:tanysu/core/constants/colors.dart';
+import 'package:tanysu/core/functions/show_snack_bar.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class CoinsBlock extends StatelessWidget {
@@ -24,7 +24,7 @@ class CoinsBlock extends StatelessWidget {
                 TextSpan(
                   text: '$coins ',
                   style: GoogleFonts.montserrat(
-                    color: mainColor70,
+                    color: mainColor,
                     fontSize: 22,
                     fontWeight: FontWeight.w700,
                   ),
@@ -75,7 +75,7 @@ class CoinsBlock extends StatelessWidget {
                       '1000KZT',
                       style: GoogleFonts.montserrat(
                         fontSize: 17,
-                        color: mainColor50,
+                        color: mainColor,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -122,7 +122,7 @@ class CoinsBlock extends StatelessWidget {
                       '1800KZT',
                       style: GoogleFonts.montserrat(
                         fontSize: 17,
-                        color: mainColor50,
+                        color: mainColor,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -169,7 +169,7 @@ class CoinsBlock extends StatelessWidget {
                       '3000KZT',
                       style: GoogleFonts.montserrat(
                         fontSize: 17,
-                        color: mainColor50,
+                        color: mainColor,
                         fontWeight: FontWeight.w400,
                       ),
                     ),

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/chat_page/data/models/chat_model.dart';
 import 'package:tanysu/features/chat_page/data/repositories/chat_repository.dart';
@@ -20,9 +19,6 @@ class ChatPageBloc extends Bloc<ChatPageEvent, ChatPageState> {
           List<ChatModel> res = await repo.getChatList();
           emit(ChatListGot(chats: res));
         } catch (e) {
-          if (kDebugMode) {
-            print('Error: $e');
-          }
           emit(ChatListGetError());
         }
       },
@@ -38,9 +34,6 @@ class ChatPageBloc extends Bloc<ChatPageEvent, ChatPageState> {
             emit(ChatDeleteError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print('Error: $e');
-          }
           emit(ChatDeleteError());
         }
       },

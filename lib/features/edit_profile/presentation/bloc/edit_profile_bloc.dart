@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/edit_profile/data/repositories/edit_profile_repository.dart';
 
@@ -29,18 +28,13 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
             juz: event.juz,
             tryToFind: event.tryToFind,
           );
-          if (kDebugMode) {
-            print(res);
-          }
+
           if (res == 200) {
             emit(ProfileUpdated());
           } else {
             emit(ProfileUpdateError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(ProfileUpdateError());
         }
       },

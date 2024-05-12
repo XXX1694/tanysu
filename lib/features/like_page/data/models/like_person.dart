@@ -10,11 +10,13 @@ class LikePersonModel {
   final Map<String, dynamic>? image;
   final String? first_name;
   final int? age;
+  final bool? online;
   LikePersonModel(
     this.id,
     this.image,
     this.age,
     this.first_name,
+    this.online,
   );
   factory LikePersonModel.fromJson(Map<String, dynamic> json) =>
       _$LikePersonModelFromJson(json);

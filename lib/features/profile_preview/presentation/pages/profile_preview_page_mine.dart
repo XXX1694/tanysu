@@ -1,10 +1,11 @@
 import 'package:appinio_swiper/appinio_swiper.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/core/constants/colors.dart';
+import 'package:tanysu/core/widgets/placeholers.dart';
 import 'package:tanysu/features/profile_preview/data/models/profile_model.dart';
 import 'package:tanysu/features/profile_preview/presentation/widgets/profile_about.dart';
 
@@ -24,22 +25,33 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
         backgroundColor: Colors.transparent,
         title: Text(
           'tanysu',
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.montserratAlternates(
             color: mainColor,
             fontSize: 22,
             fontWeight: FontWeight.w700,
           ),
         ),
+        centerTitle: true,
         foregroundColor: Colors.black,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(
-            height: 1,
-            width: double.infinity,
-            color: Colors.black12,
-          ),
+        leadingWidth: 40,
+        leading: Row(
+          children: [
+            const SizedBox(
+              width: 12,
+            ),
+            GestureDetector(
+              child: SvgPicture.asset(
+                'assets/icons/back_button.svg',
+                height: 24,
+                width: 24,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
       ),
       body: SafeArea(
@@ -58,29 +70,18 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
                         width: 310,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
-                          child: Image.network(
-                            e['image_url'] ?? '',
-                            errorBuilder: (context, error, stackTrace) =>
-                                Container(
-                              height: double.infinity,
-                              width: double.infinity,
-                              color: Colors.black,
+                          child: CachedNetworkImage(
+                            imageUrl: e['image_url'] ?? '',
+                            placeholder: (context, url) =>
+                                const ShrimerPlaceholder(
+                              height: 210,
+                              width: 165,
                             ),
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) {
-                                return child;
-                              } else {
-                                return Shimmer.fromColors(
-                                  baseColor: secondColor,
-                                  highlightColor: mainColor,
-                                  child: Container(
-                                    height: double.infinity,
-                                    width: double.infinity,
-                                    color: Colors.white,
-                                  ),
-                                );
-                              }
-                            },
+                            errorWidget: (context, url, error) =>
+                                const ErrorPlaceholder(
+                              height: 210,
+                              width: 165,
+                            ),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -100,7 +101,7 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
                   Text(
                     '${widget.profile.first_name ?? ''}, ${widget.profile.age ?? ''}',
                     style: GoogleFonts.montserrat(
-                      color: secondColor,
+                      color: mainColor,
                       fontWeight: FontWeight.w700,
                       fontSize: 28,
                     ),
@@ -138,9 +139,11 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
                     // ),
                     // const SizedBox(height: 12),
                     // SendGiftButton(userName: widget.profile.first_name ?? ''),
-                    const SizedBox(height: 12),
-                    const Divider(color: Colors.black26),
-                    const SizedBox(height: 12),
+                    const Divider(
+                      color: Colors.black26,
+                      height: 1,
+                    ),
+                    const SizedBox(height: 16),
                     ProfileAboutBlock(
                       about: widget.profile.about_me ?? '',
                       city: widget.profile.city_name ?? '',
@@ -149,8 +152,11 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
                       study: widget.profile.school_name ?? '',
                       work: widget.profile.company_name ?? '',
                     ),
-                    const Divider(color: Colors.black26),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 16),
+                    const Divider(
+                      color: Colors.black26,
+                      height: 1,
+                    ),
                   ],
                 ),
               ),

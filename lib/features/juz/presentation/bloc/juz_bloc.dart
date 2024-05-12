@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/juz/data/models/juz_model.dart';
 import 'package:tanysu/features/juz/data/repositories/juz_repository.dart';
@@ -24,9 +23,6 @@ class JuzBloc extends Bloc<JuzEvent, JuzState> {
             emit(JuzGetError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(JuzGetError());
         }
       },

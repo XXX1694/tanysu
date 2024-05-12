@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../common/constants/colors.dart';
+import '../../../../core/constants/colors.dart';
 import '../../../../l10n/translate.dart';
 
 class PasswordField extends StatefulWidget {
@@ -21,8 +21,9 @@ class _PasswordFieldState extends State<PasswordField> {
       obscureText: _obscureText,
       obscuringCharacter: '*',
       style: GoogleFonts.montserrat(
-        color: Colors.black87,
+        color: Colors.black,
         fontSize: 14,
+        fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
         suffixIcon: GestureDetector(
@@ -35,6 +36,11 @@ class _PasswordFieldState extends State<PasswordField> {
           ),
         ),
         hintText: translation(context).password,
+        hintStyle: GoogleFonts.montserrat(
+          color: Colors.black87,
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+        ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: secondColor,

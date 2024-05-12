@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
-import 'package:tanysu/common/functions/show_snack_bar.dart';
+import 'package:tanysu/core/constants/colors.dart';
+import 'package:tanysu/core/functions/show_snack_bar.dart';
 import 'package:tanysu/features/profile_page/presentation/bloc/profile_page_bloc.dart';
 import 'package:tanysu/features/settings/presentation/bloc/settings_bloc.dart';
 import 'package:tanysu/features/settings/presentation/widgets/change_language.dart';
@@ -39,9 +40,27 @@ class _SettingsPageState extends State<SettingsPage> {
             translation(context).settings,
             style: GoogleFonts.montserrat(
               color: Colors.black,
-              fontSize: 22,
-              fontWeight: FontWeight.w500,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
             ),
+          ),
+          leadingWidth: 40,
+          leading: Row(
+            children: [
+              const SizedBox(
+                width: 12,
+              ),
+              GestureDetector(
+                child: SvgPicture.asset(
+                  'assets/icons/back_button.svg',
+                  height: 24,
+                  width: 24,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
           ),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1),
@@ -54,46 +73,44 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 4),
                 CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
                     children: [
-                      const SizedBox(height: 16),
                       Text(
                         translation(context).theme,
                         style: GoogleFonts.montserrat(
                           color: Colors.black,
                           fontSize: 18,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const Spacer(),
                     ],
                   ),
                   onPressed: () {},
                 ),
-                const Divider(color: Colors.black26),
+                const Divider(
+                  color: Colors.black26,
+                  height: 1,
+                ),
                 CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
                     children: [
-                      const SizedBox(height: 16),
                       Text(
                         translation(context).language,
                         style: GoogleFonts.montserrat(
                           color: Colors.black,
                           fontSize: 18,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const Spacer(),
                     ],
                   ),
                   onPressed: () {
@@ -105,34 +122,37 @@ class _SettingsPageState extends State<SettingsPage> {
                     );
                   },
                 ),
-                const Divider(color: Colors.black26),
+                const Divider(
+                  color: Colors.black26,
+                  height: 1,
+                ),
                 CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
                     children: [
-                      const SizedBox(height: 16),
                       Text(
                         translation(context).faq,
                         style: GoogleFonts.montserrat(
                           color: Colors.black,
                           fontSize: 18,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const Spacer(),
                     ],
                   ),
                   onPressed: () {},
                 ),
-                const Divider(color: Colors.black26),
+                const Divider(
+                  color: Colors.black26,
+                  height: 1,
+                ),
                 BlocConsumer<SettingsBloc, SettingsState>(
                   builder: (context, state) => CupertinoButton(
-                    padding: const EdgeInsets.all(0),
-                    child: Column(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 16),
                         Text(
                           translation(context).log_out,
                           style: GoogleFonts.montserrat(
@@ -141,7 +161,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        const Spacer(),
                       ],
                     ),
                     onPressed: () {
@@ -155,13 +175,15 @@ class _SettingsPageState extends State<SettingsPage> {
                     }
                   },
                 ),
-                const Divider(color: Colors.black26),
+                const Divider(
+                  color: Colors.black26,
+                  height: 1,
+                ),
                 CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  child: Column(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 16),
                       Text(
                         'Удалить аккаунт',
                         style: GoogleFonts.montserrat(
@@ -170,7 +192,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const Spacer(),
                     ],
                   ),
                   onPressed: () {

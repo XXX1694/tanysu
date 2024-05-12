@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../common/constants/colors.dart';
+import '../../../../../core/constants/colors.dart';
 import '../../../../../l10n/translate.dart';
 
 class CompanyField extends StatelessWidget {
@@ -12,11 +12,17 @@ class CompanyField extends StatelessWidget {
     return TextField(
       controller: controller,
       style: GoogleFonts.montserrat(
-        color: Colors.black87,
+        color: Colors.black,
+        fontWeight: FontWeight.w500,
         fontSize: 14,
       ),
       decoration: InputDecoration(
         hintText: translation(context).company_field_text,
+        hintStyle: GoogleFonts.montserrat(
+          color: Colors.black87,
+          fontWeight: FontWeight.w400,
+          fontSize: 14,
+        ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: secondColor,

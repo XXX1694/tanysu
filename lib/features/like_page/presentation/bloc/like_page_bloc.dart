@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/like_page/data/models/like_person.dart';
 import 'package:tanysu/features/like_page/data/repositories/like_repository.dart';
@@ -26,9 +25,6 @@ class LikePageBloc extends Bloc<LikePageEvent, LikePageState> {
             meLike: res2 ?? [],
           ));
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(LikeGetError());
         }
       },

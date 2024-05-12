@@ -12,6 +12,7 @@ LikePersonModel _$LikePersonModelFromJson(Map<String, dynamic> json) =>
       json['image'] as Map<String, dynamic>?,
       json['age'] as int?,
       json['first_name'] as String?,
+      json['online'] as bool?,
     );
 
 Map<String, dynamic> _$LikePersonModelToJson(LikePersonModel instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$LikePersonModelToJson(LikePersonModel instance) =>
       'image': instance.image,
       'first_name': instance.first_name,
       'age': instance.age,
+      'online': instance.online,
     };

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/choose_city/data/models/city.dart';
 import 'package:tanysu/features/choose_city/data/repositories/choose_city_repository.dart';
@@ -24,9 +23,6 @@ class ChooseCityBloc extends Bloc<ChooseCityEvent, ChooseCityState> {
             emit(CityGetError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(CityGetError());
         }
       },

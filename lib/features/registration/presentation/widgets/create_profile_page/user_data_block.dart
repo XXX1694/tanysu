@@ -36,7 +36,6 @@ class UserDataBlock extends StatelessWidget {
         const SizedBox(height: 20),
         CityField(
           controller: cityController,
-          cityId: null,
         ),
       ],
     );

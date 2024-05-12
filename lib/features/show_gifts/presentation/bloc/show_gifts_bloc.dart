@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/show_gifts/data/repositories/gift_repo.dart';
 
@@ -24,9 +23,6 @@ class ShowGiftsBloc extends Bloc<ShowGiftsEvent, ShowGiftsState> {
             emit(GetGiftError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(GetGiftError());
         }
       },
@@ -44,9 +40,6 @@ class ShowGiftsBloc extends Bloc<ShowGiftsEvent, ShowGiftsState> {
             emit(GiftSendError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
           emit(GiftSendError());
         }
       },

@@ -12,7 +12,7 @@ class SearchInitial extends SearchState {}
 class GettingUsers extends SearchState {}
 
 class GotUsers extends SearchState {
-  final List users;
+  final List<SearchResultModel> users;
   const GotUsers({required this.users});
 }
 

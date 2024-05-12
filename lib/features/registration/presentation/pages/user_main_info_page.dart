@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tanysu/common/functions/show_snack_bar.dart';
-import 'package:tanysu/common/widgets/main_button_filled.dart';
+import 'package:tanysu/core/functions/show_snack_bar.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/registration/presentation/pages/user_partner_choose_page.dart';
 import 'package:tanysu/l10n/translate.dart';
 import '../widgets/create_profile_page/create_profile_main_text.dart';
@@ -61,7 +61,7 @@ class _UserMainInfoPageState extends State<UserMainInfoPage> {
                 nameController: nameController,
               ),
               const Spacer(),
-              MainButtonFilled(
+              MainButton(
                 text: translation(context).next,
                 onPressed: () {
                   if (nameController.text.isEmpty) {
@@ -94,6 +94,7 @@ class _UserMainInfoPageState extends State<UserMainInfoPage> {
                     );
                   }
                 },
+                status: 'active',
               ),
               const SizedBox(height: 40),
             ],

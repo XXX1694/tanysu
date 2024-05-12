@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseService {
@@ -17,10 +17,7 @@ class FirebaseService {
         idToken: googleSignInAuthentication.idToken,
       );
       await _auth.signInWithCredential(credential);
-    } on FirebaseAuthException catch (e) {
-      if (kDebugMode) {
-        print(e.message);
-      }
+    } on FirebaseAuthException {
       rethrow;
     }
     return null;

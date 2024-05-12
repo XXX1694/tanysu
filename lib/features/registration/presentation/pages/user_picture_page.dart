@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tanysu/common/functions/show_snack_bar.dart';
-import 'package:tanysu/common/widgets/main_button_filled.dart';
+import 'package:tanysu/core/functions/show_snack_bar.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
+import 'package:tanysu/core/widgets/main_button_filled.dart';
 import 'package:tanysu/features/add_image/presentation/bloc/add_image_bloc.dart';
 import 'package:tanysu/features/login/presentation/bloc/login_bloc.dart';
 import 'package:tanysu/features/registration/presentation/bloc/registration_bloc/registration_bloc.dart';
@@ -62,14 +63,15 @@ class _UserPicturePageState extends State<UserPicturePage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         foregroundColor: Colors.black,
-        surfaceTintColor: Colors.black,
+        surfaceTintColor: Colors.transparent,
+        shadowColor: Colors.transparent,
       ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 35),
+              padding: EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -96,7 +98,7 @@ class _UserPicturePageState extends State<UserPicturePage> {
             ),
             const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: BlocConsumer<AddImageBloc, AddImageState>(
                 builder: (context, state1) =>
                     BlocConsumer<RegistrationBloc, RegistrationState>(
@@ -104,7 +106,7 @@ class _UserPicturePageState extends State<UserPicturePage> {
                     if (state is UserCreating) {
                       return const MainButtonFilledLoading();
                     } else {
-                      return MainButtonFilled(
+                      return MainButton(
                         text: translation(context).next,
                         onPressed: () {
                           path1.text.isNotEmpty ? images.add(path1.text) : null;
@@ -126,6 +128,7 @@ class _UserPicturePageState extends State<UserPicturePage> {
                                   ),
                                 );
                         },
+                        status: 'active',
                       );
                     }
                   },

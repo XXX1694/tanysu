@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/core/constants/colors.dart';
+import 'package:tanysu/core/widgets/placeholers.dart';
 import 'package:tanysu/features/edit_profile/presentation/pages/edit_profile_page.dart';
 import 'package:tanysu/features/profile_preview/data/models/profile_model.dart';
 import 'package:tanysu/l10n/translate.dart';
@@ -32,19 +32,13 @@ class PhotoBlock extends StatelessWidget {
                   imageUrl: profile.images!.isNotEmpty
                       ? profile.images![0]['image_url']
                       : '',
-                  placeholder: (context, url) => Shimmer.fromColors(
-                    baseColor: secondColor,
-                    highlightColor: mainColor,
-                    child: Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      color: Colors.white,
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => Container(
+                  placeholder: (context, url) => const ShrimerPlaceholder(
                     height: double.infinity,
                     width: double.infinity,
-                    color: Colors.grey,
+                  ),
+                  errorWidget: (context, url, error) => const ErrorPlaceholder(
+                    height: double.infinity,
+                    width: double.infinity,
                   ),
                   imageBuilder: (context, imageProvider) {
                     return Container(

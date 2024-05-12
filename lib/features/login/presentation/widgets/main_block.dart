@@ -1,44 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:tanysu/features/registration/presentation/pages/user_auth_data_page.dart';
 
 import '../../../../l10n/translate.dart';
-import '../../../../common/widgets/main_button_filled_white.dart';
-import '../../../../common/widgets/main_button_outlined.dart';
+import '../../../../core/widgets/main_button.dart';
+import '../../../../core/widgets/main_button_outlined.dart';
+import '../../../registration/presentation/pages/choose_registration_method.dart';
+import '../pages/choose_login_method.dart';
 import 'agreement.dart';
 
 class MainSignInBlock extends StatelessWidget {
   const MainSignInBlock({
     super.key,
-    required this.callback,
   });
-  final Function(bool) callback;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           children: [
             const Spacer(),
             const Agreement(),
             const SizedBox(height: 32),
-            MainButtonFilledWhite(
+            MainButton(
               text: translation(context).create_acc,
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const UserAuthDataPage(),
-                    ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ChooseRegistrationMethod(),
+                  ),
+                );
               },
+              status: 'active',
             ),
             const SizedBox(height: 20),
             MainButtonOutlined(
-                text: translation(context).sign_in,
-                onPressed: () {
-                  callback(true);
-                }),
-            const SizedBox(height: 40),
+              text: translation(context).sign_in,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ChooseLoginMethod(),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 32),
           ],
         ),
       ),

@@ -9,7 +9,16 @@ abstract class MessageEvent extends Equatable {
 
 class GetAllMessages extends MessageEvent {
   final int chatId;
-  const GetAllMessages({required this.chatId});
+  const GetAllMessages({
+    required this.chatId,
+  });
+}
+
+class GetAllGroupMessages extends MessageEvent {
+  final int page;
+  const GetAllGroupMessages({
+    required this.page,
+  });
 }
 
 class Reset extends MessageEvent {}

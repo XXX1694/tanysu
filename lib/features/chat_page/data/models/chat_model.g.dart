@@ -14,6 +14,8 @@ ChatModel _$ChatModelFromJson(Map<String, dynamic> json) => ChatModel(
       is_admin_chat: json['is_admin_chat'] as bool,
       is_public: json['is_public'] as bool,
       group_photo: json['group_photo'] as String?,
+      online: json['online'] as bool?,
+      unread: json['unread'] as int?,
     );
 
 Map<String, dynamic> _$ChatModelToJson(ChatModel instance) => <String, dynamic>{
@@ -24,4 +26,6 @@ Map<String, dynamic> _$ChatModelToJson(ChatModel instance) => <String, dynamic>{
       'is_admin_chat': instance.is_admin_chat,
       'is_public': instance.is_public,
       'group_photo': instance.group_photo,
+      'unread': instance.unread,
+      'online': instance.online,
     };

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tanysu/features/get_user_id/data/repositories/get_user_id_repo.dart';
 
@@ -23,9 +22,6 @@ class GetUserIdBloc extends Bloc<GetUserIdEvent, GetUserIdState> {
             emit(GetUserIdError());
           }
         } catch (e) {
-          if (kDebugMode) {
-            print('Error: $e');
-          }
           emit(GetUserIdError());
         }
       },

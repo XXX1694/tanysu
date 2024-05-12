@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tanysu/common/functions/show_snack_bar.dart';
-import 'package:tanysu/common/widgets/main_button_filled.dart';
+import 'package:tanysu/core/functions/show_snack_bar.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/registration/presentation/pages/user_picture_page.dart';
 import 'package:tanysu/features/registration/presentation/widgets/choose_partner_page/choose_partner_main.dart';
 import 'package:tanysu/features/registration/presentation/widgets/choose_partner_page/partner_list.dart';
@@ -47,7 +47,7 @@ class _UserPartnerChoosePageState extends State<UserPartnerChoosePage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 35),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
               const SizedBox(height: 40),
@@ -55,7 +55,7 @@ class _UserPartnerChoosePageState extends State<UserPartnerChoosePage> {
               const SizedBox(height: 40),
               PartnerList(controller: tryToFindController),
               const Spacer(),
-              MainButtonFilled(
+              MainButton(
                 text: translation(context).next,
                 onPressed: () {
                   tryToFindController.text.isNotEmpty
@@ -76,6 +76,7 @@ class _UserPartnerChoosePageState extends State<UserPartnerChoosePage> {
                       : showSnackBar(
                           context, translation(context).choose_partner_main);
                 },
+                status: 'active',
               ),
               const SizedBox(height: 40),
             ],

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
+import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/choose_city/data/models/city.dart';
 import 'package:tanysu/features/choose_city/presentation/bloc/choose_city_bloc.dart';
 import 'package:tanysu/l10n/translate.dart';
@@ -52,7 +52,8 @@ class _CityFieldState extends State<CityField> {
           return DropdownButton<CityModel>(
             value: selectedValue,
             style: GoogleFonts.montserrat(
-              color: Colors.black87,
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
               fontSize: 14,
             ),
             hint: Text(translation(context).select_city),
@@ -69,7 +70,7 @@ class _CityFieldState extends State<CityField> {
             elevation: 1,
             underline: Container(
               height: 1,
-              color: Colors.black38,
+              color: Colors.black54,
             ),
             onChanged: (value) {
               setState(

@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/widgets/main_button_filled.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/profile_add_info/presentation/pages/juz_page.dart';
 import 'package:tanysu/features/profile_add_info/presentation/widgets/about_me_widgets/about_me_field.dart';
 import 'package:tanysu/features/profile_add_info/presentation/widgets/about_me_widgets/about_me_main_text.dart';
 import 'package:tanysu/features/profile_add_info/presentation/widgets/about_me_widgets/about_me_second_text.dart';
 
-import '../../../../common/constants/colors.dart';
+import '../../../../core/constants/colors.dart';
 import '../../../../l10n/translate.dart';
 
 class AboutMePage extends StatefulWidget {
@@ -61,6 +61,7 @@ class _AboutMePageState extends State<AboutMePage> {
                 color: secondColor,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
+                letterSpacing: -0.41,
               ),
             ),
           ),
@@ -75,9 +76,9 @@ class _AboutMePageState extends State<AboutMePage> {
                 color: Colors.black26,
               ),
               Container(
-                width: deviceWidth * 4 / 6,
+                width: deviceWidth * 3 / 4,
                 height: 5,
-                color: accentColor,
+                color: mainColor,
               ),
             ],
           ),
@@ -87,7 +88,7 @@ class _AboutMePageState extends State<AboutMePage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 35),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -98,7 +99,7 @@ class _AboutMePageState extends State<AboutMePage> {
               const SizedBox(height: 20),
               const AboutMeSecondText(),
               const Spacer(),
-              MainButtonFilled(
+              MainButton(
                 text: translation(context).next,
                 onPressed: () {
                   Navigator.push(
@@ -113,6 +114,7 @@ class _AboutMePageState extends State<AboutMePage> {
                     ),
                   );
                 },
+                status: 'active',
               ),
               const SizedBox(height: 40),
             ],

@@ -1,16 +1,19 @@
 // ignore_for_file: unrelated_type_equality_checks
 
+import 'dart:io';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
-import 'package:tanysu/common/widgets/main_button_filled.dart';
+import 'package:tanysu/core/constants/colors.dart';
+import 'package:tanysu/core/widgets/main_button_filled.dart';
+import 'package:tanysu/core/widgets/placeholers.dart';
 import 'package:tanysu/features/add_image/presentation/bloc/add_image_bloc.dart';
 import 'package:tanysu/features/add_image/presentation/pages/edit_image.dart';
 import 'package:tanysu/features/choose_city/presentation/widgets/city_field_mine.dart';
@@ -79,19 +82,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return BlocConsumer<ProfilePageBloc, ProfilePageState>(
       listener: (context, state) {
         if (state is ProfileGot) {
+          // debugPrint(state.model.gender);
+          // debugPrint(state.model.try_to_find);
+          debugPrint(state.model.juz);
           images = state.model.images!;
-          images.add({'': ''});
+          images.add({'id': 'fafa'});
           cityIdController.text = state.model.city.toString();
           nameController.text = state.model.first_name ?? '';
           birthDateController.text = state.model.birth_date ?? '';
-          genderController.text = state.model.gender ?? '';
+          genderController.text = state.model.gender == 'male'
+              ? translation(context).man
+              : translation(context).woman;
           cityController.text = state.model.city_name.toString();
           jobController.text = state.model.profession ?? '';
           companyController.text = state.model.company_name ?? '';
           schoolController.text = state.model.school_name ?? '';
           aboutMeController.text = state.model.about_me ?? '';
           juzController.text = state.model.juz ?? '';
-          tryToFindController.text = state.model.try_to_find ?? '';
+          tryToFindController.text = state.model.try_to_find == 'male'
+              ? translation(context).man
+              : translation(context).woman;
         }
       },
       builder: (context, state) {
@@ -117,24 +127,36 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   backgroundColor: Colors.transparent,
                   title: Text(
                     'tanysu',
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.montserratAlternates(
                       color: mainColor,
                       fontSize: 22,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
+                  centerTitle: true,
                   foregroundColor: Colors.black,
-                  surfaceTintColor: Colors.black,
+                  surfaceTintColor: Colors.transparent,
                   elevation: 0,
-                  leading: BackButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      bloc1.add(GetMyData());
-                    },
+                  leadingWidth: 40,
+                  leading: Row(
+                    children: [
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      GestureDetector(
+                        child: SvgPicture.asset(
+                          'assets/icons/back_button.svg',
+                          height: 24,
+                          width: 24,
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
                   ),
                   actions: [
-                    CupertinoButton(
-                      padding: const EdgeInsets.all(0),
+                    GestureDetector(
                       child: Center(
                         child: SvgPicture.asset(
                           'assets/icons/eye.svg',
@@ -142,7 +164,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           width: 24,
                         ),
                       ),
-                      onPressed: () {
+                      onTap: () {
                         List<Map<String, dynamic>> img =
                             state.model.images ?? [];
                         img.removeLast();
@@ -179,6 +201,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         );
                       },
                     ),
+                    const SizedBox(width: 20),
                   ],
                 ),
                 body: SafeArea(
@@ -192,7 +215,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 (e) => CupertinoButton(
                                   padding: const EdgeInsets.all(0),
                                   onPressed: () async {
-                                    if (e == images.last) {
+                                    if (e['id'] == 'fafa') {
                                       String imageUrl;
                                       imageUrl = await pickUploadImage();
                                       images.add({'image_url': imageUrl});
@@ -204,7 +227,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         ),
                                       );
                                     } else {
-                                      showEditImage(
+                                      showEditImageIOS(
                                         context,
                                         e['id'],
                                         images.length <= 2 ? true : false,
@@ -222,10 +245,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(20),
                                       child: e != images[images.length - 1]
-                                          ? Image.network(
-                                              e['image_url'],
+                                          ? CachedNetworkImage(
+                                              imageUrl: e['image_url'],
                                               alignment: Alignment.topCenter,
                                               fit: BoxFit.cover,
+                                              placeholder: (context, url) =>
+                                                  const ShrimerPlaceholder(
+                                                height: double.infinity,
+                                                width: double.infinity,
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const ErrorPlaceholder(
+                                                height: double.infinity,
+                                                width: double.infinity,
+                                              ),
                                             )
                                           : Center(
                                               child: SvgPicture.asset(
@@ -252,7 +286,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             Text(
                               '${state.model.first_name}, ${state.model.age}',
                               style: GoogleFonts.montserrat(
-                                color: secondColor,
+                                color: mainColor,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 28,
                               ),
@@ -267,7 +301,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         ),
                         const SizedBox(height: 16),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -282,12 +316,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     : null,
                               ),
                               const SizedBox(height: 20),
-                              GenderField(
-                                controller: genderController,
-                                selctedGender: state.model.gender == 'male'
-                                    ? translation(context).man
-                                    : translation(context).woman,
-                              ),
+                              GenderField(controller: genderController),
                               const SizedBox(height: 20),
                               CityField(
                                 controller: cityController,
@@ -314,12 +343,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ),
                               ),
                               const SizedBox(height: 4),
-                              GenderField(
-                                controller: tryToFindController,
-                                selctedGender: state.model.try_to_find == 'male'
-                                    ? translation(context).man
-                                    : translation(context).woman,
-                              ),
+                              GenderField(controller: tryToFindController),
                               const SizedBox(height: 20),
                               Text(
                                 translation(context).juz_main_text,
@@ -347,7 +371,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       company: companyController.text == ''
                                           ? null
                                           : companyController.text,
-                                      gender: genderController.text,
+                                      gender: genderController.text ==
+                                              translation(context).man
+                                          ? 'male'
+                                          : 'female',
                                       job: jobController.text == ''
                                           ? null
                                           : jobController.text,
@@ -359,7 +386,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       juz: juzController.text == ''
                                           ? null
                                           : juzController.text,
-                                      tryToFind: tryToFindController.text,
+                                      tryToFind: tryToFindController.text ==
+                                              translation(context).man
+                                          ? 'male'
+                                          : 'female',
                                     ),
                                   );
                                 },
@@ -374,26 +404,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
               ),
               listener: (context, state) {
-                if (kDebugMode) {
-                  print(state);
-                }
                 if (state is ProfileUpdated) {
                   Navigator.pop(context);
                   bloc1.add(GetMyData());
-                  // Get.rawSnackbar(
-                  //   messageText: Text(
-                  //     'Succeess',
-                  //     style: GoogleFonts.montserrat(
-                  //       color: Colors.black,
-                  //       fontSize: 14,
-                  //     ),
-                  //   ),
-                  //   isDismissible: false,
-                  //   duration: const Duration(seconds: 3),
-                  //   margin: const EdgeInsets.all(20),
-                  //   backgroundColor: Colors.white,
-                  //   borderRadius: 10,
-                  // );
                 } else if (state is ProfileUpdateError) {
                   Navigator.pop(context);
                   Get.rawSnackbar(
@@ -415,9 +428,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
           );
         } else if (state is ProfileGetting) {
-          return const Scaffold(
+          return Scaffold(
             body: Center(
-              child: CircularProgressIndicator(),
+              child: Platform.isAndroid
+                  ? CircularProgressIndicator(
+                      color: secondColor,
+                      strokeWidth: 3,
+                    )
+                  : CupertinoActivityIndicator(
+                      color: secondColor,
+                    ),
             ),
           );
         } else {

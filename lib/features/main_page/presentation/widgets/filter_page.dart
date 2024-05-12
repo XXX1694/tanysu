@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/widgets/main_button_filled.dart';
+import 'package:tanysu/core/widgets/main_button_filled.dart';
 import 'package:tanysu/features/choose_city/presentation/widgets/city_field.dart';
 import 'package:tanysu/features/search/presentation/widgets/gender_field.dart';
 import 'package:tanysu/features/search/presentation/widgets/slider.dart';
@@ -16,13 +16,15 @@ class MainFilterPage extends StatefulWidget {
 class _MainFilterPageState extends State<MainFilterPage> {
   late TextEditingController _cityController;
   late TextEditingController _genderController;
-  late TextEditingController _ageController;
+  late TextEditingController _minAgeController;
+  late TextEditingController _maxAgeController;
 
   @override
   void initState() {
     _cityController = TextEditingController();
     _genderController = TextEditingController();
-    _ageController = TextEditingController();
+    _minAgeController = TextEditingController();
+    _maxAgeController = TextEditingController();
     super.initState();
   }
 
@@ -36,8 +38,8 @@ class _MainFilterPageState extends State<MainFilterPage> {
           translation(context).filter,
           style: GoogleFonts.montserrat(
             color: Colors.black,
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
           ),
         ),
         centerTitle: true,
@@ -70,7 +72,6 @@ class _MainFilterPageState extends State<MainFilterPage> {
               const SizedBox(height: 8),
               CityField(
                 controller: _cityController,
-                cityId: null,
               ),
               const SizedBox(height: 24),
               Text(
@@ -84,7 +85,7 @@ class _MainFilterPageState extends State<MainFilterPage> {
               const SizedBox(height: 8),
               GenderField(
                 controller: _genderController,
-                selctedGender: '',
+                // selctedGender: '',
               ),
               const SizedBox(height: 24),
               Text(
@@ -96,7 +97,10 @@ class _MainFilterPageState extends State<MainFilterPage> {
                 ),
               ),
               const SizedBox(height: 8),
-              AgeSlider(controller: _ageController),
+              AgeSlider(
+                maxAgeController: _maxAgeController,
+                minAgeController: _minAgeController,
+              ),
               const Spacer(),
               MainButtonFilled(
                 text: translation(context).search,

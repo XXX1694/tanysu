@@ -2,15 +2,14 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:tanysu/api/firebase_api.dart';
-import 'package:tanysu/common/connection/dependency_injection.dart';
-import 'package:tanysu/common/constants/language_constants.dart';
-import 'package:tanysu/common/widgets/privacy.dart';
-import 'package:tanysu/common/widgets/terms.dart';
+import 'package:tanysu/core/connection/dependency_injection.dart';
+import 'package:tanysu/core/constants/language_constants.dart';
+import 'package:tanysu/core/widgets/privacy.dart';
+import 'package:tanysu/core/widgets/terms.dart';
 import 'package:tanysu/features/add_image/data/repositories/add_image_repo.dart';
 import 'package:tanysu/features/add_image/presentation/bloc/add_image_bloc.dart';
 import 'package:tanysu/features/block_user/data/repositories/block_repostitory.dart';
@@ -19,7 +18,7 @@ import 'package:tanysu/features/chat_page/data/repositories/chat_repository.dart
 import 'package:tanysu/features/chat_page/presentation/bloc/chat_page_bloc.dart';
 import 'package:tanysu/features/choose_city/data/repositories/choose_city_repository.dart';
 import 'package:tanysu/features/choose_city/presentation/bloc/choose_city_bloc.dart';
-import 'package:tanysu/features/choose_language/presentation/pages/choose_lange_page.dart';
+import 'package:tanysu/features/welcome/presentation/pages/choose_lange_page.dart';
 import 'package:tanysu/features/edit_profile/data/repositories/edit_profile_repository.dart';
 import 'package:tanysu/features/edit_profile/presentation/bloc/edit_profile_bloc.dart';
 import 'package:tanysu/features/get_user_id/data/repositories/get_user_id_repo.dart';
@@ -28,6 +27,8 @@ import 'package:tanysu/features/juz/data/repositories/juz_repository.dart';
 import 'package:tanysu/features/juz/presentation/bloc/juz_bloc.dart';
 import 'package:tanysu/features/like_page/data/repositories/like_repository.dart';
 import 'package:tanysu/features/like_page/presentation/bloc/like_page_bloc.dart';
+import 'package:tanysu/features/live/data/repositories/live_repository.dart';
+import 'package:tanysu/features/live/presentation/bloc/live_bloc.dart';
 import 'package:tanysu/features/login/data/repositories/login_repository.dart';
 import 'package:tanysu/features/login/presentation/bloc/login_bloc.dart';
 import 'package:tanysu/features/login/presentation/pages/login_by_email.dart';
@@ -52,20 +53,23 @@ import 'package:tanysu/features/report/data/repositories/report_repository.dart'
 import 'package:tanysu/features/report/presentation/bloc/report_bloc.dart';
 import 'package:tanysu/features/search/data/repositories/search_repo.dart';
 import 'package:tanysu/features/search/presentation/bloc/search_bloc.dart';
-import 'package:tanysu/features/search/presentation/pages/filter_page.dart';
 import 'package:tanysu/features/search/presentation/pages/search_page.dart';
 import 'package:tanysu/features/settings/data/repositories/user_logout_repository.dart';
 import 'package:tanysu/features/settings/presentation/bloc/settings_bloc.dart';
 import 'package:tanysu/features/settings/presentation/pages/settings_page.dart';
 import 'package:tanysu/features/show_gifts/data/repositories/gift_repo.dart';
 import 'package:tanysu/features/show_gifts/presentation/bloc/show_gifts_bloc.dart';
+import 'package:tanysu/features/stream/data/repository/stream_repository.dart';
+import 'package:tanysu/features/stream/presentation/bloc/stream_bloc.dart';
 import 'package:tanysu/firebase_options.dart';
 import 'package:tanysu/l10n/l10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'features/registration/presentation/bloc/registration_bloc/registration_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -84,8 +88,9 @@ void main() async {
     )
   ]);
   DependencyInjection.init();
+  // await Future.delayed(const Duration(seconds: 1));
   runApp(
-    const MainApp(),
+    const ProviderScope(child: MainApp()),
   );
 }
 
@@ -118,6 +123,7 @@ class _MainAppState extends State<MainApp> {
 
   @override
   void initState() {
+    FlutterNativeSplash.remove();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       AwesomeNotifications().createNotification(
         content: NotificationContent(
@@ -128,7 +134,6 @@ class _MainAppState extends State<MainApp> {
         ),
       );
     });
-    initialization();
     AwesomeNotifications().isNotificationAllowed().then(
       (isAllowed) {
         if (!isAllowed) {
@@ -139,17 +144,12 @@ class _MainAppState extends State<MainApp> {
     super.initState();
   }
 
-  void initialization() async {
-    await Future.delayed(const Duration(seconds: 1));
-    FlutterNativeSplash.remove();
-  }
-
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    // ]);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -287,6 +287,18 @@ class _MainAppState extends State<MainApp> {
               juzState: const JuzState(),
             ),
           ),
+          BlocProvider(
+            create: (context) => StreamBloc(
+              repo: StreamRepository(),
+              streamState: const StreamState(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => LiveBloc(
+              repo: LiveRepository(),
+              liveState: const LiveState(),
+            ),
+          ),
         ],
 
         // For building models: flutter pub run build_runner build --delete-conflicting-outputs
@@ -306,7 +318,6 @@ class _MainAppState extends State<MainApp> {
             '/terms': (context) => const TermsPage(),
             '/choose': (context) => const ChoosePage(),
             '/search': (context) => const SearchPage(),
-            '/filter': (context) => const FilterPage(),
             '/settings': (context) => const SettingsPage(),
             '/notification': (context) => const NotificationPage(),
           },

@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/constants/colors.dart';
-import 'package:tanysu/common/widgets/main_button_filled.dart';
+import 'package:tanysu/core/constants/colors.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
+import 'package:tanysu/core/widgets/main_button_filled.dart';
 import 'package:tanysu/features/edit_profile/presentation/widgets/juz_field.dart';
 import 'package:tanysu/features/juz/presentation/bloc/juz_bloc.dart';
 import 'package:tanysu/features/profile_add_info/presentation/bloc/profile_add_info_bloc.dart';
@@ -65,6 +66,7 @@ class _JuzPageState extends State<JuzPage> {
                 color: secondColor,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
+                letterSpacing: -0.41,
               ),
             ),
           ),
@@ -79,9 +81,9 @@ class _JuzPageState extends State<JuzPage> {
                 color: Colors.black26,
               ),
               Container(
-                width: deviceWidth * 5 / 6,
+                width: deviceWidth * 4 / 4,
                 height: 5,
-                color: accentColor,
+                color: mainColor,
               ),
             ],
           ),
@@ -93,7 +95,7 @@ class _JuzPageState extends State<JuzPage> {
         builder: (context, state) {
           return SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -109,7 +111,7 @@ class _JuzPageState extends State<JuzPage> {
                       if (state is AddingProfileInfo) {
                         return const MainButtonFilledLoading();
                       } else {
-                        return MainButtonFilled(
+                        return MainButton(
                           text: translation(context).next,
                           onPressed: () {
                             bloc.add(
@@ -122,6 +124,7 @@ class _JuzPageState extends State<JuzPage> {
                               ),
                             );
                           },
+                          status: 'active',
                         );
                       }
                     },

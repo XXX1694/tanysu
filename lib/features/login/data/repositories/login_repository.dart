@@ -1,9 +1,8 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tanysu/common/constants/constants.dart';
+import 'package:tanysu/core/constants/constants.dart';
 
 final _storage = SharedPreferences.getInstance();
 
@@ -17,47 +16,31 @@ class LoginRepository {
     final url = mainUrl;
     String finalUrl = '${url}users/login/';
     final dio = Dio();
-    Uri? uri = Uri.tryParse(finalUrl);
-    if (uri != null) {
-      try {
-        if (kDebugMode) {
-          print(
-            jsonEncode(
-              {
-                'email': email,
-                'password': password,
-                "firebase": firebaseToken ?? '',
-              },
-            ),
-          );
-        }
-        final response = await dio.post(
-          finalUrl,
-          data: jsonEncode(
-            {
-              'email': email,
-              'password': password,
-              "firebase": firebaseToken ?? '',
-            },
-          ),
+
+    try {
+      final response = await dio.post(
+        finalUrl,
+        data: jsonEncode(
+          {
+            'email': email,
+            'password': password,
+            "firebase": firebaseToken ?? '',
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        storage.setString(
+          'auth_token',
+          response.data['auth_token'],
         );
-        if (response.statusCode == 200) {
-          storage.setString(
-            'auth_token',
-            response.data['auth_token'],
-          );
-          if (kDebugMode) {
-            print('User log in ${response.data['auth_token']}');
-          }
-          return 200;
-        } else {
-          return 400;
-        }
-      } catch (e) {
-        if (kDebugMode) {
-          print(e);
-        }
+
+        debugPrint(response.data['auth_token']);
+        return 200;
+      } else {
+        return 400;
       }
+    } catch (e) {
+      return 400;
     }
   }
 }

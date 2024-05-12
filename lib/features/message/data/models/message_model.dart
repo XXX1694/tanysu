@@ -7,28 +7,28 @@ part 'message_model.g.dart';
 @JsonSerializable()
 class MessageModel {
   final int? id;
-  final int? chat;
-  final int? sender;
   final String? content;
   final String? timestamp;
-  final bool? is_svg;
-  final bool? is_read;
-  final String? name;
+  final int? chat;
+  final String? message_type;
   final String? photo;
+  final int? sender;
+  final String? name;
+  final bool? is_read;
   final int? profile_id;
-  final Map<String, dynamic>? profile;
+  final bool is_svg;
   MessageModel({
     required this.id,
     required this.chat,
     required this.content,
     required this.sender,
     required this.timestamp,
-    required this.is_svg,
-    required this.is_read,
-    required this.name,
+    required this.message_type,
     required this.photo,
+    required this.name,
+    required this.is_read,
     required this.profile_id,
-    required this.profile,
+    required this.is_svg,
   });
   factory MessageModel.fromJson(Map<String, dynamic> json) =>
       _$MessageModelFromJson(json);

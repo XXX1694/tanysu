@@ -1,7 +1,7 @@
 name: tanysu
 description: Dating app.
 publish_to: 'none'
-version: 0.1.0
+version: 5.0.0
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
@@ -49,19 +49,22 @@ dependencies:
   font_awesome_flutter: ^9.2.0
 
   
+  
   flutter_localizations:
     sdk: flutter
   intl: ^0.18.0
+  web_socket_channel: ^2.4.0
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+  zego_uikit_prebuilt_live_streaming: ^3.5.4
 
 flutter_native_splash:
   android: true
   ios: true
 
-  color: '#FFFFFF'
-  image: assets/images/app_icon.png
-  android_12:
-    color: '#FFFFFF'
-    image: assets/images/123.png
+  image: "assets/icons/splash_icon.png"
+  background_image: assets/background/background_splash.png
+  background_image_dark: assets/background/background_splash.png
 
 
 dev_dependencies:
@@ -70,7 +73,9 @@ dev_dependencies:
 
   json_serializable: any
   flutter_lints: ^2.0.0
-  build_runner: ^2.4.5
+  build_runner: ^2.4.9
+  riverpod_generator: ^2.4.0
+  custom_lint: ^0.6.4
 
 flutter:
   generate: true
@@ -79,7 +84,12 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/gifts/
+    - assets/background/
     - assets/icons/
+    - assets/icons/enter_method/
+    - assets/icons/report_icons/
+    - assets/icons/stream/
     - assets/icons/navigation_icons/
     - assets/privacy.html
     - assets/privacy_ru.html

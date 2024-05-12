@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/common/widgets/main_button_filled.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/profile_add_info/presentation/pages/about_me_page.dart';
 import 'package:tanysu/features/profile_add_info/presentation/widgets/job_page_widgets/company_field.dart';
 import 'package:tanysu/features/profile_add_info/presentation/widgets/job_page_widgets/job_field.dart';
 import 'package:tanysu/features/profile_add_info/presentation/widgets/job_page_widgets/job_page_main_text.dart';
 
-import '../../../../common/constants/colors.dart';
+import '../../../../core/constants/colors.dart';
 import '../../../../l10n/translate.dart';
 
 class JobPage extends StatefulWidget {
@@ -54,6 +54,7 @@ class _JobPageState extends State<JobPage> {
                 color: secondColor,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
+                letterSpacing: -0.41,
               ),
             ),
           ),
@@ -68,9 +69,9 @@ class _JobPageState extends State<JobPage> {
                 color: Colors.black26,
               ),
               Container(
-                width: deviceWidth * 2 / 6,
+                width: deviceWidth * 2 / 4,
                 height: 5,
-                color: accentColor,
+                color: mainColor,
               ),
             ],
           ),
@@ -80,7 +81,7 @@ class _JobPageState extends State<JobPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 35),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -91,7 +92,7 @@ class _JobPageState extends State<JobPage> {
               const SizedBox(height: 20),
               CompanyField(controller: _companyController),
               const Spacer(),
-              MainButtonFilled(
+              MainButton(
                 text: translation(context).next,
                 onPressed: () {
                   if (_jobController.text.isEmpty &&
@@ -141,6 +142,7 @@ class _JobPageState extends State<JobPage> {
                     );
                   }
                 },
+                status: 'active',
               ),
               const SizedBox(height: 40),
             ],
