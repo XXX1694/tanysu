@@ -205,6 +205,14 @@
     "temporarily_not_working_second": "We sorry, this function not working yet!",
 
     "edit_photo": "Edit photos",
-    "edit_photo_second": "Do you want to delete or change a photo?"
+    "edit_photo_second": "Do you want to delete or change a photo?",
+
+    "swipe": "Swipe",
+
+    "delete_chat_main": "Delete chat",
+    "delete_chat_second": "Do you really want to delete chat?",
+
+    "follow": "Follow",
+    "unfollow": "Unfollow"
 
 }

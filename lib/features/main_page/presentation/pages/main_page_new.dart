@@ -224,6 +224,7 @@ class _MainPageState extends State<MainPage> {
           await Future.delayed(const Duration(milliseconds: 200));
           // ignore: use_build_context_synchronously
           showGifts(
+            // ignore: use_build_context_synchronously
             context,
             users[previousIndex].first_name ?? '',
             users[previousIndex].id ?? 0,

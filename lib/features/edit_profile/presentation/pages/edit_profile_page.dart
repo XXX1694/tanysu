@@ -195,6 +195,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 state.model.user,
                                 0,
                                 juzController.text,
+                                0,
+                                false,
                               ),
                             ),
                           ),

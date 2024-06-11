@@ -36,6 +36,7 @@ class ProfileRepository {
     String finalUrl = '${url}users/delete/';
     final dio = Dio();
     String? token = storage.getString('auth_token');
+
     if (token == null) return null;
     dio.options.headers["authorization"] = "Token $token";
     try {

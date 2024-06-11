@@ -9,6 +9,8 @@ abstract class ChatPageEvent extends Equatable {
 
 class GetAllChats extends ChatPageEvent {}
 
+class UpdateAllChats extends ChatPageEvent {}
+
 class DeleteChat extends ChatPageEvent {
   final int chatId;
   const DeleteChat({required this.chatId});

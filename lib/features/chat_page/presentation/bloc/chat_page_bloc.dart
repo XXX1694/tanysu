@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tanysu/core/constants/chats.dart';
 import 'package:tanysu/features/chat_page/data/models/chat_model.dart';
 import 'package:tanysu/features/chat_page/data/repositories/chat_repository.dart';
 
@@ -23,6 +25,22 @@ class ChatPageBloc extends Bloc<ChatPageEvent, ChatPageState> {
         }
       },
     );
+    on<UpdateAllChats>(
+      (event, emit) async {
+        try {
+          List<ChatModel> res = await repo.getChatList();
+          if (haveLastMessagesChanged(res, chats)) {
+            emit(ChatListGetting());
+            emit(ChatListGot(chats: res));
+          }
+        } catch (e) {
+          if (kDebugMode) {
+            print(e);
+          }
+          emit(ChatListGetError());
+        }
+      },
+    );
     on<DeleteChat>(
       (event, emit) async {
         emit(ChatDeleting());
@@ -39,4 +57,21 @@ class ChatPageBloc extends Bloc<ChatPageEvent, ChatPageState> {
       },
     );
   }
+}
+
+bool haveLastMessagesChanged(List<ChatModel> oldList, List<ChatModel> newList) {
+  if (oldList.length != newList.length) {
+    return true;
+  }
+  for (int i = 0; i < oldList.length; i++) {
+    if (oldList[i].last_message!['content'] !=
+        newList[i].last_message!['content']) {
+      return true; // Different chat, assume change in last message
+    }
+    // if (oldList[i].last_message != newList[i].last_message) {
+    //   return true; // Last message has changed
+    // }
+  }
+
+  return false; // No changes detected in last messages
 }

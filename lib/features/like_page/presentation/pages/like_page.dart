@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +43,7 @@ class _LikePageState extends State<LikePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         shadowColor: Colors.transparent,
-        foregroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         backgroundColor: Colors.white,
@@ -148,14 +150,15 @@ class _LikePageState extends State<LikePage> {
                                   ],
                                 ),
                               )
-                        : Text(
-                            translation(context).empty,
-                            style: GoogleFonts.montserrat(
-                              color: Colors.black54,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: -0.41,
-                            ),
+                        : Center(
+                            child: Platform.isAndroid
+                                ? CircularProgressIndicator(
+                                    color: secondColor,
+                                    strokeWidth: 3,
+                                  )
+                                : CupertinoActivityIndicator(
+                                    color: secondColor,
+                                  ),
                           ),
                     // Platform.isAndroid
                     //     ? CircularProgressIndicator(

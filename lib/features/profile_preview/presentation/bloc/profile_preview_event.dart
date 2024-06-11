@@ -11,3 +11,8 @@ class GetUserData extends ProfilePreviewEvent {
   final int userId;
   const GetUserData({required this.userId});
 }
+
+class FollowUnfollow extends ProfilePreviewEvent {
+  final int profileId;
+  const FollowUnfollow({required this.profileId});
+}

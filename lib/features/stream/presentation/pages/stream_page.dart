@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:tanysu/core/constants/chats.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/profile_page/presentation/bloc/profile_page_bloc.dart';
 import 'package:tanysu/features/stream/presentation/bloc/stream_bloc.dart';
@@ -25,12 +27,20 @@ class _StreamPageState extends State<StreamPage> {
   late ProfilePageBloc _profilePageBloc;
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+  Timer? timer;
   @override
   void initState() {
     _streamBloc = BlocProvider.of<StreamBloc>(context);
     _profilePageBloc = BlocProvider.of<ProfilePageBloc>(context);
     _profilePageBloc.add(GetMyData());
+    _startAutoUpdate();
     super.initState();
+  }
+
+  void _startAutoUpdate() {
+    timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      _streamBloc.add(UpdateAllStream());
+    });
   }
 
   @override
@@ -74,20 +84,20 @@ class _StreamPageState extends State<StreamPage> {
                   ),
                 ],
               ),
-              actions: [
-                GestureDetector(
-                  child: SvgPicture.asset('assets/icons/start_stream.svg'),
-                  onTap: () {
-                    jumpToLivePage(
-                      context,
-                      profileId: state.model.id ?? 0,
-                      name: state.model.first_name ?? 'Test_user',
-                      isHost: true,
-                    );
-                  },
-                ),
-                const SizedBox(width: 20)
-              ],
+              // actions: [
+              //   GestureDetector(
+              //     child: SvgPicture.asset('assets/icons/start_stream.svg'),
+              //     onTap: () {
+              //       jumpToLivePage(
+              //         context,
+              //         profileId: state.model.id ?? 0,
+              //         name: state.model.first_name ?? 'Test_user',
+              //         isHost: true,
+              //       );
+              //     },
+              //   ),
+              //   const SizedBox(width: 20)
+              // ],
             ),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -95,6 +105,11 @@ class _StreamPageState extends State<StreamPage> {
                 listener: (context, state1) {
                   if (kDebugMode) {
                     print(state1);
+                  }
+                  if (state1 is StreamListGot) {
+                    setState(() {
+                      streamListGlobal = state1.streamList;
+                    });
                   }
                   if (state1 is StreamListGot || state1 is StreamListGetError) {
                     _refreshController.refreshCompleted();
@@ -122,7 +137,7 @@ class _StreamPageState extends State<StreamPage> {
                         _streamBloc.add(GetAllStream());
                       },
                       child: GridView.builder(
-                        itemCount: state1.streamList.length,
+                        itemCount: streamListGlobal.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -137,6 +152,7 @@ class _StreamPageState extends State<StreamPage> {
                               profileId: state.model.id ?? 0,
                               name: state.model.first_name ?? 'Test_user',
                               isHost: false,
+                              roomID: state1.streamList[index].room_id ?? '',
                             );
                           },
                           child: Container(
@@ -154,7 +170,7 @@ class _StreamPageState extends State<StreamPage> {
                               borderRadius: BorderRadius.circular(8),
                               image: DecorationImage(
                                 image: NetworkImage(
-                                  state1.streamList[index].profile?['image']
+                                  streamListGlobal[index].profile?['image']
                                           ['image_url'] ??
                                       '',
                                 ),
@@ -172,7 +188,8 @@ class _StreamPageState extends State<StreamPage> {
                                       width: 2,
                                     ),
                                     Text(
-                                      state1.streamList[index].spectators
+                                      streamListGlobal[index]
+                                          .spectators
                                           .toString(),
                                       style: GoogleFonts.montserrat(
                                         color: Colors.white,
@@ -195,7 +212,7 @@ class _StreamPageState extends State<StreamPage> {
                                               BorderRadius.circular(100),
                                           image: DecorationImage(
                                             image: NetworkImage(
-                                              state1.streamList[index]
+                                              streamListGlobal[index]
                                                           .profile?['image']
                                                       ['image_url'] ??
                                                   '',
@@ -215,7 +232,7 @@ class _StreamPageState extends State<StreamPage> {
                                                 children: [
                                                   TextSpan(
                                                     text:
-                                                        '${state1.streamList[index].profile?['first_name']}, ',
+                                                        '${streamListGlobal[index].profile?['first_name']}, ',
                                                     style:
                                                         GoogleFonts.montserrat(
                                                       color: Colors.white,
@@ -225,11 +242,11 @@ class _StreamPageState extends State<StreamPage> {
                                                     ),
                                                   ),
                                                   TextSpan(
-                                                    text: state1
-                                                            .streamList[index]
-                                                            .profile?['age']
-                                                            .toString() ??
-                                                        '',
+                                                    text:
+                                                        streamListGlobal[index]
+                                                                .profile?['age']
+                                                                .toString() ??
+                                                            '',
                                                     style:
                                                         GoogleFonts.montserrat(
                                                       color: Colors.white,
@@ -243,9 +260,9 @@ class _StreamPageState extends State<StreamPage> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                state1.streamList[index]
+                                                streamListGlobal[index]
                                                         .description ??
-                                                    'Без описание sggdfg df',
+                                                    'Без описание',
                                                 style: GoogleFonts.montserrat(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.w400,
@@ -323,12 +340,13 @@ class _StreamPageState extends State<StreamPage> {
     required bool isHost,
     required int profileId,
     required String name,
+    required String roomID,
   }) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => LivePage(
-          liveID: 'testLive123321',
+          liveID: roomID,
           name: name,
           profileId: profileId,
           isHost: isHost,

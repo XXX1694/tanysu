@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tanysu/core/constants/colors.dart';
+import 'package:tanysu/features/like_page/presentation/pages/like_page.dart';
 import 'package:tanysu/features/profile_page/presentation/bloc/profile_page_bloc.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/name_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/photo_block.dart';
@@ -125,6 +126,59 @@ class _ProfilePageState extends State<ProfilePage> {
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 35),
                         child: Divider(color: Colors.black26),
+                      ),
+                      const SizedBox(height: 4),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 35),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: CupertinoButton(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
+                            color: mainColor20,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LikePage(),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Мои лайки',
+                                  style: GoogleFonts.montserratAlternates(
+                                    color: mainColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Container(
+                                  height: 32,
+                                  width: 32,
+                                  decoration: BoxDecoration(
+                                    color: mainColor20,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      (state.model.likes ?? 0).toString(),
+                                      style: GoogleFonts.montserratAlternates(
+                                        color: mainColor,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 16),
                       // const CoinsBlock(coins: 0),

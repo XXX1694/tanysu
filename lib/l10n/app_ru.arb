@@ -205,6 +205,14 @@
     "temporarily_not_working_second": "К сожалению, эта функция пока не работает!",
 
     "edit_photo": "Редактировать фото",
-    "edit_photo_second": "Хотите удалить или изменить фото?"
+    "edit_photo_second": "Хотите удалить или изменить фото?",
+
+    "swipe": "Свайп",
+
+    "delete_chat_main": "Удалить чат",
+    "delete_chat_second": "Уверены что хотите удалить чат?",
+
+    "follow": "Подписаться",
+    "unfollow": "Отписаться"
 
 }

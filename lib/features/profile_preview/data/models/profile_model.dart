@@ -28,6 +28,8 @@ class ProfileModel {
   final bool is_liked;
   final int? completeness;
   final String? juz;
+  final int? likes;
+  final bool subscribed;
 
   ProfileModel(
     this.is_liked,
@@ -52,6 +54,8 @@ class ProfileModel {
     this.user,
     this.completeness,
     this.juz,
+    this.likes,
+    this.subscribed,
   );
   factory ProfileModel.fromJson(Map<String, dynamic> json) =>
       _$ProfileModelFromJson(json);

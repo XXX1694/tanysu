@@ -28,4 +28,27 @@ class ProfilePreviewRepository {
       return null;
     }
   }
+
+  followUnfollow({required profileId}) async {
+    final storage = await _storage;
+    final url = mainUrl;
+    String finalUrl = '${url}subscription/toggle/$profileId/';
+    final dio = Dio();
+    String? token = storage.getString('auth_token');
+    if (token == null) return null;
+    dio.options.headers["authorization"] = "Token $token";
+    try {
+      final response = await dio.post(
+        finalUrl,
+      );
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
 }

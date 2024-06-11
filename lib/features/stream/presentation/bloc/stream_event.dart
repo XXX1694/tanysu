@@ -8,3 +8,5 @@ abstract class StreamEvent extends Equatable {
 }
 
 class GetAllStream extends StreamEvent {}
+
+class UpdateAllStream extends StreamEvent {}

@@ -46,17 +46,19 @@ class _LivePageState extends State<LivePage> {
             if (kDebugMode) {
               print(snapshot.data);
             }
-            return ZegoUIKitPrebuiltLiveStreaming(
-              appID:
-                  759841390, // Fill in the appID that you get from ZEGOCLOUD Admin Console.
-              appSign:
-                  '3741744927f41af8dedc758151b909039452c085d2c0f3aec7d0aedd8570c5c4', // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
-              userID: widget.profileId.toString(),
-              userName: widget.name,
-              liveID: widget.liveID,
-              config: widget.isHost
-                  ? ZegoUIKitPrebuiltLiveStreamingConfig.host()
-                  : ZegoUIKitPrebuiltLiveStreamingConfig.audience(),
+            return SafeArea(
+              child: ZegoUIKitPrebuiltLiveStreaming(
+                appID:
+                    759841390, // Fill in the appID that you get from ZEGOCLOUD Admin Console.
+                appSign:
+                    '3741744927f41af8dedc758151b909039452c085d2c0f3aec7d0aedd8570c5c4', // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
+                userID: widget.profileId.toString(),
+                userName: widget.name,
+                liveID: widget.liveID,
+                config: widget.isHost
+                    ? ZegoUIKitPrebuiltLiveStreamingConfig.host()
+                    : ZegoUIKitPrebuiltLiveStreamingConfig.audience(),
+              ),
             );
           } else {
             return const Center(

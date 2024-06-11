@@ -13,6 +13,7 @@ import 'package:tanysu/core/widgets/placeholers.dart';
 import 'package:tanysu/features/block_user/presentation/widgets/show_block.dart';
 
 import 'package:tanysu/features/profile_preview/presentation/bloc/profile_preview_bloc.dart';
+import 'package:tanysu/features/profile_preview/presentation/widgets/follow_button.dart';
 import 'package:tanysu/features/profile_preview/presentation/widgets/profile_about.dart';
 import 'package:tanysu/features/profile_preview/presentation/widgets/profile_info_block_mine.dart';
 import 'package:tanysu/features/profile_preview/presentation/widgets/send_gift_button.dart';
@@ -211,19 +212,21 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
                             color: Colors.black26,
                             height: 1,
                           ),
-                          // const SizedBox(height: 12),
-                          // const Row(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   children: [
-                          //     FollowButton(),
-                          //   ],
-                          // ),
                           const SizedBox(height: 16),
                           SendGiftButton(
                             userName: state.model.first_name ?? '',
                             profileId: state.model.id ?? 0,
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 4),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FollowButton(
+                                folloewed: state.model.subscribed,
+                                profileId: state.model.id ?? 0,
+                              ),
+                            ],
+                          ),
                           const Divider(
                             color: Colors.black26,
                             height: 1,
