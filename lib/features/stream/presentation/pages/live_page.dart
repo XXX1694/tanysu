@@ -49,9 +49,9 @@ class _LivePageState extends State<LivePage> {
             return SafeArea(
               child: ZegoUIKitPrebuiltLiveStreaming(
                 appID:
-                    759841390, // Fill in the appID that you get from ZEGOCLOUD Admin Console.
+                727056335, // Fill in the appID that you get from ZEGOCLOUD Admin Console.
                 appSign:
-                    '3741744927f41af8dedc758151b909039452c085d2c0f3aec7d0aedd8570c5c4', // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
+                    '9ea02ec0d3be19a5e45e715292f2c1459b18143051f0947fc3087a1db21d117a', // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
                 userID: widget.profileId.toString(),
                 userName: widget.name,
                 liveID: widget.liveID,

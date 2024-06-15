@@ -52,7 +52,7 @@ class _AgeSliderState extends State<AgeSlider> {
               inactiveColor: mainColor50,
               activeColor: mainColor,
               // secondaryActiveColor: Colors.black12,
-              overlayColor: MaterialStatePropertyAll(secondColor),
+              overlayColor: WidgetStatePropertyAll(secondColor),
               min: 18,
               max: 65,
               labels: RangeLabels(
