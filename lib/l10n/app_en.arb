@@ -213,6 +213,10 @@
     "delete_chat_second": "Do you really want to delete chat?",
 
     "follow": "Follow",
-    "unfollow": "Unfollow"
+    "unfollow": "Unfollow",
+
+    "get_coins": "Get coins",
+    "pay": "Pay",
+    "card": "Card"
 
 }

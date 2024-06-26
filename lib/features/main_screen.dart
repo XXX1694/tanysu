@@ -160,10 +160,29 @@ class _MainScreenState extends State<MainScreen> {
                             name: userName,
                           );
                         },
-                        child: Image.asset(
-                          'assets/icons/navigation_icons/start_stream.png',
-                          height: 44,
-                          width: 44,
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/navigation_icons/start_stream.svg',
+                                height: 24,
+                                width: 24,
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                translation(context).stream,
+                                style: GoogleFonts.montserrat(
+                                  color: Colors.black54,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: -0.24,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       _buildNavItem(
@@ -173,7 +192,8 @@ class _MainScreenState extends State<MainScreen> {
                           width: 24,
                         ),
                         icon: SvgPicture.asset(
-                            'assets/icons/navigation_icons/chat_outlined.svg'),
+                          'assets/icons/navigation_icons/chat_outlined.svg',
+                        ),
                         label: translation(context).chat,
                         index: 2,
                         ref: ref,
