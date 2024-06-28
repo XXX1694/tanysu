@@ -18,6 +18,8 @@ import 'package:tanysu/features/chat_page/data/repositories/chat_repository.dart
 import 'package:tanysu/features/chat_page/presentation/bloc/chat_page_bloc.dart';
 import 'package:tanysu/features/choose_city/data/repositories/choose_city_repository.dart';
 import 'package:tanysu/features/choose_city/presentation/bloc/choose_city_bloc.dart';
+import 'package:tanysu/features/subscribers/data/repositories/subscribers_repository.dart';
+import 'package:tanysu/features/subscribers/presentation/bloc/subscribers_bloc.dart';
 import 'package:tanysu/features/welcome/presentation/pages/choose_lange_page.dart';
 import 'package:tanysu/features/edit_profile/data/repositories/edit_profile_repository.dart';
 import 'package:tanysu/features/edit_profile/presentation/bloc/edit_profile_bloc.dart';
@@ -299,6 +301,12 @@ class _MainAppState extends State<MainApp> {
               liveState: const LiveState(),
             ),
           ),
+          BlocProvider(
+            create: (context) => SubscribersBloc(
+              repository: SubscribersRepository(),
+              subscribersState: const SubscribersState(),
+            ),
+          ),
         ],
 
         // For building models: flutter pub run build_runner build --delete-conflicting-outputs
@@ -323,7 +331,7 @@ class _MainAppState extends State<MainApp> {
           },
           initialRoute: '/',
         ),
-      ), 
+      ),
     );
   }
 }
