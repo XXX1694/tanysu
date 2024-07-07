@@ -153,11 +153,64 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          jumpToLivePage(
-                            context,
-                            isHost: true,
-                            profileId: profileId,
-                            name: userName,
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              // contentPadding: const EdgeInsets.all(24),
+                              // actionsPadding: ,
+                              title: Text(
+                                translation(context).go_live,
+                                textAlign: TextAlign.center,
+                              ),
+                              titleTextStyle: GoogleFonts.montserrat(
+                                color: mainColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              content: Text(
+                                translation(context).go_stream,
+                                textAlign: TextAlign.center,
+                              ),
+                              contentTextStyle: GoogleFonts.montserrat(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    jumpToLivePage(
+                                      context,
+                                      isHost: true,
+                                      profileId: profileId,
+                                      name: userName,
+                                    );
+                                  },
+                                  child: Text(
+                                    translation(context).yes,
+                                    style: GoogleFonts.montserrat(
+                                      color: mainColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    translation(context).no,
+                                    style: GoogleFonts.montserrat(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           );
                         },
                         child: Container(

@@ -82,7 +82,7 @@
 
     "coins": "coins",
     "complete": "COMPLETE",
-    "followers": "followers",
+    "followerss": "Followers",
     "taken": "taken",
     "buy_a_coin": "Buy a coin",
     "write_first": "Write first",
@@ -217,6 +217,12 @@
 
     "get_coins": "Get coins",
     "pay": "Pay",
-    "card": "Card"
+    "card": "Card",
 
+
+    "go_stream": "Do you want to go live?",
+
+    "no_live_stream": "No one in live",
+    "be_first": "Be first"
+    
 }

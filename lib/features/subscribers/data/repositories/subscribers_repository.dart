@@ -14,14 +14,14 @@ class SubscribersRepository {
     if (token == null) return null;
     dio.options.headers["authorization"] = "Token $token";
     String finalUrl;
-    finalUrl = '${url}v2/profile/list/';
+    finalUrl = '${url}subscription/list/';
     try {
       final response = await dio.get(finalUrl);
-
-      List data = response.data;
+      print(response.data);
+      List data = response.data['results'];
       List<SearchResultModel> users = [];
       for (int i = 0; i < data.length; i++) {
-        users.add(SearchResultModel.fromJson(data[i]));
+        users.add(SearchResultModel.fromJson(data[i]['follower']));
       }
       if (response.statusCode == 200) {
         return users;

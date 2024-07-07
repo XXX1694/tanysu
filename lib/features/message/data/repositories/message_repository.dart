@@ -14,11 +14,11 @@ class MessageRepository {
     // print(token);
     if (token == null) return null;
     dio.options.headers["authorization"] = "Token $token";
-    String finalUrl = '${url}chat/message/list/$chatId/';
+    String finalUrl = '${url}v2/chat/message/list/$chatId/';
     try {
       final response = await dio.get(finalUrl);
 
-      List data = response.data;
+      List data = response.data['results'];
       List<MessageModel> chats = [];
       for (int i = 0; i < data.length; i++) {
         chats.add(MessageModel.fromJson(data[i]));
@@ -47,7 +47,7 @@ class MessageRepository {
         finalUrl,
         queryParameters: {
           "page": page,
-          "page_size": 30,
+          "page_size": 20,
         },
       );
       // print(response.data);

@@ -17,26 +17,31 @@ class UserMainInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              '$followers',
-              style: GoogleFonts.montserrat(
-                color: mainColor,
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '/subscribers');
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                '$followers',
+                style: GoogleFonts.montserrat(
+                  color: mainColor,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                ),
               ),
-            ),
-            Text(
-              translation(context).followers,
-              style: GoogleFonts.montserrat(
-                color: Colors.black,
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
+              Text(
+                translation(context).followers,
+                style: GoogleFonts.montserrat(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(width: 40),
         Column(

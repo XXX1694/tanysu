@@ -13,11 +13,17 @@ class ChatRepository {
     String? token = storage.getString('auth_token');
     if (token == null) return null;
     dio.options.headers["authorization"] = "Token $token";
-    String finalUrl = '${url}chat/list/';
+    String finalUrl = '${url}v2/chat/list/';
 
     try {
-      final response = await dio.get(finalUrl);
-      List data = response.data;
+      final response = await dio.get(
+        finalUrl,
+        queryParameters: {
+          'page': 1,
+          'page_size': 50,
+        },
+      );
+      List data = response.data['results'];
       List<ChatModel> chats = [];
       for (int i = 0; i < data.length; i++) {
         chats.add(ChatModel.fromJson(data[i]));
