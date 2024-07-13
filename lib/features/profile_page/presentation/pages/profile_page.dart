@@ -9,6 +9,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/like_page/presentation/pages/like_page.dart';
 import 'package:tanysu/features/profile_page/presentation/bloc/profile_page_bloc.dart';
+import 'package:tanysu/features/profile_page/presentation/widgets/coins_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/name_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/photo_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/user_main_info.dart';
@@ -181,8 +182,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      // const CoinsBlock(coins: 0),
-                      // const SizedBox(height: 40),
+                      const CoinsBlock(coins: 0),
+                      const SizedBox(height: 40),
                     ],
                   ),
                 ),

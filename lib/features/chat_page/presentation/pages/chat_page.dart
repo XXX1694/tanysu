@@ -45,7 +45,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void _startAutoUpdate() {
-    timer = Timer.periodic(const Duration(seconds: 6), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 8), (timer) {
       bloc.add(UpdateAllChats());
     });
   }

@@ -10,6 +10,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tanysu/core/constants/chats.dart';
 import 'package:tanysu/core/constants/colors.dart';
+import 'package:tanysu/core/functions/generate_string.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/profile_page/presentation/bloc/profile_page_bloc.dart';
 import 'package:tanysu/features/stream/presentation/bloc/stream_bloc.dart';
 import 'package:tanysu/features/stream/presentation/pages/live_page.dart';
@@ -77,7 +79,7 @@ class _StreamPageState extends State<StreamPage> {
                   Text(
                     'LIVE',
                     style: GoogleFonts.montserratAlternates(
-                      color: accentColor,
+                      color: const Color(0xFFFFA500),
                       fontSize: 22,
                       fontWeight: FontWeight.w700,
                     ),
@@ -150,7 +152,7 @@ class _StreamPageState extends State<StreamPage> {
                             jumpToLivePage(
                               context,
                               profileId: state.model.id ?? 0,
-                              name: state.model.first_name ?? 'Test_user',
+                              name: state.model.first_name ?? 'Без имени',
                               isHost: false,
                               roomID: state1.streamList[index].room_id ?? '',
                             );
@@ -296,28 +298,65 @@ class _StreamPageState extends State<StreamPage> {
                             ),
                     );
                   } else {
-                    return SmartRefresher(
-                      header: ClassicHeader(
-                        textStyle: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          decoration: TextDecoration.none,
-                          letterSpacing: -0.41,
+                    // return SmartRefresher(
+                    //   header: ClassicHeader(
+                    //     textStyle: const TextStyle(
+                    //       color: Colors.grey,
+                    //       fontSize: 14,
+                    //       fontWeight: FontWeight.w600,
+                    //       decoration: TextDecoration.none,
+                    //       letterSpacing: -0.41,
+                    //     ),
+                    //     idleText: translation(context).pull_to_refresh,
+                    //     releaseText: translation(context).release_to_refresh,
+                    //     refreshingText: translation(context).refreshing_text,
+                    //   ),
+                    //   enablePullDown: true,
+                    //   enablePullUp: false,
+                    //   controller: _refreshController,
+                    //   onRefresh: () async {
+                    //     _streamBloc.add(GetAllStream());
+                    //   },
+                    //   child: Center(
+                    //     child: Text(translation(context).empty),
+                    //   ),
+                    // );
+
+                    return Column(
+                      children: [
+                        const Spacer(),
+                        Text(
+                          translation(context).no_live_stream,
+                          style: GoogleFonts.montserrat(
+                            color: mainColor,
+                            fontSize: 26,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                        idleText: translation(context).pull_to_refresh,
-                        releaseText: translation(context).release_to_refresh,
-                        refreshingText: translation(context).refreshing_text,
-                      ),
-                      enablePullDown: true,
-                      enablePullUp: false,
-                      controller: _refreshController,
-                      onRefresh: () async {
-                        _streamBloc.add(GetAllStream());
-                      },
-                      child: Center(
-                        child: Text(translation(context).empty),
-                      ),
+                        const SizedBox(height: 16),
+                        Text(
+                          translation(context).be_first,
+                          style: GoogleFonts.montserrat(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const Spacer(),
+                        MainButton(
+                          text: translation(context).go_live,
+                          onPressed: () {
+                            newStream(
+                              context,
+                              isHost: true,
+                              profileId: state.model.id ?? 0,
+                              name: state.model.first_name ?? 'Без имени',
+                            );
+                          },
+                          status: 'active',
+                        ),
+                        const SizedBox(height: 32),
+                      ],
                     );
                   }
                 },
@@ -347,6 +386,25 @@ class _StreamPageState extends State<StreamPage> {
       MaterialPageRoute(
         builder: (context) => LivePage(
           liveID: roomID,
+          name: name,
+          profileId: profileId,
+          isHost: isHost,
+        ),
+      ),
+    );
+  }
+
+  newStream(
+    BuildContext context, {
+    required bool isHost,
+    required int profileId,
+    required String name,
+  }) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LivePage(
+          liveID: generateUniqueId(16),
           name: name,
           profileId: profileId,
           isHost: isHost,

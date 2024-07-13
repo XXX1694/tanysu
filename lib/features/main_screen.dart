@@ -153,17 +153,89 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          jumpToLivePage(
-                            context,
-                            isHost: true,
-                            profileId: profileId,
-                            name: userName,
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              // contentPadding: const EdgeInsets.all(24),
+                              // actionsPadding: ,
+                              title: Text(
+                                translation(context).go_live,
+                                textAlign: TextAlign.center,
+                              ),
+                              titleTextStyle: GoogleFonts.montserrat(
+                                color: mainColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              content: Text(
+                                translation(context).go_stream,
+                                textAlign: TextAlign.center,
+                              ),
+                              contentTextStyle: GoogleFonts.montserrat(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    jumpToLivePage(
+                                      context,
+                                      isHost: true,
+                                      profileId: profileId,
+                                      name: userName,
+                                    );
+                                  },
+                                  child: Text(
+                                    translation(context).yes,
+                                    style: GoogleFonts.montserrat(
+                                      color: mainColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    translation(context).no,
+                                    style: GoogleFonts.montserrat(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           );
                         },
-                        child: Image.asset(
-                          'assets/icons/navigation_icons/start_stream.png',
-                          height: 44,
-                          width: 44,
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/navigation_icons/start_stream.svg',
+                                height: 24,
+                                width: 24,
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                translation(context).stream,
+                                style: GoogleFonts.montserrat(
+                                  color: Colors.black54,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: -0.24,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       _buildNavItem(
@@ -173,7 +245,8 @@ class _MainScreenState extends State<MainScreen> {
                           width: 24,
                         ),
                         icon: SvgPicture.asset(
-                            'assets/icons/navigation_icons/chat_outlined.svg'),
+                          'assets/icons/navigation_icons/chat_outlined.svg',
+                        ),
                         label: translation(context).chat,
                         index: 2,
                         ref: ref,

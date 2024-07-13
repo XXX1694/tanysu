@@ -82,7 +82,7 @@
 
     "coins": "coins",
     "complete": "COMPLETE",
-    "followers": "followers",
+    "followerss": "Followers",
     "taken": "taken",
     "buy_a_coin": "Buy a coin",
     "write_first": "Write first",
@@ -213,6 +213,16 @@
     "delete_chat_second": "Do you really want to delete chat?",
 
     "follow": "Follow",
-    "unfollow": "Unfollow"
+    "unfollow": "Unfollow",
 
+    "get_coins": "Get coins",
+    "pay": "Pay",
+    "card": "Card",
+
+
+    "go_stream": "Do you want to go live?",
+
+    "no_live_stream": "No one in live",
+    "be_first": "Be first"
+    
 }
