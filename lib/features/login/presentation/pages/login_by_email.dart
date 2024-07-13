@@ -12,6 +12,8 @@ import 'package:tanysu/features/login/presentation/widgets/email_field.dart';
 import 'package:tanysu/features/main_screen.dart';
 import 'package:tanysu/l10n/translate.dart';
 
+import '../widgets/bottom_text.dart';
+
 class LoginByEmail extends StatefulWidget {
   const LoginByEmail({super.key});
 
@@ -44,15 +46,15 @@ class _LoginByEmailState extends State<LoginByEmail> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 35),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 40),
+              const SizedBox(height: 60),
               const LoginMainText(),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               const LoginSecondText(),
-              const SizedBox(height: 32),
+              const SizedBox(height: 40),
               EmailField(controller: _emailController),
               const SizedBox(height: 20),
               PasswordField(controller: _passwordController),
@@ -97,6 +99,8 @@ class _LoginByEmailState extends State<LoginByEmail> {
                   }
                 },
               ),
+              const SizedBox(height: 12),
+              const LoginBottomText(),
               const SizedBox(height: 40),
             ],
           ),

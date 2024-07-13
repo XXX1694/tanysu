@@ -79,12 +79,12 @@ class _ProfilePageState extends State<ProfilePage> {
             if (state is ProfileGetting) {
               return Center(
                 child: Platform.isAndroid
-                    ? CircularProgressIndicator(
-                        color: secondColor,
+                    ? const CircularProgressIndicator(
+                        color: mainColor,
                         strokeWidth: 3,
                       )
-                    : CupertinoActivityIndicator(
-                        color: secondColor,
+                    : const CupertinoActivityIndicator(
+                        color: mainColor,
                       ),
               );
             } else if (state is ProfileGot) {

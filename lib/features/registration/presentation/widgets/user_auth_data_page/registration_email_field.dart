@@ -16,9 +16,9 @@ class RegistrationEmailField extends StatelessWidget {
       ),
       decoration: InputDecoration(
         hintText: translation(context).phone_number,
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            color: secondColor,
+            color: mainColor,
           ),
         ),
       ),

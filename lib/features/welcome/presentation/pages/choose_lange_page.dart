@@ -46,12 +46,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                 ),
               ),
             ),
-            SvgPicture.asset(
-              'assets/background/main_background_pattern.svg',
-              fit: BoxFit.cover,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-            ),
+
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),

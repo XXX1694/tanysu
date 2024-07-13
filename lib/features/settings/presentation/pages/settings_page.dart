@@ -204,8 +204,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           translation(context).are_you_sure,
                           textAlign: TextAlign.center,
                         ),
-                        contentTextStyle: TextStyle(
-                          color: secondColor,
+                        contentTextStyle: const TextStyle(
+                          color: mainColor,
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                         ),

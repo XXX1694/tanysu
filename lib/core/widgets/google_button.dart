@@ -1,32 +1,27 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 
-class MainButtonIcon extends StatelessWidget {
-  const MainButtonIcon({
+class GoogleButton extends StatelessWidget {
+  const GoogleButton({
     super.key,
-    required this.text,
     required this.onPressed,
-    required this.icon,
   });
-  final String text;
-  final String icon;
+
   final VoidCallback? onPressed;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+
       onTap: onPressed,
       child: Container(
         width: double.infinity,
         height: 50,
         decoration: BoxDecoration(
-          color: Colors.transparent,
-          border: Border.all(
-            color: Colors.black,
-            width: 1,
-          ),
+          color: mainColor,
           borderRadius: BorderRadius.circular(100),
         ),
         child: Stack(
@@ -38,10 +33,10 @@ class MainButtonIcon extends StatelessWidget {
                 children: [
                   const SizedBox(width: 13),
                   SvgPicture.asset(
-                    icon,
+                    'assets/icons/enter_method/google.svg',
                     height: 24,
                     width: 24,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                   const Spacer(),
                 ],
@@ -49,11 +44,11 @@ class MainButtonIcon extends StatelessWidget {
             ),
             Center(
               child: Text(
-                text,
+                'Google',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
             ),
           ],

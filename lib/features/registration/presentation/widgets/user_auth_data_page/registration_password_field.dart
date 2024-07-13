@@ -34,9 +34,9 @@ class _RegistrationPasswordFieldState extends State<RegistrationPasswordField> {
           ),
         ),
         hintText: translation(context).password,
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            color: secondColor,
+            color: mainColor,
           ),
         ),
       ),

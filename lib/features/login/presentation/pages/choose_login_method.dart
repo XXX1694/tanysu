@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/api/firebase_auth.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/login/presentation/bloc/login_bloc.dart';
@@ -13,7 +11,9 @@ import 'package:tanysu/features/main_screen.dart';
 import 'package:tanysu/features/registration/presentation/pages/user_main_info_page.dart';
 import 'package:tanysu/l10n/translate.dart';
 
+import '../../../../core/widgets/google_button.dart';
 import '../../../../core/widgets/main_button_icon.dart';
+import '../widgets/bottom_text.dart';
 
 class ChooseLoginMethod extends StatefulWidget {
   const ChooseLoginMethod({super.key});
@@ -24,6 +24,7 @@ class ChooseLoginMethod extends StatefulWidget {
 
 class _ChooseLoginMethodState extends State<ChooseLoginMethod> {
   late LoginBloc _loginBloc;
+
   @override
   void initState() {
     _loginBloc = BlocProvider.of<LoginBloc>(context);
@@ -60,31 +61,47 @@ class _ChooseLoginMethodState extends State<ChooseLoginMethod> {
         backgroundColor: Colors.white,
         body: Stack(
           children: [
-            Center(
-              child: Text(
-                'tanysu',
-                style: GoogleFonts.montserratAlternates(
-                  color: mainColor,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 72,
+            Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: Text.rich(
+                  TextSpan(
+                    children:<TextSpan> [
+                      TextSpan(
+                        text: 'pande',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge!
+                            .copyWith(
+                          color: mainColor,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'YA!',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge!
+                            .copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-            SvgPicture.asset(
-              'assets/background/main_background_pattern.svg',
-              fit: BoxFit.cover,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-            ),
             SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 35),
                 child: Column(
                   children: [
                     const Spacer(),
                     Platform.isAndroid
-                        ? MainButtonIcon(
-                            text: translation(context).with_google,
+                        ? GoogleButton(
+
                             onPressed: () async {
                               FirebaseService service = FirebaseService();
                               try {
@@ -103,7 +120,7 @@ class _ChooseLoginMethodState extends State<ChooseLoginMethod> {
                                 if (e is FirebaseAuthException) {}
                               }
                             },
-                            icon: 'assets/icons/enter_method/google.svg',
+
                           )
                         : MainButtonIcon(
                             text: translation(context).with_apple,
@@ -123,7 +140,7 @@ class _ChooseLoginMethodState extends State<ChooseLoginMethod> {
                       },
                       icon: 'assets/icons/enter_method/email.svg',
                     ),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 40),
                   ],
                 ),
               ),

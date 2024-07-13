@@ -17,23 +17,39 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Center(
-            child: Text(
-              'tanysu',
-              style: GoogleFonts.montserratAlternates(
-                  color: mainColor, fontWeight: FontWeight.w700, fontSize: 72),
-            ),
+      body: SafeArea(
+        child: SizedBox(
+          height: double.infinity,
+          width: double.infinity,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'pande',
+                        style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                              color: mainColor,
+                              fontWeight: FontWeight.w700,
+                            ),
+                      ),
+                      TextSpan(
+                        text: 'YA!',
+                        style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const MainSignInBlock(),
+            ],
           ),
-          SvgPicture.asset(
-            'assets/background/main_background_pattern.svg',
-            fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-          ),
-          const MainSignInBlock(),
-        ],
+        ),
       ),
     );
   }

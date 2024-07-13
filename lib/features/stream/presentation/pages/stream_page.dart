@@ -289,12 +289,12 @@ class _StreamPageState extends State<StreamPage> {
                   } else if (state is StreamListGetting) {
                     return Center(
                       child: Platform.isAndroid
-                          ? CircularProgressIndicator(
-                              color: secondColor,
+                          ? const CircularProgressIndicator(
+                              color: mainColor,
                               strokeWidth: 3,
                             )
-                          : CupertinoActivityIndicator(
-                              color: secondColor,
+                          : const CupertinoActivityIndicator(
+                              color: mainColor,
                             ),
                     );
                   } else {

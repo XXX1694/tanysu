@@ -46,7 +46,7 @@ class _FollowButtonState extends State<FollowButton> {
         ),
         decoration: BoxDecoration(
           gradient: !follow
-              ? LinearGradient(
+              ? const LinearGradient(
                   colors: [
                     mainColor,
                     secondColor,

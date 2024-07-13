@@ -18,10 +18,10 @@ import 'package:tanysu/features/chat_page/data/repositories/chat_repository.dart
 import 'package:tanysu/features/chat_page/presentation/bloc/chat_page_bloc.dart';
 import 'package:tanysu/features/choose_city/data/repositories/choose_city_repository.dart';
 import 'package:tanysu/features/choose_city/presentation/bloc/choose_city_bloc.dart';
+import 'package:tanysu/features/registration/presentation/pages/user_auth_data_page.dart';
 import 'package:tanysu/features/subscribers/data/repositories/subscribers_repository.dart';
 import 'package:tanysu/features/subscribers/presentation/bloc/subscribers_bloc.dart';
 import 'package:tanysu/features/subscribers/presentation/pages/subscribers_page.dart';
-import 'package:tanysu/features/welcome/presentation/pages/choose_lange_page.dart';
 import 'package:tanysu/features/edit_profile/data/repositories/edit_profile_repository.dart';
 import 'package:tanysu/features/edit_profile/presentation/bloc/edit_profile_bloc.dart';
 import 'package:tanysu/features/get_user_id/data/repositories/get_user_id_repo.dart';
@@ -67,6 +67,8 @@ import 'package:tanysu/features/stream/presentation/bloc/stream_bloc.dart';
 import 'package:tanysu/firebase_options.dart';
 import 'package:tanysu/l10n/l10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'core/themes/themes.dart';
+import 'features/login/presentation/pages/choose_login_method.dart';
 import 'features/registration/presentation/bloc/registration_bloc/registration_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -315,13 +317,15 @@ class _MainAppState extends State<MainApp> {
         // For apk: flutter build apk --split-per-abi
 
         child: GetMaterialApp(
+          theme: lightTheme,
           debugShowCheckedModeBanner: false,
           supportedLocales: L10n.all,
           locale: _locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           routes: {
-            '/': (context) => const ChooseLanguagePage(),
-            '/login/phone': (context) => const LoginByEmail(),
+            '/': (context) => const ChooseLoginMethod(),
+            '/login': (context) => const LoginByEmail(),
+            '/registration': (context) => const UserAuthDataPage(),
             '/main': (context) => const MainScreen(),
             '/privacy': (context) => const PrivacyPage(),
             '/terms': (context) => const TermsPage(),

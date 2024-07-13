@@ -88,7 +88,7 @@ class _GiftsState extends State<Gifts> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               '0',
                               style: TextStyle(
                                 color: mainColor,

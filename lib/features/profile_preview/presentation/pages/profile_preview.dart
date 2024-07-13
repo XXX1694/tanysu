@@ -47,11 +47,11 @@ class _ProfilePreviewPageBasicState extends State<ProfilePreviewPageBasic> {
                 Expanded(
                   child: Center(
                     child: Platform.isAndroid
-                        ? CircularProgressIndicator(
+                        ? const CircularProgressIndicator(
                             color: mainColor,
                             strokeWidth: 3,
                           )
-                        : CupertinoActivityIndicator(
+                        : const CupertinoActivityIndicator(
                             color: mainColor,
                           ),
                   ),

@@ -175,12 +175,12 @@ class _SubscribersPageState extends State<SubscribersPage> {
               } else {
                 return Center(
                   child: Platform.isAndroid
-                      ? CircularProgressIndicator(
-                          color: secondColor,
+                      ? const CircularProgressIndicator(
+                          color: mainColor,
                           strokeWidth: 3,
                         )
-                      : CupertinoActivityIndicator(
-                          color: secondColor,
+                      : const CupertinoActivityIndicator(
+                          color: mainColor,
                         ),
                 );
               }

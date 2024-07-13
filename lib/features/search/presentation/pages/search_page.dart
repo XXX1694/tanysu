@@ -264,12 +264,12 @@ class _SearchPageState extends State<SearchPage> {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 32),
                         child: Platform.isAndroid
-                            ? CircularProgressIndicator(
-                                color: secondColor,
+                            ? const CircularProgressIndicator(
+                                color: mainColor,
                                 strokeWidth: 3,
                               )
-                            : CupertinoActivityIndicator(
-                                color: secondColor,
+                            : const CupertinoActivityIndicator(
+                                color: mainColor,
                               ),
                       );
                     }
@@ -278,12 +278,12 @@ class _SearchPageState extends State<SearchPage> {
               } else {
                 return Center(
                   child: Platform.isAndroid
-                      ? CircularProgressIndicator(
-                          color: secondColor,
+                      ? const CircularProgressIndicator(
+                          color: mainColor,
                           strokeWidth: 3,
                         )
-                      : CupertinoActivityIndicator(
-                          color: secondColor,
+                      : const CupertinoActivityIndicator(
+                          color: mainColor,
                         ),
                 );
               }
