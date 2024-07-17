@@ -8,7 +8,7 @@ class LoginMainText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      translation(context).login_main_text,
+      translation(context).login,
       style: Theme.of(context).textTheme.headlineLarge?.copyWith(
             color: Colors.black,
             fontWeight: FontWeight.w700,

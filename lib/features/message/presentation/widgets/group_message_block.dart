@@ -4,7 +4,6 @@ import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:tanysu/core/constants/colors.dart';
@@ -126,12 +125,9 @@ class MyMessage extends StatelessWidget {
               children: [
                 Text(
                   translation(context).delete,
-                  style: GoogleFonts.montserrat(
-                    color: Colors.red,
-                    // fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: -0.41,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Colors.red,
+                      ),
                 ),
                 const Icon(
                   Icons.delete,
@@ -146,7 +142,7 @@ class MyMessage extends StatelessWidget {
               maxWidth: MediaQuery.of(context).size.width * 0.85),
           // margin: const EdgeInsets.only(bottom: 8),
           decoration: BoxDecoration(
-            color: accentColor50,
+            color: accentColor20,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(12),
               topRight: Radius.circular(12),
@@ -188,11 +184,12 @@ class MyMessage extends StatelessWidget {
                           Flexible(
                             child: Text(
                               message.content ?? '',
-                              style: GoogleFonts.montserrat(
-                                color: Colors.black,
-                                fontSize: 14,
-                                height: 1.2,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    color: Colors.black,
+                                  ),
                             ),
                           ),
                           const SizedBox(width: 8),
@@ -200,10 +197,12 @@ class MyMessage extends StatelessWidget {
                             DateFormat.Hm().format(
                               DateTime.parse(message.timestamp ?? ''),
                             ),
-                            style: GoogleFonts.montserrat(
-                              color: Colors.black54,
-                              fontSize: 10,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(
+                                  color: Colors.black54,
+                                ),
                           ),
                         ],
                       ),
@@ -295,11 +294,12 @@ class OtherMessage extends StatelessWidget {
                         children: [
                           Text(
                             message.name ?? '',
-                            style: GoogleFonts.montserrat(
-                              color: Colors.black,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                  color: Colors.black,
+                                ),
                           ),
                           Row(
                             mainAxisSize: MainAxisSize.min,
@@ -308,11 +308,12 @@ class OtherMessage extends StatelessWidget {
                               Flexible(
                                 child: Text(
                                   message.content ?? '',
-                                  style: GoogleFonts.montserrat(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    height: 1.2,
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                      ),
                                 ),
                               ),
                               const SizedBox(width: 8),
@@ -320,10 +321,12 @@ class OtherMessage extends StatelessWidget {
                                 DateFormat.Hm().format(
                                   DateTime.parse(message.timestamp ?? ''),
                                 ),
-                                style: GoogleFonts.montserrat(
-                                  color: Colors.black54,
-                                  fontSize: 10,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall
+                                    ?.copyWith(
+                                      color: Colors.black54,
+                                    ),
                               ),
                             ],
                           ),

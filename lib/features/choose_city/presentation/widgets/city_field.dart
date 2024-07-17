@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/choose_city/data/models/city.dart';
 import 'package:tanysu/features/choose_city/presentation/bloc/choose_city_bloc.dart';
@@ -39,6 +38,7 @@ class _CityFieldState extends State<CityField> {
             for (int i = 0; i < state.cities.length; i++) {
               if (state.cities[i].id == int.parse(widget.controller.text)) {
                 selectedValue = state.cities[i];
+                selectedValue!.name = 'asd';
               }
             }
           }
@@ -50,23 +50,24 @@ class _CityFieldState extends State<CityField> {
             value: selectedValue,
             hint: Text(
               translation(context).select_city,
-              style: GoogleFonts.montserrat(
-                color: Colors.black54,
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.black54,
+                  ),
             ),
-            style: GoogleFonts.montserrat(
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-            ),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Colors.black,
+                ),
             isExpanded: true,
             items: state.cities.map(
               (value) {
                 return DropdownMenuItem(
                   value: value,
-                  child: Text(value.name),
+                  child: Text(
+                    value.name,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.black,
+                        ),
+                  ),
                 );
               },
             ).toList(),

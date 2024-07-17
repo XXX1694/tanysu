@@ -92,7 +92,8 @@ class _CuprtinoActionSheetBuilderState
             onPressed: () {
               if (widget.last) {
                 Navigator.pop(context);
-                showSnackBar(context, translation(context).at_least_one_image);
+                showSnackBar(context,
+                    text: translation(context).at_least_one_image);
               } else {
                 bloc.add(DeleteImage(id: widget.imageId));
               }
@@ -178,8 +179,8 @@ class _ImageEditState extends State<ImageEdit> {
               onPressed: () {
                 if (widget.last) {
                   Navigator.pop(context);
-                  showSnackBar(
-                      context, translation(context).at_least_one_image);
+                  showSnackBar(context,
+                      text: translation(context).at_least_one_image);
                 } else {
                   bloc.add(DeleteImage(id: widget.imageId));
                 }

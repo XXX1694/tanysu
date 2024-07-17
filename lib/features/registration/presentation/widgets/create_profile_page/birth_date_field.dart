@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../../../../../l10n/translate.dart';
 import '../../../../../core/constants/colors.dart';
@@ -23,46 +22,57 @@ class BirthDateField extends StatefulWidget {
 class _BirthDateFieldState extends State<BirthDateField> {
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: widget.controller,
-      readOnly: true,
-      onTap: () {
-        DatePicker.showDatePicker(
-          context,
-          showTitleActions: true,
-          minTime: DateTime.now().subtract(const Duration(days: 365 * 100)),
-          maxTime: DateTime.now().subtract(const Duration(days: 6574)),
-          onChanged: (date) {},
-          onConfirm: (date) {
-            setState(
-              () {
-                widget.controller.text =
-                    DateFormat('yyyy-MM-dd').format(date).toString();
-              },
-            );
-          },
-          currentTime: widget.date ?? DateTime.now(),
-        );
-      },
-      style: GoogleFonts.montserrat(
-        color: Colors.black,
-        fontWeight: FontWeight.w500,
-        fontSize: 14,
-      ),
-      decoration: InputDecoration(
-        hintText: translation(context).enter_birth_date,
-        hintStyle: GoogleFonts.montserrat(
-          color: Colors.black54,
-          fontWeight: FontWeight.w400,
-          fontSize: 14,
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: mainColor,
+    return SizedBox(
+      height: 44,
+      child: TextField(
+        controller: widget.controller,
+        readOnly: true,
+        onTap: () {
+          DatePicker.showDatePicker(
+            context,
+            showTitleActions: true,
+            minTime: DateTime.now().subtract(const Duration(days: 365 * 100)),
+            maxTime: DateTime.now().subtract(const Duration(days: 6574)),
+            onChanged: (date) {},
+            onConfirm: (date) {
+              setState(
+                () {
+                  widget.controller.text =
+                      DateFormat('yyyy-MM-dd').format(date).toString();
+                },
+              );
+            },
+            currentTime: widget.date ?? DateTime.now(),
+          );
+        },
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.black,
+            ),
+        decoration: InputDecoration(
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
+          hintText: translation(context).enter_birth_date,
+          hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Colors.black54,
+              ),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: mainColor,
+            ),
+          ),
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.black38,
+            ),
+          ),
+          border: const UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.black38,
+            ),
           ),
         ),
+        keyboardType: TextInputType.name,
       ),
-      keyboardType: TextInputType.name,
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/show_gifts/presentation/pages/show_gifts.dart';
 import 'package:tanysu/l10n/translate.dart';
@@ -19,12 +18,7 @@ class SendGiftButton extends StatelessWidget {
         height: 50,
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [
-              mainColor,
-              secondColor,
-            ],
-          ),
+          color: accentColor,
           borderRadius: BorderRadius.circular(100),
         ),
         child: Row(
@@ -41,11 +35,10 @@ class SendGiftButton extends StatelessWidget {
             Center(
               child: Text(
                 translation(context).send_a_gift,
-                style: GoogleFonts.montserrat(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
                 textAlign: TextAlign.justify,
               ),
             ),

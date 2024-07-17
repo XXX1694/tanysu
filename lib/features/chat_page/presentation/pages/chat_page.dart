@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -60,12 +60,11 @@ class _ChatPageState extends State<ChatPage> {
         surfaceTintColor: Colors.transparent,
         centerTitle: true,
         title: Text(
-          'tanysu',
-          style: GoogleFonts.montserratAlternates(
-            color: mainColor,
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
-          ),
+          'PANDEYA',
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+              ),
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
@@ -78,7 +77,7 @@ class _ChatPageState extends State<ChatPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: BlocBuilder<GetUserIdBloc, GetUserIdState>(
             builder: (context, state1) {
               return BlocConsumer<ChatPageBloc, ChatPageState>(
@@ -107,13 +106,10 @@ class _ChatPageState extends State<ChatPage> {
                   // );
                   return SmartRefresher(
                     header: ClassicHeader(
-                      textStyle: GoogleFonts.montserrat(
-                        color: Colors.grey,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        decoration: TextDecoration.none,
-                        letterSpacing: -0.41,
-                      ),
+                      textStyle:
+                          Theme.of(context).textTheme.titleSmall!.copyWith(
+                                color: Colors.black54,
+                              ),
                       idleText: translation(context).pull_to_refresh,
                       releaseText: translation(context).release_to_refresh,
                       refreshingText: translation(context).refreshing_text,
@@ -138,10 +134,12 @@ class _ChatPageState extends State<ChatPage> {
                             children: [
                               Text(
                                 translation(context).unmatch,
-                                style: GoogleFonts.montserrat(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      color: Colors.white,
+                                    ),
                               ),
                               const SizedBox(width: 12),
                             ],
@@ -153,12 +151,33 @@ class _ChatPageState extends State<ChatPage> {
                               ? showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
+                                    iconPadding: const EdgeInsets.all(8),
+                                    contentPadding: const EdgeInsets.all(8),
+                                    insetPadding: const EdgeInsets.all(12),
+                                    titlePadding: const EdgeInsets.all(16),
+                                    buttonPadding: const EdgeInsets.all(12),
+                                    actionsPadding: const EdgeInsets.all(4),
                                     title: Text(
-                                        translation(context).delete_chat_main),
-                                    content: Text(translation(context)
-                                        .delete_chat_second),
+                                      translation(context).delete_chat_main,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    titleTextStyle: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge
+                                        ?.copyWith(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                    content: Text(
+                                      translation(context).delete_chat_second,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    contentTextStyle: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(color: Colors.black),
                                     actions: [
-                                      CupertinoButton(
+                                      TextButton(
                                         onPressed: () {
                                           Navigator.pop(context);
                                           setState(() {
@@ -170,13 +189,28 @@ class _ChatPageState extends State<ChatPage> {
                                             ),
                                           );
                                         },
-                                        child: Text(translation(context).yes),
+                                        child: Text(
+                                          translation(context).yes,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.copyWith(
+                                                color: mainColor,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                        ),
                                       ),
-                                      CupertinoButton(
+                                      TextButton(
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        child: Text(translation(context).no),
+                                        child: Text(
+                                          translation(context).no,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.copyWith(color: Colors.black),
+                                        ),
                                       )
                                     ],
                                   ),
@@ -185,7 +219,8 @@ class _ChatPageState extends State<ChatPage> {
                                   context: context,
                                   builder: (context) => CupertinoAlertDialog(
                                     title: Text(
-                                        translation(context).delete_chat_main),
+                                      translation(context).delete_chat_main,
+                                    ),
                                     content: Text(translation(context)
                                         .delete_chat_second),
                                     actions: [
@@ -264,219 +299,198 @@ class _ChatPageState extends State<ChatPage> {
                               );
                             }
                           },
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 56,
-                                width: double.infinity,
-                                child: Row(
+                          child: SizedBox(
+                            height: 54,
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                Stack(
                                   children: [
-                                    Stack(
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          child: CachedNetworkImage(
-                                            // fadeInDuration:
-                                            //     const Duration(seconds: 0),
-                                            // fadeOutDuration:
-                                            //     const Duration(seconds: 0),
-                                            // fadeInCurve: Curves.linear,
-                                            // fadeOutCurve: Curves.linear,
-                                            height: 54,
-                                            width: 54,
-                                            imageUrl: chats[index].is_public
-                                                ? chats[index].group_photo ?? ''
-                                                : chats[index].profile?['image']
-                                                        ['image_url'] ??
-                                                    '',
-                                            placeholder: (context, url) =>
-                                                const ShrimerPlaceholder(
-                                              height: double.infinity,
-                                              width: double.infinity,
-                                            ),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    const ErrorPlaceholder(
-                                              height: double.infinity,
-                                              width: double.infinity,
-                                            ),
-                                            fit: BoxFit.cover,
-                                            cacheKey: chats[index].is_public
-                                                ? chats[index].group_photo ?? ''
-                                                : chats[index].profile?['image']
-                                                        ['image_url'] ??
-                                                    '', // Optional custom cache key
-                                            fadeInDuration: const Duration(
-                                                milliseconds:
-                                                    0), // Optional fade-in duration
-                                            maxWidthDiskCache:
-                                                500, // Optional maximum width for disk cache
-                                            maxHeightDiskCache: 500,
-                                          ),
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: CachedNetworkImage(
+                                        // fadeInDuration:
+                                        //     const Duration(seconds: 0),
+                                        // fadeOutDuration:
+                                        //     const Duration(seconds: 0),
+                                        // fadeInCurve: Curves.linear,
+                                        // fadeOutCurve: Curves.linear,
+                                        height: 54,
+                                        width: 54,
+                                        imageUrl: chats[index].is_public
+                                            ? chats[index].group_photo ?? ''
+                                            : chats[index].profile?['image']
+                                                    ['image_url'] ??
+                                                '',
+                                        placeholder: (context, url) =>
+                                            const ShrimerPlaceholder(
+                                          height: double.infinity,
+                                          width: double.infinity,
                                         ),
-                                        Positioned(
-                                          right: 0,
-                                          bottom: 0,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(2),
-                                            child: Container(
-                                              height: 12,
-                                              width: 12,
-                                              decoration: BoxDecoration(
-                                                color: chats[index]
-                                                            .is_admin_chat ||
-                                                        chats[index].is_public
-                                                    ? Colors.transparent
-                                                    : chats[index].online ??
-                                                            false
-                                                        ? Colors.green
-                                                        : Colors.red,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  100,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
+                                        errorWidget: (context, url, error) =>
+                                            const ErrorPlaceholder(
+                                          height: double.infinity,
+                                          width: double.infinity,
                                         ),
-                                      ],
+                                        fit: BoxFit.cover,
+                                        cacheKey: chats[index].is_public
+                                            ? chats[index].group_photo ?? ''
+                                            : chats[index].profile?['image']
+                                                    ['image_url'] ??
+                                                '', // Optional custom cache key
+                                        fadeInDuration: const Duration(
+                                            milliseconds:
+                                                0), // Optional fade-in duration
+                                        maxWidthDiskCache:
+                                            500, // Optional maximum width for disk cache
+                                        maxHeightDiskCache: 500,
+                                      ),
                                     ),
-                                    const SizedBox(width: 8),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Expanded(
-                                                child: Text(
-                                                  chats[index].is_admin_chat
-                                                      ? translation(context)
-                                                          .support
-                                                      : chats[index].is_public
-                                                          ? chats[index].name
-                                                          : chats[index]
-                                                                      .profile?[
-                                                                  'first_name'] ??
-                                                              '',
-                                                  style: GoogleFonts.montserrat(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 16,
-                                                  ),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                              ),
-                                              Text(
-                                                chats[index].last_message !=
-                                                        null
-                                                    ? DateFormat('HH:mm')
-                                                        .format(DateTime.parse(
-                                                            chats[index]
-                                                                    .last_message?[
-                                                                'timestamp']))
-                                                        .toString()
-                                                    : '',
-                                                style: GoogleFonts.montserrat(
-                                                  color: Colors.black54,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 12,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Expanded(
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Expanded(
-                                                  child: Text(
-                                                    chats[index].last_message ==
-                                                            null
-                                                        ? chats[index]
-                                                                .is_admin_chat
-                                                            ? translation(
-                                                                    context)
-                                                                .support_text
-                                                            : translation(
-                                                                    context)
-                                                                .write_first
-                                                        : chats[index]
-                                                                .last_message?[
-                                                            'content'],
-                                                    // maxLines: 2,
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style:
-                                                        GoogleFonts.montserrat(
-                                                      color: Colors.black54,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 12,
-                                                    ),
-                                                    // overflow:
-                                                    //     TextOverflow.clip,
-                                                  ),
-                                                ),
-                                                chats[index].unread != null &&
-                                                        chats[index].unread != 0
-                                                    ? Container(
-                                                        height: 24,
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          horizontal: 8,
-                                                        ),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: mainColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                            100,
-                                                          ),
-                                                        ),
-                                                        child: Center(
-                                                          child: Text(
-                                                            chats[index]
-                                                                .unread
-                                                                .toString(),
-                                                            style: GoogleFonts
-                                                                .montserrat(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      )
-                                                    : const SizedBox(
-                                                        width: 32,
-                                                      ),
-                                              ],
+                                    Positioned(
+                                      right: 0,
+                                      bottom: 0,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2),
+                                        child: Container(
+                                          height: 12,
+                                          width: 12,
+                                          decoration: BoxDecoration(
+                                            color: chats[index].is_admin_chat ||
+                                                    chats[index].is_public
+                                                ? Colors.transparent
+                                                : chats[index].online ?? false
+                                                    ? Colors.green
+                                                    : Colors.red,
+                                            borderRadius: BorderRadius.circular(
+                                              100,
                                             ),
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
-                              ),
-                            ],
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              chats[index].is_admin_chat
+                                                  ? translation(context).support
+                                                  : chats[index].is_public
+                                                      ? chats[index].name
+                                                      : chats[index].profile?[
+                                                              'first_name'] ??
+                                                          '',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium
+                                                  ?.copyWith(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                          Text(
+                                            chats[index].last_message != null
+                                                ? DateFormat('HH:mm')
+                                                    .format(DateTime.parse(
+                                                        chats[index]
+                                                                .last_message?[
+                                                            'timestamp']))
+                                                    .toString()
+                                                : '',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelMedium
+                                                ?.copyWith(
+                                                  color: Colors.black45,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                chats[index].last_message ==
+                                                        null
+                                                    ? chats[index].is_admin_chat
+                                                        ? translation(context)
+                                                            .support_text
+                                                        : translation(context)
+                                                            .write_first
+                                                    : chats[index]
+                                                            .last_message?[
+                                                        'content'],
+                                                // maxLines: 2,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall
+                                                    ?.copyWith(
+                                                      color: Colors.black54,
+                                                    ),
+                                                // overflow:
+                                                //     TextOverflow.clip,
+                                              ),
+                                            ),
+                                            chats[index].unread != null &&
+                                                    chats[index].unread != 0
+                                                ? Container(
+                                                    height: 24,
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                      horizontal: 8,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      color: mainColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        100,
+                                                      ),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        chats[index]
+                                                            .unread
+                                                            .toString(),
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .labelMedium
+                                                            ?.copyWith(
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                  )
+                                                : const SizedBox(
+                                                    width: 32,
+                                                  ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

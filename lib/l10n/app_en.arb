@@ -12,16 +12,18 @@
     "with_google": "Google",
     "with_email": "Email",
 
-    "get_number_main_text": "Can we get your email?",
-    "get_number_second_text": "We’ll text you a code to verify you’re really you. Message and data rates may apply.",
+    "get_number_main_text": "Sign Up",
+    "get_number_second_text": "Don’t lose access to your account, verify your email.",
     "phone_number": "Email",
     "next": "Next",
+    "password_should_be": "* Your password must be at least 8 characters long, be of mixed case and also contain a digit or symbol.",
 
     "otp_main_text": "Enter your code",
     "resend": "Resend",
     "email_main_text": "Your email?",
     "email_second_text": "Don’t lose access to your account, verify your email.",
     "enter_email": "Enter email",
+    "registration": "Registration",
 
     "password_page_main_text": "Create password",
     "password_page_second_text": "Your password must be at least 8 characters long, be of mixed case and also contain a digit or symbol.",
@@ -226,6 +228,18 @@
     "be_first": "Be first",
 
     "already_have_acc": "Already have an account?",
-    "no_acc": "No account?"
+    "no_acc": "No account?",
+
+    "followings": "Followings",
     
+    "profile_likes": "Likes",
+    
+    "cardCredentials": "Card info",
+
+    "card_number": "Card Number",
+    "cardholed": "Cardholer",
+    "card_date": "Date",
+    "card_cvv": "CVV",
+
+    "pay_money": "Pay"
 }

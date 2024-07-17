@@ -2,7 +2,6 @@ import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/main_page/presentation/bloc/main_page_bloc.dart';
 import 'package:tanysu/features/main_page/presentation/bloc/swipe_bloc/swipe_bloc.dart';
@@ -55,12 +54,11 @@ class _MainPageState extends State<MainPage> {
                   height: 40,
                 ),
                 Text(
-                  'tanysu',
-                  style: GoogleFonts.montserratAlternates(
-                    color: mainColor,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  'PANDEYA',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                      ),
                 ),
                 const Spacer(),
                 GestureDetector(
@@ -99,22 +97,25 @@ class _MainPageState extends State<MainPage> {
                                   children: [
                                     const Spacer(),
                                     Text(
-                                      'tanysu',
-                                      style: GoogleFonts.montserratAlternates(
-                                        color: mainColor,
-                                        fontSize: 42,
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                                      'PANDEYA',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall
+                                          ?.copyWith(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w700,
+                                          ),
                                     ),
                                     const SizedBox(height: 12),
                                     Text(
                                       translation(context).list_end,
                                       textAlign: TextAlign.center,
-                                      style: GoogleFonts.montserratAlternates(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium
+                                          ?.copyWith(
+                                            color: Colors.black,
+                                          ),
                                     ),
                                     const Spacer(),
                                   ],

@@ -47,6 +47,7 @@ dependencies:
   awesome_notifications: ^0.8.2
   firebase_messaging: ^14.7.5
   font_awesome_flutter: ^9.2.0
+  sqflite: ^2.3.3+1
 
   
   

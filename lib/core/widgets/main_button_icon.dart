@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/core/constants/colors.dart';
 
 class MainButtonIcon extends StatelessWidget {
   const MainButtonIcon({
@@ -51,9 +48,9 @@ class MainButtonIcon extends StatelessWidget {
               child: Text(
                 text,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                ),
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
             ),
           ],

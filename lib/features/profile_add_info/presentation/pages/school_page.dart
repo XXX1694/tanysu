@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/profile_add_info/presentation/pages/job_page.dart';
@@ -28,6 +27,7 @@ class _SchoolPageState extends State<SchoolPage> {
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -45,12 +45,9 @@ class _SchoolPageState extends State<SchoolPage> {
             },
             child: Text(
               translation(context).skip,
-              style: GoogleFonts.montserrat(
-                color: secondColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                letterSpacing: -0.41,
-              ),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: mainColor,
+                  ),
             ),
           ),
         ],
@@ -76,12 +73,12 @@ class _SchoolPageState extends State<SchoolPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 35),
           child: Column(
             children: [
-              const SizedBox(height: 36),
+              const SizedBox(height: 60),
               const SchoolPageMainText(),
-              const SizedBox(height: 32),
+              const SizedBox(height: 40),
               SchoolPageField(controller: _schoolNameController),
               const Spacer(),
               MainButton(

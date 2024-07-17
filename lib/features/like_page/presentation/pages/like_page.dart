@@ -4,7 +4,6 @@ import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/like_page/presentation/bloc/like_page_bloc.dart';
@@ -18,7 +17,7 @@ class LikePage extends StatefulWidget {
   State<LikePage> createState() => _LikePageState();
 }
 
-bool iLiked = true;
+bool iLiked = false;
 
 class _LikePageState extends State<LikePage> {
   late LikePageBloc bloc;
@@ -49,12 +48,11 @@ class _LikePageState extends State<LikePage> {
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
-          'tanysu',
-          style: GoogleFonts.montserratAlternates(
-            color: mainColor,
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
-          ),
+          'PANDEYA',
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+              ),
         ),
       ),
       body: SafeArea(
@@ -79,11 +77,10 @@ class _LikePageState extends State<LikePage> {
                         },
                         child: Text(
                           translation(context).liled_me,
-                          style: GoogleFonts.montserrat(
-                            color: !iLiked ? mainColor : Colors.black45,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: !iLiked ? mainColor : Colors.black45,
+                                  ),
                         ),
                       ),
                     ),
@@ -102,11 +99,10 @@ class _LikePageState extends State<LikePage> {
                         },
                         child: Text(
                           translation(context).i_liked,
-                          style: GoogleFonts.montserrat(
-                            color: iLiked ? mainColor : Colors.black45,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: iLiked ? mainColor : Colors.black45,
+                                  ),
                         ),
                       ),
                     ),

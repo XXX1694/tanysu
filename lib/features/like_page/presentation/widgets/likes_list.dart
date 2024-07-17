@@ -117,15 +117,16 @@ class LikesList extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 10),
+                          const SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               '${list[index].first_name ?? ''}, ${list[index].age ?? 0}',
-                              style: GoogleFonts.montserrat(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    color: Colors.white,
+                                  ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           )

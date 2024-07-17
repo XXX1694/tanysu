@@ -32,15 +32,24 @@ class AddImageBloc extends Bloc<AddImageEvent, AddImageState> {
         emit(AddingImage());
         try {
           bool res = true;
-          for (int i = 0; i < event.images.length; i++) {
+          await Future.forEach<String>(event.images, (item) async {
             final a = await repo.addImage(
-              image: event.images[i],
+              image: item,
               profileId: event.id,
             );
             if (a != 201) {
               res = false;
             }
-          }
+          });
+          // for (int i = 0; i < event.images.length; i++) {
+          //   final a = await repo.addImage(
+          //     image: event.images[i],
+          //     profileId: event.id,
+          //   );
+          //   if (a != 201) {
+          //     res = false;
+          //   }
+          // }
           if (res) {
             emit(AddedImage());
           } else {

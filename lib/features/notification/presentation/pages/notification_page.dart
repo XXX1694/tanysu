@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class NotificationPage extends StatelessWidget {
@@ -9,36 +7,18 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         foregroundColor: Colors.black,
         surfaceTintColor: Colors.black,
+        centerTitle: true,
         title: Text(
           translation(context).notification,
-          style: GoogleFonts.montserrat(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        leadingWidth: 40,
-        leading: Row(
-          children: [
-            const SizedBox(
-              width: 12,
-            ),
-            GestureDetector(
-              child: SvgPicture.asset(
-                'assets/icons/back_button.svg',
-                height: 24,
-                width: 24,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.black,
               ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
@@ -56,12 +36,9 @@ class NotificationPage extends StatelessWidget {
               child: Center(
                 child: Text(
                   translation(context).empty,
-                  style: GoogleFonts.montserrat(
-                    color: Colors.black54,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: -0.41,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Colors.black54,
+                      ),
                 ),
               ),
             )

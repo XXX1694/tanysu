@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/profile_preview/presentation/bloc/profile_preview_bloc.dart';
 import 'package:tanysu/l10n/translate.dart';
@@ -30,8 +29,8 @@ class _FollowButtonState extends State<FollowButton> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoButton(
-      onPressed: () {
+    return GestureDetector(
+      onTap: () {
         setState(() {
           follow = !follow;
           if (follow) {
@@ -40,32 +39,21 @@ class _FollowButtonState extends State<FollowButton> {
         });
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 24,
-          vertical: 10,
-        ),
+        height: 32,
+        width: 128,
         decoration: BoxDecoration(
-          gradient: !follow
-              ? const LinearGradient(
-                  colors: [
-                    mainColor,
-                    secondColor,
-                  ],
-                )
-              : null,
-          color: follow ? mainColor20 : null,
-          borderRadius: BorderRadius.circular(80),
-        ),
+            color: !follow ? Colors.transparent : mainColor,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+                color: !follow ? Colors.black38 : Colors.transparent)),
         child: Center(
           child: Text(
             follow
                 ? translation(context).unfollow
                 : translation(context).follow,
-            style: GoogleFonts.montserrat(
-              color: follow ? mainColor : Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: !follow ? Colors.black54 : Colors.white,
+                ),
           ),
         ),
       ),

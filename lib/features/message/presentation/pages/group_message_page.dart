@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:tanysu/features/chat_page/presentation/bloc/chat_page_bloc.dart';
 import 'package:tanysu/features/message/data/models/message_model.dart';
 import 'package:tanysu/features/message/presentation/bloc/message_bloc.dart';
@@ -101,33 +101,18 @@ class _PublicMessagePageState extends State<PublicMessagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         surfaceTintColor: Colors.transparent,
-        leadingWidth: 50,
         elevation: 0,
-        leading: Row(
-          children: [
-            const SizedBox(width: 12),
-            InkWell(
-              child: SvgPicture.asset('assets/icons/back_button.svg'),
-              onTap: () {
-                bloc1.add(GetAllChats());
-                Navigator.pop(context);
-              },
-            ),
-            const Spacer(),
-          ],
-        ),
         centerTitle: true,
         title: Text(
           widget.name,
-          style: GoogleFonts.montserrat(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: Colors.black,
+              ),
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -138,72 +123,70 @@ class _PublicMessagePageState extends State<PublicMessagePage> {
           ),
         ),
       ),
-      body: Scaffold(
-        body: SafeArea(
-          child: Stack(
-            children: [
-              SvgPicture.asset(
-                'assets/background/message_background_pattern.svg',
-                fit: BoxFit.cover,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: BlocConsumer<MessageBloc, MessageState>(
-                        listener: (context, state) {
-                          if (state is MessageGot) {
-                            messages += state.messages;
-                          }
-                        },
-                        builder: (context, state) {
-                          return StreamBuilder(
-                            stream: channel.stream,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                Map<String, dynamic> info =
-                                    jsonDecode(snapshot.data);
-                                debugPrint(info.toString());
-                                if (info['message_type'] == 'chat_message') {
-                                  messages.add(
-                                    MessageModel(
-                                      chat: widget.chatId,
-                                      content: info['message'],
-                                      sender: info['user'],
-                                      timestamp: info['timestamp'],
-                                      message_type: info['message_type'],
-                                      is_read: false,
-                                      id: info['message_id'] ?? 0,
-                                      name: info['name'] ?? '',
-                                      photo: info['photo'] ?? '',
-                                      profile_id: info['profile_id'] ?? 0,
-                                      is_svg: false,
-                                    ),
-                                  );
-                                }
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SvgPicture.asset(
+              'assets/background/chat_background.svg',
+              fit: BoxFit.cover,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: BlocConsumer<MessageBloc, MessageState>(
+                      listener: (context, state) {
+                        if (state is MessageGot) {
+                          messages += state.messages;
+                        }
+                      },
+                      builder: (context, state) {
+                        return StreamBuilder(
+                          stream: channel.stream,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              Map<String, dynamic> info =
+                                  jsonDecode(snapshot.data);
+                              debugPrint(info.toString());
+                              if (info['message_type'] == 'chat_message') {
+                                messages.add(
+                                  MessageModel(
+                                    chat: widget.chatId,
+                                    content: info['message'],
+                                    sender: info['user'],
+                                    timestamp: info['timestamp'],
+                                    message_type: info['message_type'],
+                                    is_read: false,
+                                    id: info['message_id'] ?? 0,
+                                    name: info['name'] ?? '',
+                                    photo: info['photo'] ?? '',
+                                    profile_id: info['profile_id'] ?? 0,
+                                    is_svg: false,
+                                  ),
+                                );
                               }
-                              return GroupMessageBlock(
-                                userId: widget.userId,
-                                messages: messages,
-                                deleteMessageFunction: deleteMessage,
-                                scrollController: _scrollController,
-                              );
-                            },
-                          );
-                        },
-                      ),
+                            }
+                            return GroupMessageBlock(
+                              userId: widget.userId,
+                              messages: messages,
+                              deleteMessageFunction: deleteMessage,
+                              scrollController: _scrollController,
+                            );
+                          },
+                        );
+                      },
                     ),
-                    GroupMessageField(
-                      controller: textController,
-                      sendMessageFunction: sendMessage,
-                    ),
-                    const SizedBox(height: 20),
-                  ],
-                ),
+                  ),
+                  GroupMessageField(
+                    controller: textController,
+                    sendMessageFunction: sendMessage,
+                  ),
+                  const SizedBox(height: 20),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

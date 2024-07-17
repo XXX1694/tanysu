@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/core/widgets/main_button_filled.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/choose_city/presentation/widgets/city_field.dart';
 import 'package:tanysu/features/search/presentation/bloc/search_bloc.dart';
 import 'package:tanysu/features/search/presentation/widgets/gender_field.dart';
@@ -50,29 +48,9 @@ class _FilterPageState extends State<FilterPage> {
         backgroundColor: Colors.white,
         title: Text(
           translation(context).filter,
-          style: GoogleFonts.montserrat(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        leadingWidth: 40,
-        leading: Row(
-          children: [
-            const SizedBox(
-              width: 12,
-            ),
-            GestureDetector(
-              child: SvgPicture.asset(
-                'assets/icons/back_button.svg',
-                height: 24,
-                width: 24,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.black,
               ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
         ),
         centerTitle: true,
         foregroundColor: Colors.black,
@@ -95,11 +73,10 @@ class _FilterPageState extends State<FilterPage> {
               const SizedBox(height: 20),
               Text(
                 translation(context).city,
-                style: GoogleFonts.montserrat(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
               const SizedBox(height: 8),
               CityField(
@@ -108,11 +85,10 @@ class _FilterPageState extends State<FilterPage> {
               const SizedBox(height: 24),
               Text(
                 translation(context).try_to_find,
-                style: GoogleFonts.montserrat(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
               const SizedBox(height: 8),
               GenderField(
@@ -121,11 +97,10 @@ class _FilterPageState extends State<FilterPage> {
               const SizedBox(height: 24),
               Text(
                 translation(context).age,
-                style: GoogleFonts.montserrat(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
               const SizedBox(height: 8),
               AgeSlider(
@@ -133,7 +108,7 @@ class _FilterPageState extends State<FilterPage> {
                 minAgeController: widget.minAgeController,
               ),
               const Spacer(),
-              MainButtonFilled(
+              MainButton(
                 text: translation(context).search,
                 onPressed: () {
                   widget.callback(
@@ -152,6 +127,7 @@ class _FilterPageState extends State<FilterPage> {
                   );
                   Navigator.pop(context);
                 },
+                status: 'active',
               ),
               const SizedBox(height: 40),
             ],

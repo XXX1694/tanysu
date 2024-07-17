@@ -3,9 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/core/widgets/placeholers.dart';
+import 'package:tanysu/features/profile_page/presentation/widgets/user_main_info.dart';
 import 'package:tanysu/features/profile_preview/data/models/profile_model.dart';
 import 'package:tanysu/features/profile_preview/presentation/widgets/profile_about.dart';
 
@@ -21,38 +20,20 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         title: Text(
-          'tanysu',
-          style: GoogleFonts.montserratAlternates(
-            color: mainColor,
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
-          ),
+          'PANDEYA',
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+              ),
         ),
         centerTitle: true,
         foregroundColor: Colors.black,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
-        leadingWidth: 40,
-        leading: Row(
-          children: [
-            const SizedBox(
-              width: 12,
-            ),
-            GestureDetector(
-              child: SvgPicture.asset(
-                'assets/icons/back_button.svg',
-                height: 24,
-                width: 24,
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -100,13 +81,12 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
                 children: [
                   Text(
                     '${widget.profile.first_name ?? ''}, ${widget.profile.age ?? ''}',
-                    style: GoogleFonts.montserrat(
-                      color: mainColor,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 28,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: 12),
                   SvgPicture.asset(
                     'assets/icons/not_verified.svg',
                     height: 34,
@@ -114,12 +94,19 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(height: 20),
+                    UserMainInfoMine(
+                      followers: widget.profile.followers_count ?? 0,
+                      likes: widget.profile.likes ?? 0,
+                      followeings: widget.profile.followeings ?? 0,
+                      newLikes: widget.profile.new_likes ?? 0,
+                    ),
+                    const SizedBox(height: 20),
                     // const Divider(color: Colors.black26),
                     // const SizedBox(height: 12),
                     // ProfileInfoBlockMine(
@@ -140,10 +127,10 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
                     // const SizedBox(height: 12),
                     // SendGiftButton(userName: widget.profile.first_name ?? ''),
                     const Divider(
-                      color: Colors.black26,
+                      color: Colors.black12,
                       height: 1,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 20),
                     ProfileAboutBlock(
                       about: widget.profile.about_me ?? '',
                       city: widget.profile.city_name ?? '',
@@ -152,11 +139,7 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
                       study: widget.profile.school_name ?? '',
                       work: widget.profile.company_name ?? '',
                     ),
-                    const SizedBox(height: 16),
-                    const Divider(
-                      color: Colors.black26,
-                      height: 1,
-                    ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:tanysu/core/constants/colors.dart';
+
 import 'package:tanysu/l10n/translate.dart';
 
 class ProfileAboutBlock extends StatelessWidget {
@@ -30,119 +29,104 @@ class ProfileAboutBlock extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: translation(context).location_pr,
-                      style: GoogleFonts.montserrat(
-                        color: mainColor70,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                     TextSpan(
                       text: city,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.black,
+                          ),
                     ),
                   ],
                 ),
               )
             : const SizedBox(),
-        city != '' ? const SizedBox(height: 12) : const SizedBox(),
+        city != '' ? const SizedBox(height: 8) : const SizedBox(),
         job != ''
             ? RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
                       text: translation(context).work_pr,
-                      style: GoogleFonts.montserrat(
-                        color: mainColor70,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                     TextSpan(
                       text: '$job, $work',
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.black,
+                          ),
                     ),
                   ],
                 ),
               )
             : const SizedBox(),
-        job != '' ? const SizedBox(height: 12) : const SizedBox(),
+        job != '' ? const SizedBox(height: 8) : const SizedBox(),
         study != ''
             ? RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
                       text: translation(context).study_pr,
-                      style: GoogleFonts.montserrat(
-                        color: mainColor70,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                     TextSpan(
                       text: study,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.black,
+                          ),
                     ),
                   ],
                 ),
               )
             : const SizedBox(),
-        study != '' ? const SizedBox(height: 12) : const SizedBox(),
+        study != '' ? const SizedBox(height: 8) : const SizedBox(),
         ru != ''
             ? RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
                       text: 'Ру: ',
-                      style: GoogleFonts.montserrat(
-                        color: mainColor70,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                     TextSpan(
                       text: ru,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.black,
+                          ),
                     ),
                   ],
                 ),
               )
             : const SizedBox(),
-        ru != '' ? const SizedBox(height: 12) : const SizedBox(),
+        ru != '' ? const SizedBox(height: 8) : const SizedBox(),
         about != ''
             ? RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
                       text: translation(context).about_pr,
-                      style: GoogleFonts.montserrat(
-                        color: mainColor70,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                     TextSpan(
                       text: about,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.black,
+                          ),
                     ),
                   ],
                 ),

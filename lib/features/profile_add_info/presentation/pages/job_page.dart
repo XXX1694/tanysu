@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/profile_add_info/presentation/pages/about_me_page.dart';
 import 'package:tanysu/features/profile_add_info/presentation/widgets/job_page_widgets/company_field.dart';
@@ -31,6 +30,7 @@ class _JobPageState extends State<JobPage> {
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -50,12 +50,9 @@ class _JobPageState extends State<JobPage> {
             },
             child: Text(
               translation(context).skip,
-              style: GoogleFonts.montserrat(
-                color: secondColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                letterSpacing: -0.41,
-              ),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: mainColor,
+                  ),
             ),
           ),
         ],
@@ -81,13 +78,13 @@ class _JobPageState extends State<JobPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 35),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 36),
+              const SizedBox(height: 60),
               const JobPageMainText(),
-              const SizedBox(height: 32),
+              const SizedBox(height: 40),
               JobField(controller: _jobController),
               const SizedBox(height: 20),
               CompanyField(controller: _companyController),

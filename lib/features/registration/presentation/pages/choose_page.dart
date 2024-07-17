@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/main_screen.dart';
 
@@ -28,16 +27,17 @@ class _ChoosePageState extends State<ChoosePage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 35),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 40),
+              // const SizedBox(height: 60),
               Text(
                 translation(context).choose_main,
-                style: GoogleFonts.montserrat(
-                  color: Colors.black,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w700,
-                ),
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
               const SizedBox(height: 52),
               CupertinoButton(
@@ -47,7 +47,7 @@ class _ChoosePageState extends State<ChoosePage> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.black45,
+                      color: Colors.black,
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(100),
@@ -55,11 +55,10 @@ class _ChoosePageState extends State<ChoosePage> {
                   child: Center(
                     child: Text(
                       translation(context).start_using_app,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black45,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
                     ),
                   ),
                 ),
@@ -73,7 +72,7 @@ class _ChoosePageState extends State<ChoosePage> {
                   );
                 },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 20),
               MainButton(
                 text: translation(context).continue_registration,
                 onPressed: () {
@@ -86,6 +85,7 @@ class _ChoosePageState extends State<ChoosePage> {
                 },
                 status: 'active',
               ),
+              const SizedBox(height: 60),
             ],
           ),
         ),

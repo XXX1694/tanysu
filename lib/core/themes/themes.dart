@@ -61,8 +61,8 @@ ThemeData lightTheme = ThemeData(
       fontFamily: 'TT Interphases Pro',
     ),
     titleSmall: TextStyle(
-      fontSize: 24,
-      height: 32 / 24,
+      fontSize: 14,
+      height: 20 / 14,
       letterSpacing: 0.1,
       fontWeight: FontWeight.w500,
       fontFamily: 'TT Interphases Pro',

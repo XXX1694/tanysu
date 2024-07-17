@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/l10n/translate.dart';
 
@@ -25,7 +24,7 @@ class _PartnerListState extends State<PartnerList> {
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(
-                color: selected == 0 ? mainColor : Colors.black45,
+                color: selected == 0 ? mainColor : Colors.black54,
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(100),
@@ -33,11 +32,10 @@ class _PartnerListState extends State<PartnerList> {
             child: Center(
               child: Text(
                 translation(context).woman,
-                style: GoogleFonts.montserrat(
-                  color: selected == 0 ? mainColor : Colors.black45,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: selected == 0 ? mainColor : Colors.black54,
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
             ),
           ),
@@ -61,7 +59,7 @@ class _PartnerListState extends State<PartnerList> {
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(
-                color: selected == 1 ? mainColor : Colors.black45,
+                color: selected == 1 ? mainColor : Colors.black54,
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(100),
@@ -69,11 +67,10 @@ class _PartnerListState extends State<PartnerList> {
             child: Center(
               child: Text(
                 translation(context).man,
-                style: GoogleFonts.montserrat(
-                  color: selected == 1 ? mainColor : Colors.black45,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: selected == 1 ? mainColor : Colors.black54,
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
             ),
           ),
@@ -97,7 +94,7 @@ class _PartnerListState extends State<PartnerList> {
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(
-                color: selected == 2 ? mainColor : Colors.black45,
+                color: selected == 2 ? mainColor : Colors.black54,
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(100),
@@ -105,11 +102,10 @@ class _PartnerListState extends State<PartnerList> {
             child: Center(
               child: Text(
                 translation(context).everyone,
-                style: GoogleFonts.montserrat(
-                  color: selected == 2 ? mainColor : Colors.black45,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: selected == 2 ? mainColor : Colors.black54,
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
             ),
           ),

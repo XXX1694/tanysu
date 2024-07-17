@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:tanysu/core/constants/colors.dart';
 
 class AgeSlider extends StatefulWidget {
@@ -32,9 +32,9 @@ class _AgeSliderState extends State<AgeSlider> {
       children: [
         Text(
           '18',
-          style: GoogleFonts.montserrat(
-            fontSize: 14,
-          ),
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: Colors.black54,
+              ),
         ),
         const SizedBox(width: 8),
         Expanded(
@@ -42,8 +42,8 @@ class _AgeSliderState extends State<AgeSlider> {
             data: const SliderThemeData(
               trackHeight: 1,
               thumbColor: mainColor,
-              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8),
-              overlayShape: RoundSliderOverlayShape(overlayRadius: 8),
+              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 6),
+              overlayShape: RoundSliderOverlayShape(overlayRadius: 6),
               showValueIndicator: ShowValueIndicator.always,
               valueIndicatorShape: PaddleSliderValueIndicatorShape(),
             ),
@@ -80,9 +80,9 @@ class _AgeSliderState extends State<AgeSlider> {
         const SizedBox(width: 8),
         Text(
           '65',
-          style: GoogleFonts.montserrat(
-            fontSize: 14,
-          ),
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: Colors.black54,
+              ),
         ),
       ],
     );

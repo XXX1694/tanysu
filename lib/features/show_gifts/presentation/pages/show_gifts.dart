@@ -46,11 +46,11 @@ class _GiftsState extends State<Gifts> {
       listener: (context, state) {
         if (state is GiftSendSuccess) {
           Navigator.pop(context);
-          showSnackBar(context, 'Подарок отправлен');
+          showSnackBar(context, text: 'Подарок отправлен');
         }
         if (state is GiftSendError) {
           Navigator.pop(context);
-          showSnackBar(context, 'Подарок не отправлен');
+          showSnackBar(context, text: 'Подарок не отправлен');
         }
       },
       builder: (context, state) {

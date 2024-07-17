@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/api/firebase_auth.dart';
 import 'package:tanysu/core/constants/colors.dart';
@@ -72,7 +71,6 @@ class _ChooseRegistrationMethodState extends State<ChooseRegistrationMethod> {
                 ),
               ),
             ),
-
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -81,7 +79,6 @@ class _ChooseRegistrationMethodState extends State<ChooseRegistrationMethod> {
                     const Spacer(),
                     Platform.isAndroid
                         ? GoogleButton(
-
                             onPressed: () async {
                               FirebaseService service = FirebaseService();
                               try {
@@ -100,7 +97,6 @@ class _ChooseRegistrationMethodState extends State<ChooseRegistrationMethod> {
                                 if (e is FirebaseAuthException) {}
                               }
                             },
-
                           )
                         : MainButtonIcon(
                             text: translation(context).with_apple,

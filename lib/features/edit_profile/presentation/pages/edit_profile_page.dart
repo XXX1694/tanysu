@@ -9,10 +9,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
-import 'package:tanysu/core/widgets/main_button_filled.dart';
+import 'package:tanysu/core/functions/show_snack_bar.dart';
+import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/core/widgets/placeholers.dart';
 import 'package:tanysu/features/add_image/presentation/bloc/add_image_bloc.dart';
 import 'package:tanysu/features/add_image/presentation/pages/edit_image.dart';
@@ -114,7 +113,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   content: NotificationContent(
                     id: 10,
                     channelKey: 'basic_channel',
-                    title: 'Tanysu',
+                    title: 'PANDEYA',
                     body: translation(context).image_uploaded,
                   ),
                 );
@@ -123,38 +122,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
             builder: (context, state1) =>
                 BlocConsumer<EditProfileBloc, EditProfileState>(
               builder: (context, state2) => Scaffold(
+                backgroundColor: Colors.white,
                 appBar: AppBar(
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: Colors.white,
                   title: Text(
-                    'tanysu',
-                    style: GoogleFonts.montserratAlternates(
-                      color: mainColor,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    'PANDEYA',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                   centerTitle: true,
                   foregroundColor: Colors.black,
                   surfaceTintColor: Colors.transparent,
                   elevation: 0,
-                  leadingWidth: 40,
-                  leading: Row(
-                    children: [
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      GestureDetector(
-                        child: SvgPicture.asset(
-                          'assets/icons/back_button.svg',
-                          height: 24,
-                          width: 24,
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                  ),
                   actions: [
                     GestureDetector(
                       child: Center(
@@ -197,6 +178,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 juzController.text,
                                 0,
                                 false,
+                                state.model.followeings,
+                                state.model.new_likes,
                               ),
                             ),
                           ),
@@ -287,13 +270,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           children: [
                             Text(
                               '${state.model.first_name}, ${state.model.age}',
-                              style: GoogleFonts.montserrat(
-                                color: mainColor,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 28,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium
+                                  ?.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                             ),
-                            const SizedBox(width: 16),
+                            const SizedBox(width: 12),
                             SvgPicture.asset(
                               'assets/icons/not_verified.svg',
                               height: 34,
@@ -301,14 +286,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 32),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          padding: const EdgeInsets.symmetric(horizontal: 35),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Divider(color: Colors.black26),
-                              const SizedBox(height: 20),
                               FirstNameField(controller: nameController),
                               const SizedBox(height: 20),
                               BirthDateField(
@@ -333,32 +316,34 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               SchoolPageField(controller: schoolController),
                               const SizedBox(height: 20),
                               AboutMeField(controller: aboutMeController),
-                              const SizedBox(height: 20),
-                              const Divider(color: Colors.black26),
-                              const SizedBox(height: 20),
+                              const SizedBox(height: 28),
+                              const Divider(color: Colors.black26, height: 1),
+                              const SizedBox(height: 28),
                               Text(
                                 translation(context).try_to_find,
-                                style: GoogleFonts.montserrat(
-                                  color: Colors.black54,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(
+                                      color: Colors.black54,
+                                    ),
                               ),
                               const SizedBox(height: 4),
                               GenderField(controller: tryToFindController),
                               const SizedBox(height: 20),
                               Text(
                                 translation(context).juz_main_text,
-                                style: GoogleFonts.montserrat(
-                                  color: Colors.black54,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(
+                                      color: Colors.black54,
+                                    ),
                               ),
                               const SizedBox(height: 4),
                               JuzField(controller: juzController),
-                              const SizedBox(height: 32),
-                              MainButtonFilled(
+                              const SizedBox(height: 60),
+                              MainButton(
                                 text: translation(context).confirm,
                                 onPressed: () {
                                   bloc.add(
@@ -395,8 +380,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     ),
                                   );
                                 },
+                                status: 'active',
                               ),
-                              const SizedBox(height: 32),
+                              const SizedBox(height: 40),
                             ],
                           ),
                         )
@@ -411,19 +397,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   bloc1.add(GetMyData());
                 } else if (state is ProfileUpdateError) {
                   Navigator.pop(context);
-                  Get.rawSnackbar(
-                    messageText: Text(
-                      translation(context).success_t,
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 14,
-                      ),
-                    ),
-                    isDismissible: false,
-                    duration: const Duration(seconds: 3),
-                    margin: const EdgeInsets.all(20),
-                    backgroundColor: Colors.white,
-                    borderRadius: 10,
+                  showSnackBar(
+                    context,
+                    text: translation(context).success_t,
                   );
                 }
               },
@@ -431,6 +407,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           );
         } else if (state is ProfileGetting) {
           return Scaffold(
+            backgroundColor: Colors.white,
             body: Center(
               child: Platform.isAndroid
                   ? const CircularProgressIndicator(
@@ -444,6 +421,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           );
         } else {
           return Scaffold(
+            backgroundColor: Colors.white,
             body: Center(
               child: Text(translation(context).error),
             ),

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 
 class MainButton extends StatelessWidget {
@@ -22,12 +21,12 @@ class MainButton extends StatelessWidget {
     return CupertinoButton(
       padding: const EdgeInsets.all(0),
       onPressed: status == 'active' ? onPressed : null,
-      pressedOpacity: status == 'passive' ? 1.0 : 0.54,
+      // pressedOpacity: status == 'passive' ? 1.0 : 0.54,
       child: Container(
         width: double.infinity,
         height: 50,
         decoration: BoxDecoration(
-          color: mainColor,
+          color: status == 'passive' ? Colors.black12 : mainColor,
           borderRadius: BorderRadius.circular(100),
         ),
         child: Center(
@@ -44,7 +43,8 @@ class MainButton extends StatelessWidget {
                   text,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                        color:
+                            status == 'passive' ? Colors.black54 : Colors.white,
                       ),
                 ),
         ),

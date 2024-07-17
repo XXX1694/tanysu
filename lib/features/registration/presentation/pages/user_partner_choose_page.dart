@@ -39,18 +39,26 @@ class _UserPartnerChoosePageState extends State<UserPartnerChoosePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         foregroundColor: Colors.black,
         surfaceTintColor: Colors.black,
+        title: Text(
+          translation(context).registration,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.black,
+              ),
+        ),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 35),
           child: Column(
             children: [
-              const SizedBox(height: 40),
+              const SizedBox(height: 60),
               const ChoosePartnerMain(),
               const SizedBox(height: 40),
               PartnerList(controller: tryToFindController),
@@ -73,8 +81,8 @@ class _UserPartnerChoosePageState extends State<UserPartnerChoosePage> {
                             ),
                           ),
                         )
-                      : showSnackBar(
-                          context, translation(context).choose_partner_main);
+                      : showSnackBar(context,
+                          text: translation(context).choose_partner_main);
                 },
                 status: 'active',
               ),

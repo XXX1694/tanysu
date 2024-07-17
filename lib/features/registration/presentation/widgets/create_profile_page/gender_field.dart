@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class GenderField extends StatefulWidget {
@@ -31,17 +30,25 @@ class _GenderFieldState extends State<GenderField> {
     ];
     return DropdownButton<String>(
       value: selectedValue,
-      style: GoogleFonts.montserrat(
-        color: Colors.black87,
-        fontSize: 14,
-      ),
-      hint: Text(translation(context).choose_gender),
+      style: widget.isSelected == null
+          ? Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Colors.black54,
+              )
+          : Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Colors.black,
+              ),
+      hint: Text(' ${translation(context).choose_gender}'),
       isExpanded: true,
       items: dropdownList.map(
         (String value) {
           return DropdownMenuItem(
             value: value,
-            child: Text(value),
+            child: Text(
+              ' $value',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.black,
+                  ),
+            ),
           );
         },
       ).toList(),

@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/core/widgets/placeholers.dart';
@@ -116,11 +115,10 @@ class PhotoBlock extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                   child: Text(
                     '${profile.completeness}% ${translation(context).complete}',
-                    style: GoogleFonts.montserrat(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                 ),
               ),
