@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/l10n/translate.dart';
 
@@ -8,27 +7,28 @@ class EmailField extends StatelessWidget {
   final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      style: GoogleFonts.montserrat(
-        color: Colors.black,
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-      ),
-      decoration: InputDecoration(
-        hintText: translation(context).phone_number,
-        hintStyle: GoogleFonts.montserrat(
-          color: Colors.black87,
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: secondColor,
+    return SizedBox(
+      height: 44,
+      child: TextField(
+        controller: controller,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.black,
+            ),
+        decoration: InputDecoration(
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
+          hintText: translation(context).phone_number,
+          hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Colors.black54,
+              ),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: mainColor,
+            ),
           ),
         ),
+        keyboardType: TextInputType.emailAddress,
       ),
-      keyboardType: TextInputType.emailAddress,
     );
   }
 }

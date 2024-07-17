@@ -19,7 +19,7 @@ class SendGiftButton extends StatelessWidget {
         height: 50,
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [
               mainColor,
               secondColor,

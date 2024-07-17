@@ -22,9 +22,9 @@ class ReportField extends StatelessWidget {
           fontSize: 14,
           fontWeight: FontWeight.w400,
         ),
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            color: secondColor,
+            color: mainColor,
           ),
         ),
       ),

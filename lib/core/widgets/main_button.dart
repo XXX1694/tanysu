@@ -12,9 +12,11 @@ class MainButton extends StatelessWidget {
     required this.onPressed,
     required this.status,
   });
+
   final String text;
   final VoidCallback? onPressed;
   final String status;
+
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
@@ -25,38 +27,25 @@ class MainButton extends StatelessWidget {
         width: double.infinity,
         height: 50,
         decoration: BoxDecoration(
-          gradient: status == 'active'
-              ? LinearGradient(
-                  colors: [
-                    mainColor,
-                    secondColor,
-                  ],
-                )
-              : const LinearGradient(
-                  colors: [
-                    Colors.black12,
-                    Colors.black12,
-                  ],
-                ),
+          color: mainColor,
           borderRadius: BorderRadius.circular(100),
         ),
         child: Center(
           child: status == 'loading'
               ? Platform.isAndroid
-                  ? CircularProgressIndicator(
+                  ? const CircularProgressIndicator(
                       color: secondColor,
                       strokeWidth: 3,
                     )
-                  : CupertinoActivityIndicator(
+                  : const CupertinoActivityIndicator(
                       color: secondColor,
                     )
               : Text(
                   text,
-                  style: GoogleFonts.montserrat(
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
                     color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                  ),
+                      ),
                 ),
         ),
       ),

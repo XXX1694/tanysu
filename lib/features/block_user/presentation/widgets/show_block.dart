@@ -86,12 +86,12 @@ class _CuprtinoActionSheetBuilderState
             builder: (context) {
               return Center(
                 child: Platform.isAndroid
-                    ? CircularProgressIndicator(
-                        color: secondColor,
+                    ? const CircularProgressIndicator(
+                        color: mainColor,
                         strokeWidth: 3,
                       )
-                    : CupertinoActivityIndicator(
-                        color: secondColor,
+                    : const CupertinoActivityIndicator(
+                        color: mainColor,
                       ),
               );
             },
@@ -222,7 +222,7 @@ class _BlockPartState extends State<BlockPart> {
                       translation(context).do_you_really,
                       textAlign: TextAlign.center,
                     ),
-                    contentTextStyle: TextStyle(
+                    contentTextStyle: const TextStyle(
                       color: secondColor,
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
@@ -323,11 +323,11 @@ class _BlockPartState extends State<BlockPart> {
             builder: (context) {
               return Center(
                 child: Platform.isAndroid
-                    ? CircularProgressIndicator(
+                    ? const CircularProgressIndicator(
                         color: secondColor,
                         strokeWidth: 3,
                       )
-                    : CupertinoActivityIndicator(
+                    : const CupertinoActivityIndicator(
                         color: secondColor,
                       ),
               );

@@ -23,9 +23,9 @@ class FirstNameField extends StatelessWidget {
           fontWeight: FontWeight.w400,
           fontSize: 14,
         ),
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            color: secondColor,
+            color: mainColor,
           ),
         ),
       ),

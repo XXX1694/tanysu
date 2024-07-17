@@ -1,7 +1,7 @@
 {
     "clang": "en",
-    "create_acc": "CREATE ACCOUNT",
-    "sign_in": "SIGN IN",
+    "create_acc": "Sign Up",
+    "sign_in": "Sign in",
 
     "agreement1": "By tapping ‘Sign in’ you agree to our",
     "agreement2": "Terms.",
@@ -223,6 +223,9 @@
     "go_stream": "Do you want to go live?",
 
     "no_live_stream": "No one in live",
-    "be_first": "Be first"
+    "be_first": "Be first",
+
+    "already_have_acc": "Already have an account?",
+    "no_acc": "No account?"
     
 }

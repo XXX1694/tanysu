@@ -72,16 +72,16 @@ class GroupMessageBlock extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 32),
             child: Center(
               child: Platform.isAndroid
-                  ? SizedBox(
+                  ? const SizedBox(
                       height: 28,
                       width: 28,
                       child: CircularProgressIndicator(
-                        color: secondColor,
+                        color: mainColor,
                         strokeWidth: 2,
                       ),
                     )
-                  : CupertinoActivityIndicator(
-                      color: secondColor,
+                  : const CupertinoActivityIndicator(
+                      color: mainColor,
                     ),
             ),
           );
@@ -146,7 +146,7 @@ class MyMessage extends StatelessWidget {
               maxWidth: MediaQuery.of(context).size.width * 0.85),
           // margin: const EdgeInsets.only(bottom: 8),
           decoration: BoxDecoration(
-            color: accentColor50w,
+            color: accentColor50,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(12),
               topRight: Radius.circular(12),

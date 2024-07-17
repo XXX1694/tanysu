@@ -13,9 +13,9 @@ class MainButtonOutlined extends StatelessWidget {
   final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
-    return CupertinoButton(
-      padding: const EdgeInsets.all(0),
-      onPressed: onPressed,
+    return GestureDetector(
+
+      onTap: onPressed,
       child: Container(
         width: double.infinity,
         height: 50,

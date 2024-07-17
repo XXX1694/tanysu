@@ -13,6 +13,7 @@ import 'package:tanysu/features/registration/presentation/pages/user_auth_data_p
 import 'package:tanysu/features/registration/presentation/pages/user_main_info_page.dart';
 import 'package:tanysu/l10n/translate.dart';
 
+import '../../../../core/widgets/google_button.dart';
 import '../../../../core/widgets/main_button_icon.dart';
 
 class ChooseRegistrationMethod extends StatefulWidget {
@@ -71,12 +72,7 @@ class _ChooseRegistrationMethodState extends State<ChooseRegistrationMethod> {
                 ),
               ),
             ),
-            SvgPicture.asset(
-              'assets/background/main_background_pattern.svg',
-              fit: BoxFit.cover,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-            ),
+
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -84,8 +80,8 @@ class _ChooseRegistrationMethodState extends State<ChooseRegistrationMethod> {
                   children: [
                     const Spacer(),
                     Platform.isAndroid
-                        ? MainButtonIcon(
-                            text: translation(context).with_google,
+                        ? GoogleButton(
+
                             onPressed: () async {
                               FirebaseService service = FirebaseService();
                               try {
@@ -104,7 +100,7 @@ class _ChooseRegistrationMethodState extends State<ChooseRegistrationMethod> {
                                 if (e is FirebaseAuthException) {}
                               }
                             },
-                            icon: 'assets/icons/enter_method/google.svg',
+
                           )
                         : MainButtonIcon(
                             text: translation(context).with_apple,

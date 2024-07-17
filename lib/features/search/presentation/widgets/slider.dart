@@ -39,20 +39,20 @@ class _AgeSliderState extends State<AgeSlider> {
         const SizedBox(width: 8),
         Expanded(
           child: SliderTheme(
-            data: SliderThemeData(
+            data: const SliderThemeData(
               trackHeight: 1,
               thumbColor: mainColor,
-              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
-              overlayShape: const RoundSliderOverlayShape(overlayRadius: 8),
+              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8),
+              overlayShape: RoundSliderOverlayShape(overlayRadius: 8),
               showValueIndicator: ShowValueIndicator.always,
-              valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
+              valueIndicatorShape: PaddleSliderValueIndicatorShape(),
             ),
             child: RangeSlider(
               // thumbColor: secondColor,
               inactiveColor: mainColor50,
               activeColor: mainColor,
               // secondaryActiveColor: Colors.black12,
-              overlayColor: MaterialStatePropertyAll(secondColor),
+              overlayColor: const WidgetStatePropertyAll(secondColor),
               min: 18,
               max: 65,
               labels: RangeLabels(
