@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/core/widgets/main_button_filled.dart';
 import 'package:tanysu/features/report/presentation/bloc/report_bloc.dart';
@@ -35,6 +33,7 @@ class _ReportPageState extends State<ReportPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -42,29 +41,9 @@ class _ReportPageState extends State<ReportPage> {
         centerTitle: true,
         title: Text(
           translation(context).report,
-          style: GoogleFonts.montserrat(
-            color: Colors.black,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        leadingWidth: 40,
-        leading: Row(
-          children: [
-            const SizedBox(
-              width: 12,
-            ),
-            GestureDetector(
-              child: SvgPicture.asset(
-                'assets/icons/back_button.svg',
-                height: 24,
-                width: 24,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.black,
               ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -81,11 +60,11 @@ class _ReportPageState extends State<ReportPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 40),
+              const SizedBox(height: 60),
               const ReportMainText(),
-              const SizedBox(height: 20),
+              const SizedBox(height: 40),
               ReportField(controller: _reportController),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
               const ReportSecondText(),
               const Spacer(),
               BlocConsumer<ReportBloc, ReportState>(

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/features/profile_add_info/presentation/pages/juz_page.dart';
 import 'package:tanysu/features/profile_add_info/presentation/widgets/about_me_widgets/about_me_field.dart';
@@ -37,6 +36,7 @@ class _AboutMePageState extends State<AboutMePage> {
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -57,12 +57,9 @@ class _AboutMePageState extends State<AboutMePage> {
             },
             child: Text(
               translation(context).skip,
-              style: GoogleFonts.montserrat(
-                color: secondColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                letterSpacing: -0.41,
-              ),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: mainColor,
+                  ),
             ),
           ),
         ],
@@ -88,15 +85,15 @@ class _AboutMePageState extends State<AboutMePage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 35),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 40),
+              const SizedBox(height: 60),
               const AboutMeMainText(),
-              const SizedBox(height: 20),
+              const SizedBox(height: 40),
               AboutMeField(controller: _aboutMeController),
-              const SizedBox(height: 20),
+              const SizedBox(height: 12),
               const AboutMeSecondText(),
               const Spacer(),
               MainButton(

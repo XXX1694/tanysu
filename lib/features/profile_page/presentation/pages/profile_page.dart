@@ -4,10 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tanysu/core/constants/colors.dart';
-import 'package:tanysu/features/like_page/presentation/pages/like_page.dart';
 import 'package:tanysu/features/profile_page/presentation/bloc/profile_page_bloc.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/coins_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/name_block.dart';
@@ -40,12 +38,11 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          'tanysu',
-          style: GoogleFonts.montserratAlternates(
-            color: mainColor,
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
-          ),
+          'PANDEYA',
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+              ),
         ),
         surfaceTintColor: Colors.transparent,
         actions: [
@@ -111,9 +108,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 40),
                       PhotoBlock(profile: state.model),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 20),
                       NameBlock(
                         name: state.model.first_name ?? '',
                         age: state.model.age ?? 0,
@@ -121,68 +118,76 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(height: 20),
                       UserMainInfo(
                         followers: state.model.followers_count ?? 0,
-                        coins: 0,
+                        likes: state.model.likes ?? 0,
+                        followeings: state.model.followeings ?? 0,
+                        newLikes: state.model.new_likes ?? 0,
                       ),
-                      const SizedBox(height: 28),
+                      const SizedBox(height: 20),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 35),
-                        child: Divider(color: Colors.black26),
-                      ),
-                      const SizedBox(height: 4),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 35),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: CupertinoButton(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 12,
-                            ),
-                            color: mainColor20,
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LikePage(),
-                                ),
-                              );
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Мои лайки',
-                                  style: GoogleFonts.montserratAlternates(
-                                    color: mainColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Container(
-                                  height: 32,
-                                  width: 32,
-                                  decoration: BoxDecoration(
-                                    color: mainColor20,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      (state.model.likes ?? 0).toString(),
-                                      style: GoogleFonts.montserratAlternates(
-                                        color: mainColor,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+                        child: Divider(
+                          color: Colors.black26,
+                          height: 1,
                         ),
                       ),
-                      const SizedBox(height: 16),
-                      const CoinsBlock(coins: 0),
+                      const SizedBox(height: 20),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 35),
+                      //   child: SizedBox(
+                      //     width: double.infinity,
+                      //     child: CupertinoButton(
+                      //       padding: const EdgeInsets.symmetric(
+                      //         horizontal: 16,
+                      //         vertical: 12,
+                      //       ),
+                      //       color: mainColor20,
+                      //       onPressed: () {
+                      //         Navigator.push(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //             builder: (context) => const LikePage(),
+                      //           ),
+                      //         );
+                      //       },
+                      //       child: Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //         children: [
+                      //           Text(
+                      //             'Мои лайки',
+                      //             style: GoogleFonts.montserratAlternates(
+                      //               color: mainColor,
+                      //               fontSize: 16,
+                      //               fontWeight: FontWeight.w600,
+                      //             ),
+                      //           ),
+                      //           Container(
+                      //             height: 32,
+                      //             width: 32,
+                      //             decoration: BoxDecoration(
+                      //               color: mainColor20,
+                      //               borderRadius: BorderRadius.circular(100),
+                      //             ),
+                      //             child: Center(
+                      //               child: Text(
+                      //                 (state.model.likes ?? 0).toString(),
+                      //                 style: GoogleFonts.montserratAlternates(
+                      //                   color: mainColor,
+                      //                   fontSize: 16,
+                      //                   fontWeight: FontWeight.w600,
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //           )
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 16),
+                      CoinsBlock(
+                        coins: 0,
+                        userName: state.model.first_name ?? "No name",
+                      ),
                       const SizedBox(height: 40),
                     ],
                   ),

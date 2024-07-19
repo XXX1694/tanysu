@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/core/functions/show_snack_bar.dart';
 import 'package:tanysu/features/profile_page/presentation/bloc/profile_page_bloc.dart';
@@ -31,36 +29,18 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<ProfilePageBloc, ProfilePageState>(
       builder: (BuildContext context, state) => Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
           foregroundColor: Colors.black,
           surfaceTintColor: Colors.black,
+          centerTitle: true,
           title: Text(
             translation(context).settings,
-            style: GoogleFonts.montserrat(
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          leadingWidth: 40,
-          leading: Row(
-            children: [
-              const SizedBox(
-                width: 12,
-              ),
-              GestureDetector(
-                child: SvgPicture.asset(
-                  'assets/icons/back_button.svg',
-                  height: 24,
-                  width: 24,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Colors.black,
                 ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
           ),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1),
@@ -77,38 +57,33 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 8),
                 CupertinoButton(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Row(
                     children: [
                       Text(
                         translation(context).theme,
-                        style: GoogleFonts.montserrat(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                            ),
                       ),
                       const Spacer(),
                     ],
                   ),
                   onPressed: () {},
                 ),
-                const Divider(
-                  color: Colors.black26,
-                  height: 1,
-                ),
                 CupertinoButton(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Row(
                     children: [
                       Text(
                         translation(context).language,
-                        style: GoogleFonts.montserrat(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                            ),
                       ),
                       const Spacer(),
                     ],
@@ -122,44 +97,35 @@ class _SettingsPageState extends State<SettingsPage> {
                     );
                   },
                 ),
-                const Divider(
-                  color: Colors.black26,
-                  height: 1,
-                ),
                 CupertinoButton(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Row(
                     children: [
                       Text(
                         translation(context).faq,
-                        style: GoogleFonts.montserrat(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                            ),
                       ),
                       const Spacer(),
                     ],
                   ),
                   onPressed: () {},
                 ),
-                const Divider(
-                  color: Colors.black26,
-                  height: 1,
-                ),
                 BlocConsumer<SettingsBloc, SettingsState>(
                   builder: (context, state) => CupertinoButton(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           translation(context).log_out,
-                          style: GoogleFonts.montserrat(
-                            color: Colors.red,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                         ),
                         const Spacer(),
                       ],
@@ -175,22 +141,17 @@ class _SettingsPageState extends State<SettingsPage> {
                     }
                   },
                 ),
-                const Divider(
-                  color: Colors.black26,
-                  height: 1,
-                ),
                 CupertinoButton(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Удалить аккаунт',
-                        style: GoogleFonts.montserrat(
-                          color: Colors.red,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Colors.red,
+                              fontWeight: FontWeight.w400,
+                            ),
                       ),
                       const Spacer(),
                     ],
@@ -199,16 +160,20 @@ class _SettingsPageState extends State<SettingsPage> {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        contentPadding: const EdgeInsets.all(20),
+                        iconPadding: const EdgeInsets.all(8),
+                        contentPadding: const EdgeInsets.all(8),
+                        insetPadding: const EdgeInsets.all(12),
+                        titlePadding: const EdgeInsets.all(16),
+                        buttonPadding: const EdgeInsets.all(12),
+                        actionsPadding: const EdgeInsets.all(4),
                         content: Text(
                           translation(context).are_you_sure,
                           textAlign: TextAlign.center,
                         ),
-                        contentTextStyle: const TextStyle(
-                          color: mainColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
+                        contentTextStyle: Theme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(color: Colors.black),
                         actions: [
                           TextButton(
                             onPressed: () async {
@@ -216,13 +181,28 @@ class _SettingsPageState extends State<SettingsPage> {
 
                               profilePageBloc.add(DeleteProfile());
                             },
-                            child: Text(translation(context).yes),
+                            child: Text(
+                              translation(context).yes,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                    color: mainColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
                           ),
                           TextButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text(translation(context).no),
+                            child: Text(
+                              translation(context).no,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(color: Colors.black),
+                            ),
                           ),
                         ],
                       ),
@@ -236,7 +216,7 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       listener: (BuildContext context, Object? state1) {
         if (state1 is ProfileDeleted) {
-          showSnackBar(context, 'Аккаунт удалён!');
+          showSnackBar(context, text: 'Аккаунт удалён!');
           bloc.add(UserLogOut());
         }
       },

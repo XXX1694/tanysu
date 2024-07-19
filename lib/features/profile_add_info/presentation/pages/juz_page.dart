@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/core/widgets/main_button.dart';
 import 'package:tanysu/core/widgets/main_button_filled.dart';
@@ -44,6 +44,7 @@ class _JuzPageState extends State<JuzPage> {
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -62,12 +63,9 @@ class _JuzPageState extends State<JuzPage> {
             },
             child: Text(
               translation(context).skip,
-              style: GoogleFonts.montserrat(
-                color: secondColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                letterSpacing: -0.41,
-              ),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: mainColor,
+                  ),
             ),
           ),
         ],
@@ -95,11 +93,11 @@ class _JuzPageState extends State<JuzPage> {
         builder: (context, state) {
           return SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(horizontal: 35),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 60),
                   const JuzPageMainText(),
                   // const SizedBox(height: 20),
                   // const JuzPageSecondText(),

@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/block_user/presentation/widgets/show_block.dart';
 import 'package:tanysu/features/chat_page/presentation/bloc/chat_page_bloc.dart';
@@ -26,13 +25,13 @@ class MessagePage extends StatefulWidget {
   final int userId;
   final int profileId;
   const MessagePage({
-    Key? key,
+    super.key,
     required this.name,
     required this.image,
     required this.chatId,
     required this.userId,
     required this.profileId,
-  }) : super(key: key);
+  });
 
   @override
   State<MessagePage> createState() => _MessagePageState();
@@ -139,54 +138,30 @@ class _MessagePageState extends State<MessagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        leadingWidth: 300,
         elevation: 0,
-        leading: Row(
-          children: [
-            const SizedBox(width: 12),
-            InkWell(
-              child: SvgPicture.asset('assets/icons/back_button.svg'),
-              onTap: () {
-                bloc1.add(GetAllChats());
-                Navigator.pop(context);
-              },
-            ),
-            const SizedBox(width: 8),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProfilePreviewPageMain(
-                      profileId: widget.profileId,
-                      controller: null,
-                    ),
-                  ),
-                );
-              },
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                  widget.image,
+        centerTitle: true,
+        title: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfilePreviewPageMain(
+                  profileId: widget.profileId,
+                  controller: null,
                 ),
-                radius: 20,
               ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                widget.name,
-                style: GoogleFonts.montserrat(
+            );
+          },
+          child: Text(
+            widget.name,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
                 ),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
+          ),
         ),
         actions: [
           Padding(
@@ -212,103 +187,100 @@ class _MessagePageState extends State<MessagePage> {
           ),
         ),
       ),
-      body: Scaffold(
-        backgroundColor: mainColor.withOpacity(0.05),
-        body: SafeArea(
-          child: Stack(
-            children: [
-              SvgPicture.asset(
-                'assets/background/message_background_pattern.svg',
-                fit: BoxFit.cover,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: BlocBuilder<MessageBloc, MessageState>(
-                        builder: (context, state) {
-                          if (state is MessageGot) {
-                            messages = state.messages;
-                            return StreamBuilder(
-                              stream: channel.stream,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  Map<String, dynamic> info =
-                                      jsonDecode(snapshot.data);
-                                  debugPrint(info.toString());
-                                  if (info['message_type'] == 'chat_message') {
-                                    messages.add(
-                                      MessageModel(
-                                        chat: widget.chatId,
-                                        content: '${info['message']}',
-                                        sender: info['user'],
-                                        timestamp: info['timestamp'],
-                                        message_type: info['message_type'],
-                                        is_read: false,
-                                        id: info['message_id'] ?? 0,
-                                        name: info['name'] ?? '',
-                                        photo: info['photo'] ?? '',
-                                        profile_id: info['profile_id'] ?? 0,
-                                        is_svg: false,
-                                      ),
-                                    );
-                                  } else {
-                                    messages.add(
-                                      MessageModel(
-                                        chat: widget.chatId,
-                                        content: '${info['message']}',
-                                        sender: info['user'],
-                                        timestamp: info['timestamp'],
-                                        message_type: info['message_type'],
-                                        is_read: false,
-                                        id: info['message_id'] ?? 0,
-                                        name: info['name'] ?? '',
-                                        photo: info['photo'] ?? '',
-                                        profile_id: info['profile_id'] ?? 0,
-                                        is_svg: true,
-                                      ),
-                                    );
-                                  }
-                                }
-                                return MainMessageBlock(
-                                  userId: widget.userId,
-                                  messages: messages,
-                                  deleteMessageFunction: deleteMessage,
-                                );
-                              },
-                            );
-                          } else if (state is MessageGetting) {
-                            return Center(
-                              child: Platform.isAndroid
-                                  ? const CircularProgressIndicator(
-                                      color: mainColor,
-                                      strokeWidth: 3,
-                                    )
-                                  : const CupertinoActivityIndicator(
-                                      color: mainColor,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SvgPicture.asset(
+              'assets/background/chat_background.svg',
+              fit: BoxFit.cover,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: BlocBuilder<MessageBloc, MessageState>(
+                      builder: (context, state) {
+                        if (state is MessageGot) {
+                          messages = state.messages;
+                          return StreamBuilder(
+                            stream: channel.stream,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                Map<String, dynamic> info =
+                                    jsonDecode(snapshot.data);
+                                debugPrint(info.toString());
+                                if (info['message_type'] == 'chat_message') {
+                                  messages.add(
+                                    MessageModel(
+                                      chat: widget.chatId,
+                                      content: '${info['message']}',
+                                      sender: info['user'],
+                                      timestamp: info['timestamp'],
+                                      message_type: info['message_type'],
+                                      is_read: false,
+                                      id: info['message_id'] ?? 0,
+                                      name: info['name'] ?? '',
+                                      photo: info['photo'] ?? '',
+                                      profile_id: info['profile_id'] ?? 0,
+                                      is_svg: false,
                                     ),
-                            );
-                          } else {
-                            return Center(
-                              child: Text(translation(context).chat_get_error),
-                            );
-                          }
-                        },
-                      ),
+                                  );
+                                } else {
+                                  messages.add(
+                                    MessageModel(
+                                      chat: widget.chatId,
+                                      content: '${info['message']}',
+                                      sender: info['user'],
+                                      timestamp: info['timestamp'],
+                                      message_type: info['message_type'],
+                                      is_read: false,
+                                      id: info['message_id'] ?? 0,
+                                      name: info['name'] ?? '',
+                                      photo: info['photo'] ?? '',
+                                      profile_id: info['profile_id'] ?? 0,
+                                      is_svg: true,
+                                    ),
+                                  );
+                                }
+                              }
+                              return MainMessageBlock(
+                                userId: widget.userId,
+                                messages: messages,
+                                deleteMessageFunction: deleteMessage,
+                              );
+                            },
+                          );
+                        } else if (state is MessageGetting) {
+                          return Center(
+                            child: Platform.isAndroid
+                                ? const CircularProgressIndicator(
+                                    color: mainColor,
+                                    strokeWidth: 3,
+                                  )
+                                : const CupertinoActivityIndicator(
+                                    color: mainColor,
+                                  ),
+                          );
+                        } else {
+                          return Center(
+                            child: Text(translation(context).chat_get_error),
+                          );
+                        }
+                      },
                     ),
-                    MessageField(
-                      sendMessageFunction: sendMessage,
-                      sendGiftFunction: sendGift,
-                      messageController: textController,
-                      profileId: widget.profileId,
-                    ),
-                    const SizedBox(height: 20),
-                  ],
-                ),
+                  ),
+                  MessageField(
+                    sendMessageFunction: sendMessage,
+                    sendGiftFunction: sendGift,
+                    messageController: textController,
+                    profileId: widget.profileId,
+                  ),
+                  const SizedBox(height: 20),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

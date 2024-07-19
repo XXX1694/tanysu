@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/features/report/presentation/bloc/report_bloc.dart';
 import 'package:tanysu/features/report/presentation/pages/report_page.dart';
 import 'package:tanysu/l10n/translate.dart';
@@ -30,36 +29,17 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         centerTitle: true,
-        leadingWidth: 40,
-        leading: Row(
-          children: [
-            const SizedBox(
-              width: 12,
-            ),
-            GestureDetector(
-              child: SvgPicture.asset(
-                'assets/icons/back_button.svg',
-                height: 24,
-                width: 24,
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
         title: Text(
           translation(context).report,
-          style: GoogleFonts.montserrat(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.black,
+              ),
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
@@ -102,7 +82,7 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 20),
+                // const SizedBox(height: 20),
                 CupertinoButton(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: Row(
@@ -113,11 +93,9 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                       const SizedBox(width: 8),
                       Text(
                         translation(context).fake_profile,
-                        style: GoogleFonts.montserrat(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: Colors.black,
+                            ),
                       ),
                       const Spacer(),
                     ],
@@ -142,11 +120,9 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                       const SizedBox(width: 8),
                       Text(
                         translation(context).inapropriate_content,
-                        style: GoogleFonts.montserrat(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: Colors.black,
+                            ),
                       ),
                       const Spacer(),
                     ],
@@ -171,11 +147,9 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                       const SizedBox(width: 8),
                       Text(
                         translation(context).adv,
-                        style: GoogleFonts.montserrat(
-                          color: const Color.fromARGB(255, 66, 62, 62),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: Colors.black,
+                            ),
                       ),
                       const Spacer(),
                     ],
@@ -200,11 +174,9 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                       const SizedBox(width: 8),
                       Text(
                         translation(context).disc,
-                        style: GoogleFonts.montserrat(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: Colors.black,
+                            ),
                       ),
                       const Spacer(),
                     ],
@@ -229,11 +201,9 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                       const SizedBox(width: 8),
                       Text(
                         translation(context).y_user,
-                        style: GoogleFonts.montserrat(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: Colors.black,
+                            ),
                       ),
                       const Spacer(),
                     ],
@@ -258,11 +228,9 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                       const SizedBox(width: 8),
                       Text(
                         translation(context).not_interested,
-                        style: GoogleFonts.montserrat(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: Colors.black,
+                            ),
                       ),
                       const Spacer(),
                     ],
@@ -287,11 +255,9 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
                       const SizedBox(width: 8),
                       Text(
                         translation(context).other_p,
-                        style: GoogleFonts.montserrat(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: Colors.black,
+                            ),
                       ),
                       const Spacer(),
                     ],

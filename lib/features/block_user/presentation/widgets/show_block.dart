@@ -217,29 +217,55 @@ class _BlockPartState extends State<BlockPart> {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    contentPadding: const EdgeInsets.all(20),
+                    iconPadding: const EdgeInsets.all(8),
+                    contentPadding: const EdgeInsets.all(8),
+                    insetPadding: const EdgeInsets.all(12),
+                    titlePadding: const EdgeInsets.all(16),
+                    buttonPadding: const EdgeInsets.all(12),
+                    actionsPadding: const EdgeInsets.all(4),
+                    title: Text(
+                      translation(context).block,
+                      textAlign: TextAlign.center,
+                    ),
+                    titleTextStyle:
+                        Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700,
+                            ),
                     content: Text(
                       translation(context).do_you_really,
                       textAlign: TextAlign.center,
                     ),
-                    contentTextStyle: const TextStyle(
-                      color: secondColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    contentTextStyle: Theme.of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(color: Colors.black),
                     actions: [
                       TextButton(
                         onPressed: () {
                           Navigator.pop(context);
                           bloc.add(BlockUser(profileId: widget.profileId));
                         },
-                        child: Text(translation(context).yes),
+                        child: Text(
+                          translation(context).yes,
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: mainColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                        ),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: Text(translation(context).no),
+                        child: Text(
+                          translation(context).no,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),

@@ -35,6 +35,8 @@ ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) => ProfileModel(
       json['juz'] as String?,
       json['likes'] as int?,
       json['subscribed'] as bool,
+      json['followeings'] as int?,
+      json['new_likes'] as int?,
     );
 
 Map<String, dynamic> _$ProfileModelToJson(ProfileModel instance) =>
@@ -63,4 +65,6 @@ Map<String, dynamic> _$ProfileModelToJson(ProfileModel instance) =>
       'juz': instance.juz,
       'likes': instance.likes,
       'subscribed': instance.subscribed,
+      'followeings': instance.followeings,
+      'new_likes': instance.new_likes,
     };

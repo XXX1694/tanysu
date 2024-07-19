@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class ByCardButton extends StatelessWidget {
   const ByCardButton({
     super.key,
     required this.price,
+    required this.onPressed,
   });
   final int price;
+  final Function onPressed;
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
@@ -20,7 +21,7 @@ class ByCardButton extends StatelessWidget {
             color: Colors.black54,
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(100),
         ),
         height: 54,
         width: double.infinity,
@@ -29,11 +30,10 @@ class ByCardButton extends StatelessWidget {
             const SizedBox(width: 16),
             Text(
               translation(context).card,
-              style: GoogleFonts.montserrat(
-                color: Colors.black,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
             const Spacer(),
             SvgPicture.asset(
@@ -44,17 +44,18 @@ class ByCardButton extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               '$price',
-              style: GoogleFonts.montserrat(
-                color: Colors.black,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
             const SizedBox(width: 16),
           ],
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        onPressed();
+      },
     );
   }
 }

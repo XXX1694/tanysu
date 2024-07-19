@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class ReportMainText extends StatelessWidget {
@@ -9,11 +8,10 @@ class ReportMainText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       translation(context).write_reason,
-      style: GoogleFonts.montserrat(
-        color: Colors.black,
-        fontSize: 28,
-        fontWeight: FontWeight.w700,
-      ),
+      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+            color: Colors.black,
+            fontWeight: FontWeight.w700,
+          ),
     );
   }
 }

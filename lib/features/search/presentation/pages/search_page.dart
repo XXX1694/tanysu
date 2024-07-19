@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:appinio_swiper/appinio_swiper.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/profile_preview/presentation/pages/profile_preview_page_main.dart';
 import 'package:tanysu/features/search/data/models/search_result_model.dart';
@@ -102,33 +102,15 @@ class _SearchPageState extends State<SearchPage> {
         backgroundColor: Colors.white,
         title: Text(
           translation(context).search,
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.black,
+              ),
         ),
         // leading: null,
         foregroundColor: Colors.black,
         surfaceTintColor: Colors.transparent,
         centerTitle: true, leadingWidth: 40,
-        leading: Row(
-          children: [
-            const SizedBox(
-              width: 12,
-            ),
-            GestureDetector(
-              child: SvgPicture.asset(
-                'assets/icons/back_button.svg',
-                height: 24,
-                width: 24,
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
+
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
@@ -199,18 +181,23 @@ class _SearchPageState extends State<SearchPage> {
                         },
                         child: SizedBox(
                           width: double.infinity,
-                          height: 60,
+                          height: 56,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundImage: NetworkImage(
-                                  user.image['image_url'],
+                              SizedBox(
+                                height: 56,
+                                width: 56,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: user.image['image_url'],
+                                  ),
                                 ),
                               ),
-                              const SizedBox(width: 16),
+                              const SizedBox(width: 12),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,39 +207,43 @@ class _SearchPageState extends State<SearchPage> {
                                       children: [
                                         TextSpan(
                                           text: user.first_name.toString(),
-                                          style: GoogleFonts.montserrat(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.black,
-                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium
+                                              ?.copyWith(
+                                                color: Colors.black,
+                                              ),
                                         ),
                                         TextSpan(
                                           text: ', ',
-                                          style: GoogleFonts.montserrat(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.black,
-                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium
+                                              ?.copyWith(
+                                                color: Colors.black,
+                                              ),
                                         ),
                                         TextSpan(
                                           text: user.age.toString(),
-                                          style: GoogleFonts.montserrat(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.black,
-                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium
+                                              ?.copyWith(
+                                                color: Colors.black,
+                                              ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(height: 4),
+                                  const SizedBox(height: 2),
                                   Text(
                                     user.city_name.toString(),
-                                    style: GoogleFonts.montserrat(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall
+                                        ?.copyWith(
+                                          color: Colors.black54,
+                                        ),
                                   )
                                 ],
                               ),
@@ -263,14 +254,20 @@ class _SearchPageState extends State<SearchPage> {
                     } else {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 32),
-                        child: Platform.isAndroid
-                            ? const CircularProgressIndicator(
-                                color: mainColor,
-                                strokeWidth: 3,
-                              )
-                            : const CupertinoActivityIndicator(
-                                color: mainColor,
-                              ),
+                        child: SizedBox(
+                          height: 56,
+                          width: double.infinity,
+                          child: Center(
+                            child: Platform.isAndroid
+                                ? const CircularProgressIndicator(
+                                    color: mainColor,
+                                    strokeWidth: 3,
+                                  )
+                                : const CupertinoActivityIndicator(
+                                    color: mainColor,
+                                  ),
+                          ),
+                        ),
                       );
                     }
                   },

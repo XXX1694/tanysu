@@ -17,7 +17,6 @@ class SubscribersRepository {
     finalUrl = '${url}subscription/list/';
     try {
       final response = await dio.get(finalUrl);
-      print(response.data);
       List data = response.data['results'];
       List<SearchResultModel> users = [];
       for (int i = 0; i < data.length; i++) {

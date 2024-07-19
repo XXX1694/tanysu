@@ -59,12 +59,19 @@ class _UserPicturePageState extends State<UserPicturePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         foregroundColor: Colors.black,
-        surfaceTintColor: Colors.transparent,
-        shadowColor: Colors.transparent,
+        surfaceTintColor: Colors.black,
+        title: Text(
+          translation(context).registration,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.black,
+              ),
+        ),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: Column(
@@ -75,7 +82,7 @@ class _UserPicturePageState extends State<UserPicturePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 40),
+                  SizedBox(height: 60),
                   PicMainText(),
                   // SizedBox(height: 22),
                   // PicSecondText(),
@@ -85,7 +92,7 @@ class _UserPicturePageState extends State<UserPicturePage> {
             const SizedBox(height: 20),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.only(right: 20, left: 24),
                 child: PhotosBlock(
                   path: [
                     path1,
@@ -115,7 +122,9 @@ class _UserPicturePageState extends State<UserPicturePage> {
                           path4.text.isNotEmpty ? images.add(path4.text) : null;
                           images.length <= 1
                               ? showSnackBar(
-                                  context, translation(context).pic_second_text)
+                                  context,
+                                  text: translation(context).pic_second_text,
+                                )
                               : registrationBloc.add(
                                   CreateUser(
                                     email: widget.email,
@@ -134,7 +143,7 @@ class _UserPicturePageState extends State<UserPicturePage> {
                   },
                   listener: (context, state) {
                     if (state is UserCreateError) {
-                      showSnackBar(context, state.error);
+                      showSnackBar(context, text: state.error);
                     } else if (state is UserCreated) {
                       addImageBloc.add(
                         AddImageList(
@@ -148,7 +157,10 @@ class _UserPicturePageState extends State<UserPicturePage> {
                 listener: (context, state1) {
                   if (state1 is AddedImage) {
                     Navigator.pushNamedAndRemoveUntil(
-                        context, '/choose', (route) => false);
+                      context,
+                      '/choose',
+                      (route) => false,
+                    );
                     loginBloc.add(
                       LogIn(
                         email: widget.email,

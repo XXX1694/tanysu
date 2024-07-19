@@ -35,12 +35,20 @@ class _UserMainInfoPageState extends State<UserMainInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         foregroundColor: Colors.black,
         surfaceTintColor: Colors.black,
+        title: Text(
+          translation(context).registration,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.black,
+              ),
+        ),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: Padding(
@@ -48,7 +56,7 @@ class _UserMainInfoPageState extends State<UserMainInfoPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 40),
+              const SizedBox(height: 60),
               const FittedBox(
                 fit: BoxFit.scaleDown,
                 child: CreateProfileMainText(),
@@ -65,18 +73,20 @@ class _UserMainInfoPageState extends State<UserMainInfoPage> {
                 text: translation(context).next,
                 onPressed: () {
                   if (nameController.text.isEmpty) {
-                    showSnackBar(context, translation(context).name_empty);
+                    showSnackBar(context,
+                        text: translation(context).name_empty);
                   } else if (birthDateContoller.text.isEmpty) {
-                    showSnackBar(
-                        context, translation(context).birth_date_empty);
+                    showSnackBar(context,
+                        text: translation(context).birth_date_empty);
                   } else if (cityController.text.isEmpty) {
-                    showSnackBar(context, translation(context).city_empty);
+                    showSnackBar(context,
+                        text: translation(context).city_empty);
                   } else if (genderController.text.isEmpty) {
-                    showSnackBar(context, translation(context).gender_required);
+                    showSnackBar(context,
+                        text: translation(context).gender_required);
                   } else if (nameController.text.length > 25) {
-                    showSnackBar(
-                        context,
-                        translation(context)
+                    showSnackBar(context,
+                        text: translation(context)
                             .name_can_not_be_more_than_25_symbols);
                   } else {
                     Navigator.push(

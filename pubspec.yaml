@@ -17,13 +17,13 @@ dependencies:
   flutter_native_splash: ^2.3.1
   json_annotation: ^4.8.1
   image_picker: ^1.0.4
-  image_cropper: ^5.0.0
+  image_cropper: ^7.1.0
   flutter_image_compress: ^2.0.4
   flutter_phoenix: ^1.1.1
-  google_fonts: ^5.1.0
+  google_fonts: ^6.2.1
   path_provider: ^2.0.6
   mask_text_input_formatter: ^2.5.0
-  pinput: ^3.0.1
+  pinput: ^5.0.0
   shared_preferences: ^2.2.1
   dotted_border: ^2.0.0+3
   connectivity_plus: ^4.0.2
@@ -31,40 +31,41 @@ dependencies:
   provider: ^6.0.5
   get: ^4.6.6
   percent_indicator: ^4.2.3
-  carousel_slider: ^4.2.1
+  carousel_slider_plus: ^6.0.0
   fluttertoast: ^8.2.2
   appinio_swiper: ^2.1.0
   socket_io_client: ^2.0.3+1
   webview_flutter_plus: ^0.3.0+2
   shimmer: ^3.0.0
-  grouped_list: ^5.1.2 
+  grouped_list: ^6.0.0 
   pull_to_refresh: ^2.0.0
   cached_network_image: ^3.3.0
   google_sign_in: ^6.1.5
   http: ^1.1.0
-  firebase_core: ^2.21.0
-  firebase_auth: ^4.12.1
-  awesome_notifications: ^0.8.2
-  firebase_messaging: ^14.7.5
-  font_awesome_flutter: ^9.2.0
+  firebase_core: ^3.2.0
+  firebase_auth: ^5.1.2
+  awesome_notifications: ^0.9.3+1
+  firebase_messaging: ^15.0.3
+  font_awesome_flutter: ^10.7.0
+  sqflite: ^2.3.3+1
 
   
   
   flutter_localizations:
     sdk: flutter
   intl: ^0.19.0
-  web_socket_channel: ^2.4.0
+  web_socket_channel: ^3.0.1
   flutter_riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5
   zego_uikit_prebuilt_live_streaming: ^3.5.4
+  file_picker: ^8.0.6
 
 flutter_native_splash:
   android: true
   ios: true
 
   image: "assets/icons/splash_icon.png"
-  background_image: assets/background/background_splash.png
-  background_image_dark: assets/background/background_splash.png
+  color: "#ffffff"
 
   android_12:
     image: "assets/icons/navigation_icons/splash.png"
@@ -93,7 +94,7 @@ dev_dependencies:
     sdk: flutter
 
   json_serializable: any
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
   build_runner: ^2.4.9
   riverpod_generator: ^2.4.0
   custom_lint: ^0.6.4

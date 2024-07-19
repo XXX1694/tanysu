@@ -18,10 +18,9 @@ class LoginBottomText extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.pushNamedAndRemoveUntil(
+            Navigator.pushNamed(
               context,
               '/registration',
-              (route) => false,
             );
           },
           child: Text(

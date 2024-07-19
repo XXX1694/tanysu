@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 
 class MainButton extends StatelessWidget {
@@ -44,7 +43,7 @@ class MainButton extends StatelessWidget {
                   text,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                        color: Colors.white,
                       ),
                 ),
         ),

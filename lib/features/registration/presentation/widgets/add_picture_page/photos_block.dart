@@ -101,9 +101,7 @@ class _PhotosBlockState extends State<PhotosBlock> {
                           ? 'assets/icons/select.svg'
                           : 'assets/icons/cancel_new.svg',
                       // ignore: deprecated_member_use
-                      color: widget.path[index].text.isEmpty
-                          ? Colors.white
-                          : Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ),

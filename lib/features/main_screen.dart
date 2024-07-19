@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/core/functions/generate_string.dart';
 import 'package:tanysu/features/chat_page/presentation/pages/chat_page.dart';
@@ -58,18 +57,12 @@ class _MainScreenState extends State<MainScreen> {
             Text(
               label,
               style: active
-                  ? GoogleFonts.montserrat(
-                      color: mainColor,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: -0.24,
-                    )
-                  : GoogleFonts.montserrat(
-                      color: Colors.black54,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: -0.24,
-                    ),
+                  ? Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: mainColor,
+                      )
+                  : Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: Colors.black54,
+                      ),
             ),
           ],
         ),
@@ -80,6 +73,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Consumer(
         builder: (context, ref, child) {
           final currentIndex = ref.watch(bottomNavIndexProvider);
@@ -127,9 +121,10 @@ class _MainScreenState extends State<MainScreen> {
                     children: [
                       _buildNavItem(
                         icon: SvgPicture.asset(
-                            'assets/icons/navigation_icons/main_outlined.svg'),
-                        activeIcon: Image.asset(
-                          'assets/icons/navigation_icons/main_filled.png',
+                          'assets/icons/navigation_icons/main_outlined.svg',
+                        ),
+                        activeIcon: SvgPicture.asset(
+                          'assets/icons/navigation_icons/main_filled.svg',
                           height: 24,
                           width: 24,
                         ),
@@ -138,44 +133,57 @@ class _MainScreenState extends State<MainScreen> {
                         ref: ref,
                         active: currentIndex == 0,
                       ),
-                      _buildNavItem(
-                        activeIcon: Image.asset(
-                          'assets/icons/navigation_icons/swipe_filled.png',
-                          height: 24,
-                          width: 24,
-                        ),
-                        icon: SvgPicture.asset(
-                            'assets/icons/navigation_icons/swipe_outlined.svg'),
-                        label: translation(context).swipe,
-                        index: 1,
-                        ref: ref,
-                        active: currentIndex == 1,
-                      ),
+                      // _buildNavItem(
+                      //   activeIcon: SvgPicture.asset(
+                      //     'assets/icons/navigation_icons/swipe_filled.svg',
+                      //     height: 24,
+                      //     width: 24,
+                      //   ),
+                      //   icon: SvgPicture.asset(
+                      //     'assets/icons/navigation_icons/swipe_outlined.svg',
+                      //   ),
+                      //   label: translation(context).swipe,
+                      //   index: 1,
+                      //   ref: ref,
+                      //   active: currentIndex == 1,
+                      // ),
                       GestureDetector(
                         onTap: () {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              // contentPadding: const EdgeInsets.all(24),
-                              // actionsPadding: ,
+                              shadowColor: Colors.transparent,
+                              backgroundColor: Colors.white,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(12),
+                                ),
+                              ),
+                              iconPadding: const EdgeInsets.all(8),
+                              contentPadding: const EdgeInsets.all(8),
+                              insetPadding: const EdgeInsets.all(12),
+                              titlePadding: const EdgeInsets.all(16),
+                              buttonPadding: const EdgeInsets.all(12),
+                              actionsPadding: const EdgeInsets.all(4),
                               title: Text(
                                 translation(context).go_live,
                                 textAlign: TextAlign.center,
                               ),
-                              titleTextStyle: GoogleFonts.montserrat(
-                                color: mainColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              titleTextStyle: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                               content: Text(
                                 translation(context).go_stream,
                                 textAlign: TextAlign.center,
                               ),
-                              contentTextStyle: GoogleFonts.montserrat(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
+                              contentTextStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(color: Colors.black),
                               actions: [
                                 TextButton(
                                   onPressed: () {
@@ -189,11 +197,13 @@ class _MainScreenState extends State<MainScreen> {
                                   },
                                   child: Text(
                                     translation(context).yes,
-                                    style: GoogleFonts.montserrat(
-                                      color: mainColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                          color: mainColor,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                   ),
                                 ),
                                 TextButton(
@@ -202,11 +212,10 @@ class _MainScreenState extends State<MainScreen> {
                                   },
                                   child: Text(
                                     translation(context).no,
-                                    style: GoogleFonts.montserrat(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(color: Colors.black),
                                   ),
                                 ),
                               ],
@@ -220,27 +229,27 @@ class _MainScreenState extends State<MainScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset(
-                                'assets/icons/navigation_icons/start_stream.svg',
+                                'assets/icons/navigation_icons/live.svg',
                                 height: 24,
                                 width: 24,
                               ),
                               const SizedBox(height: 2),
                               Text(
                                 translation(context).stream,
-                                style: GoogleFonts.montserrat(
-                                  color: Colors.black54,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: -0.24,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall
+                                    ?.copyWith(
+                                      color: Colors.black54,
+                                    ),
                               ),
                             ],
                           ),
                         ),
                       ),
                       _buildNavItem(
-                        activeIcon: Image.asset(
-                          'assets/icons/navigation_icons/chat_filled.png',
+                        activeIcon: SvgPicture.asset(
+                          'assets/icons/navigation_icons/chat_filled.svg',
                           height: 24,
                           width: 24,
                         ),
@@ -253,8 +262,8 @@ class _MainScreenState extends State<MainScreen> {
                         active: currentIndex == 2,
                       ),
                       _buildNavItem(
-                        activeIcon: Image.asset(
-                          'assets/icons/navigation_icons/profile_filled.png',
+                        activeIcon: SvgPicture.asset(
+                          'assets/icons/navigation_icons/profile_filled.svg',
                           height: 24,
                           width: 24,
                         ),

@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>848296565441-1elfje98klslc3rh5pns80rmo4ghm194.apps.googleusercontent.com</string>
+	<string>848296565441-iqv0d7jaumv1kpam9qrqks5ucfpv7i48.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.848296565441-1elfje98klslc3rh5pns80rmo4ghm194</string>
+	<string>com.googleusercontent.apps.848296565441-iqv0d7jaumv1kpam9qrqks5ucfpv7i48</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>848296565441-71k2ui01gvuhsfja4uvm2r2ds4vor975.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.tanysu.kz</string>
+	<string>com.tanysu.main</string>
 	<key>PROJECT_ID</key>
 	<string>tanysu-a540c</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:848296565441:ios:65dddaeec8d0ba536ad240</string>
+	<string>1:848296565441:ios:df2210da13aa42866ad240</string>
 </dict>
 </plist>

@@ -40,9 +40,16 @@ class _LoginByEmailState extends State<LoginByEmail> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        elevation: 0,
         foregroundColor: Colors.black,
         surfaceTintColor: Colors.black,
-        elevation: 0,
+        title: Text(
+          translation(context).login_main_text,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.black,
+              ),
+        ),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: Padding(
@@ -80,7 +87,7 @@ class _LoginByEmailState extends State<LoginByEmail> {
                 },
                 listener: (context, state) {
                   if (state is LoginError) {
-                    showSnackBar(context, 'Login error');
+                    showSnackBar(context, text: 'Login error');
                   } else if (state is LogedIn) {
                     AwesomeNotifications().createNotification(
                       content: NotificationContent(
@@ -90,11 +97,12 @@ class _LoginByEmailState extends State<LoginByEmail> {
                         body: translation(context).welcome_text,
                       ),
                     );
-                    Navigator.push(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const MainScreen(),
                       ),
+                      (route) => false,
                     );
                   }
                 },

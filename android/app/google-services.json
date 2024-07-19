@@ -7,6 +7,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:848296565441:android:d1751188d73fdd586ad240",
+        "android_client_info": {
+          "package_name": "com.tanysu.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848296565441-26q724o07sudf8repm7eucl38a6ft38g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5aFQqEo3LdVYeVOvi6a7s9XCjMS28QxU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848296565441-26q724o07sudf8repm7eucl38a6ft38g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848296565441-1elfje98klslc3rh5pns80rmo4ghm194.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tanysu.kz"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:848296565441:android:1305e6b53cf60e086ad240",
         "android_client_info": {
           "package_name": "com.tanysu.kz"

@@ -5,7 +5,7 @@ part 'city.g.dart';
 @JsonSerializable()
 class CityModel {
   final int id;
-  final String name;
+  String name;
   CityModel(
     this.id,
     this.name,

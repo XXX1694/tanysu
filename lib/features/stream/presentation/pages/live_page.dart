@@ -10,12 +10,12 @@ class LivePage extends StatefulWidget {
   final int profileId;
 
   const LivePage({
-    Key? key,
+    super.key,
     required this.liveID,
     this.isHost = false,
     required this.name,
     required this.profileId,
-  }) : super(key: key);
+  });
 
   @override
   State<LivePage> createState() => _LivePageState();
@@ -49,9 +49,9 @@ class _LivePageState extends State<LivePage> {
             return SafeArea(
               child: ZegoUIKitPrebuiltLiveStreaming(
                 appID:
-                727056335, // Fill in the appID that you get from ZEGOCLOUD Admin Console.
+                    249797448, // Fill in the appID that you get from ZEGOCLOUD Admin Console.
                 appSign:
-                    '9ea02ec0d3be19a5e45e715292f2c1459b18143051f0947fc3087a1db21d117a', // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
+                    'a8d3f6de3e464385099caf470a53373573263131eab9cf129c5b2509e3aa4911', // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
                 userID: widget.profileId.toString(),
                 userName: widget.name,
                 liveID: widget.liveID,

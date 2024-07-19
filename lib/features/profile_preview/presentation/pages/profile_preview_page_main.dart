@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/core/widgets/placeholers.dart';
 import 'package:tanysu/features/block_user/presentation/widgets/show_block.dart';
@@ -15,7 +15,7 @@ import 'package:tanysu/features/block_user/presentation/widgets/show_block.dart'
 import 'package:tanysu/features/profile_preview/presentation/bloc/profile_preview_bloc.dart';
 import 'package:tanysu/features/profile_preview/presentation/widgets/follow_button.dart';
 import 'package:tanysu/features/profile_preview/presentation/widgets/profile_about.dart';
-import 'package:tanysu/features/profile_preview/presentation/widgets/profile_info_block_mine.dart';
+import 'package:tanysu/features/profile_preview/presentation/widgets/profile_info_block.dart';
 import 'package:tanysu/features/profile_preview/presentation/widgets/send_gift_button.dart';
 import 'package:tanysu/l10n/translate.dart';
 
@@ -34,12 +34,10 @@ class ProfilePreviewPageMain extends StatefulWidget {
 
 class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
   late ProfilePreviewBloc bloc;
-  late AppinioSwiperController _controller;
   @override
   void initState() {
     bloc = BlocProvider.of<ProfilePreviewBloc>(context);
     bloc.add(GetUserData(userId: widget.profileId));
-    _controller = AppinioSwiperController();
     super.initState();
   }
 
@@ -68,38 +66,20 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
           );
         } else if (state is ProfilePreviewDataGot) {
           return Scaffold(
+            backgroundColor: Colors.white,
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               title: Text(
-                'tanysu',
-                style: GoogleFonts.montserratAlternates(
-                  color: mainColor,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
-                ),
+                'PANDEYA',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
               centerTitle: true,
               foregroundColor: Colors.black,
               surfaceTintColor: Colors.transparent,
               elevation: 0,
-              leadingWidth: 40,
-              leading: Row(
-                children: [
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  GestureDetector(
-                    child: SvgPicture.asset(
-                      'assets/icons/back_button.svg',
-                      height: 24,
-                      width: 24,
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
               actions: [
                 CupertinoButton(
                   padding: const EdgeInsets.all(0),
@@ -173,14 +153,16 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
                             child: Text(
                               '${state.model.first_name}, ${state.model.age}',
                               overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.montserrat(
-                                color: mainColor,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 28,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                             ),
                           ),
-                          const SizedBox(width: 16),
+                          const SizedBox(width: 12),
                           SvgPicture.asset(
                             'assets/icons/not_verified.svg',
                             height: 34,
@@ -189,35 +171,29 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 16),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Divider(
-                            color: Colors.black26,
-                            height: 1,
-                          ),
-                          const SizedBox(height: 16),
-                          ProfileInfoBlock(
+                          const SizedBox(height: 20),
+                          ProfileInfoBlockForSearch(
                             coins: 0,
                             followers: state.model.followers_count ?? 0,
-                            controller: widget.controller ?? _controller,
-                            profileId: state.model.id ?? 0,
                             isLiked: state.model.is_liked,
+                            profileId: state.model.id ?? 0,
                           ),
                           const SizedBox(height: 16),
                           const Divider(
                             color: Colors.black26,
                             height: 1,
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 20),
                           SendGiftButton(
                             userName: state.model.first_name ?? '',
                             profileId: state.model.id ?? 0,
                           ),
-                          const SizedBox(height: 4),
+                          const SizedBox(height: 12),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -227,11 +203,7 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
                               ),
                             ],
                           ),
-                          const Divider(
-                            color: Colors.black26,
-                            height: 1,
-                          ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 24),
                           ProfileAboutBlock(
                             about: state.model.about_me ?? '',
                             city: state.model.city_name ?? '',
@@ -240,11 +212,7 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
                             study: state.model.school_name ?? '',
                             work: state.model.company_name ?? '',
                           ),
-                          const SizedBox(height: 4),
-                          const Divider(
-                            color: Colors.black26,
-                            height: 1,
-                          ),
+                          const SizedBox(height: 40),
                         ],
                       ),
                     ),

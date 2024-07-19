@@ -13,6 +13,8 @@ class ProfileRepository {
     final dio = Dio();
     String? token = storage.getString('auth_token');
     if (token == null) return null;
+    // print(finalUrl);
+    // print(token);
     dio.options.headers["authorization"] = "Token $token";
     try {
       final response = await dio.get(

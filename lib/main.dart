@@ -79,6 +79,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseApi().initNotifications();
+
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   // await FirebaseAppCheck.instance.activate(
   //   webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),

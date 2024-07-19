@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +18,10 @@ class FirebaseApi {
       provisional: false,
       sound: true,
     );
-    final fCMToken = await _firebaseMessaging.getToken();
+
+    final fCMToken = Platform.isIOS
+        ? await _firebaseMessaging.getAPNSToken()
+        : await _firebaseMessaging.getToken();
     await storage.setString('firebase_token', fCMToken ?? '');
   }
 }

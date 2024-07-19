@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/l10n/translate.dart';
 
@@ -20,11 +19,9 @@ class GroupMessageField extends StatelessWidget {
         Expanded(
           child: TextField(
             cursorHeight: 18,
-            style: GoogleFonts.montserrat(
-              color: Colors.black,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: Colors.black,
+                ),
             // textAlignVertical: TextAlignVertical.center,
             textAlign: TextAlign.left,
             minLines: 1,
@@ -32,21 +29,17 @@ class GroupMessageField extends StatelessWidget {
             controller: controller,
             decoration: InputDecoration(
               isDense: true,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 10,
-              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
               fillColor: Colors.white,
               hintText: translation(context).message,
-              hintStyle: GoogleFonts.montserrat(
-                color: Colors.black54,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+              hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Colors.black54,
+                  ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: const BorderSide(
-                  color: mainColor20,
+                  color: accentColor20,
                   width: 1,
                 ),
               ),
@@ -54,20 +47,20 @@ class GroupMessageField extends StatelessWidget {
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: const BorderSide(
-                  color: mainColor20,
+                  color: accentColor20,
                   width: 1,
                 ),
               ),
               disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: const BorderSide(
-                  color: mainColor20,
+                  color: accentColor20,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: const BorderSide(
-                  color: mainColor50,
+                  color: mainColor,
                 ),
               ),
             ),
@@ -86,7 +79,7 @@ class GroupMessageField extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 width: 1,
-                color: mainColor20,
+                color: accentColor20,
               ),
             ),
             child: Center(

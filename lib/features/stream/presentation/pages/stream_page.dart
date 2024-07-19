@@ -64,27 +64,12 @@ class _StreamPageState extends State<StreamPage> {
               elevation: 0,
               backgroundColor: Colors.white,
               centerTitle: true,
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'tanysu ',
-                    style: GoogleFonts.montserratAlternates(
-                      color: mainColor,
-                      fontSize: 22,
+              title: Text(
+                'PANDEYA',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Colors.black,
                       fontWeight: FontWeight.w700,
                     ),
-                  ),
-                  Text(
-                    'LIVE',
-                    style: GoogleFonts.montserratAlternates(
-                      color: const Color(0xFFFFA500),
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
               ),
               // actions: [
               //   GestureDetector(
@@ -235,13 +220,12 @@ class _StreamPageState extends State<StreamPage> {
                                                   TextSpan(
                                                     text:
                                                         '${streamListGlobal[index].profile?['first_name']}, ',
-                                                    style:
-                                                        GoogleFonts.montserrat(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 14,
-                                                    ),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleSmall
+                                                        ?.copyWith(
+                                                          color: Colors.white,
+                                                        ),
                                                   ),
                                                   TextSpan(
                                                     text:
@@ -249,13 +233,12 @@ class _StreamPageState extends State<StreamPage> {
                                                                 .profile?['age']
                                                                 .toString() ??
                                                             '',
-                                                    style:
-                                                        GoogleFonts.montserrat(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 14,
-                                                    ),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleSmall
+                                                        ?.copyWith(
+                                                          color: Colors.white,
+                                                        ),
                                                   ),
                                                 ],
                                               ),
@@ -265,12 +248,12 @@ class _StreamPageState extends State<StreamPage> {
                                                 streamListGlobal[index]
                                                         .description ??
                                                     'Без описание',
-                                                style: GoogleFonts.montserrat(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 12,
-                                                  letterSpacing: -0.41,
-                                                ),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelMedium
+                                                    ?.copyWith(
+                                                      color: Colors.white70,
+                                                    ),
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
@@ -327,20 +310,21 @@ class _StreamPageState extends State<StreamPage> {
                         const Spacer(),
                         Text(
                           translation(context).no_live_stream,
-                          style: GoogleFonts.montserrat(
-                            color: mainColor,
-                            fontSize: 26,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700,
+                              ),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 12),
                         Text(
                           translation(context).be_first,
-                          style: GoogleFonts.montserrat(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: Colors.black54,
+                                  ),
                         ),
                         const Spacer(),
                         MainButton(
@@ -365,6 +349,7 @@ class _StreamPageState extends State<StreamPage> {
           );
         } else {
           return Scaffold(
+            backgroundColor: Colors.white,
             body: Center(
               child: Text(translation(context).empty),
             ),
