@@ -1,8 +1,5 @@
 plugins {
     id "com.android.application"
-    // START: FlutterFire Configuration
-    id 'com.google.gms.google-services'
-    // END: FlutterFire Configuration
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 }
@@ -17,12 +14,12 @@ if (localPropertiesFile.exists()) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '54'
+    flutterVersionCode = '80'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '5.4'
+    flutterVersionName = '8.0'
 }
 
 def keystoreProperties = new Properties()
@@ -33,13 +30,14 @@ def keystoreProperties = new Properties()
 
 android {
     namespace "com.tanysu.kz"
-    compileSdkVersion 34
+    compileSdkVersion 34 // Убедитесь, что версия сборки тоже 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 
     kotlinOptions {
         jvmTarget = '1.8'
@@ -54,8 +52,9 @@ android {
         applicationId "com.tanysu.kz"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 24
-        targetSdkVersion 33
+        minSdkVersion 28
+        compileSdkVersion 34
+        targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -72,9 +71,7 @@ android {
         release {
             signingConfig signingConfigs.release
             minifyEnabled true
-            // proguardFiles getDefaultProguardFile(
-            //         'proguard-android-optimize.txt'),
-            //         'proguard-rules.pro'
+
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -84,6 +81,12 @@ android {
        // when your project uses more than one plugin that depend on C++ libs.
         pickFirst 'lib/**/libc++_shared.so'
     }
+    allprojects {
+        tasks.withType(JavaCompile){
+            options.compilerArgs <<"-Xlint:deprecation"
+        }
+    }
+
 }
 
 flutter {

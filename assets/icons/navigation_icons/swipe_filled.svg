@@ -1,8 +1,15 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="17.0409" height="16.2847" transform="translate(3 4)" fill="white"/>
-<rect x="2.13288" y="6.92942" width="9.43755" height="14.6563" rx="1.39774" transform="rotate(-15 2.13288 6.92942)" fill="#20881D"/>
-<rect x="2.13288" y="6.92942" width="9.43755" height="14.6563" rx="1.39774" transform="rotate(-15 2.13288 6.92942)" stroke="#20881D"/>
-<rect x="10.6201" y="3.20001" width="10.4376" height="15.6563" rx="2.7" transform="rotate(18.3245 10.6201 3.20001)" fill="#5AA758"/>
-<rect x="11.9298" y="3.21797" width="9.43755" height="14.6563" rx="1.39774" transform="rotate(18.3245 11.9298 3.21797)" fill="#20881D"/>
-<rect x="11.9298" y="3.21797" width="9.43755" height="14.6563" rx="1.39774" transform="rotate(18.3245 11.9298 3.21797)" stroke="#20881D"/>
+<rect x="1.52051" y="6.57581" width="10.4376" height="15.6563" rx="1.89774" transform="rotate(-15 1.52051 6.57581)" fill="url(#paint0_linear_229_4568)"/>
+<rect x="11.6123" y="2.58618" width="10.4376" height="15.6563" rx="1.89774" transform="rotate(18.3245 11.6123 2.58618)" fill="url(#paint1_linear_229_4568)"/>
+<defs>
+<linearGradient id="paint0_linear_229_4568" x1="6.73928" y1="6.57581" x2="6.73928" y2="22.2321" gradientUnits="userSpaceOnUse">
+<stop stop-color="#3E28AA"/>
+<stop offset="1" stop-color="#ED5F88"/>
+</linearGradient>
+<linearGradient id="paint1_linear_229_4568" x1="16.8311" y1="2.58618" x2="16.8311" y2="18.2425" gradientUnits="userSpaceOnUse">
+<stop stop-color="#3E28AA"/>
+<stop offset="1" stop-color="#ED5F88"/>
+</linearGradient>
+</defs>
 </svg>

@@ -7,7 +7,7 @@ abstract class ChatPageEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetAllChats extends ChatPageEvent {}
+// class GetAllChats extends ChatPageEvent {}
 
 class UpdateAllChats extends ChatPageEvent {}
 

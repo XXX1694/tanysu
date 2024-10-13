@@ -4,16 +4,18 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tanysu/api/firebase_api.dart';
 import 'package:tanysu/core/connection/dependency_injection.dart';
 import 'package:tanysu/core/constants/language_constants.dart';
-import 'package:tanysu/core/widgets/privacy.dart';
-import 'package:tanysu/core/widgets/terms.dart';
+import 'package:tanysu/core/providers/navigation_observer.dart';
 import 'package:tanysu/features/add_image/data/repositories/add_image_repo.dart';
 import 'package:tanysu/features/add_image/presentation/bloc/add_image_bloc.dart';
 import 'package:tanysu/features/block_user/data/repositories/block_repostitory.dart';
 import 'package:tanysu/features/block_user/presentation/bloc/block_user_bloc.dart';
+import 'package:tanysu/features/chat_page/data/models/chat_model.dart';
 import 'package:tanysu/features/chat_page/data/repositories/chat_repository.dart';
 import 'package:tanysu/features/chat_page/presentation/bloc/chat_page_bloc.dart';
 import 'package:tanysu/features/choose_city/data/repositories/choose_city_repository.dart';
@@ -64,9 +66,13 @@ import 'package:tanysu/features/show_gifts/data/repositories/gift_repo.dart';
 import 'package:tanysu/features/show_gifts/presentation/bloc/show_gifts_bloc.dart';
 import 'package:tanysu/features/stream/data/repository/stream_repository.dart';
 import 'package:tanysu/features/stream/presentation/bloc/stream_bloc.dart';
+import 'package:tanysu/features/subscriptions/data/repositories/subscribtions_repository.dart';
+import 'package:tanysu/features/subscriptions/presentation/bloc/subscribtions_bloc.dart';
+import 'package:tanysu/features/subscriptions/presentation/pages/subscribtions_page.dart';
 import 'package:tanysu/firebase_options.dart';
 import 'package:tanysu/l10n/l10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
 import 'core/themes/themes.dart';
 import 'features/login/presentation/pages/choose_login_method.dart';
 import 'features/registration/presentation/bloc/registration_bloc/registration_bloc.dart';
@@ -75,9 +81,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  DependencyInjection.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Hive.initFlutter();
+
+  // Register the adapter
+  Hive.registerAdapter(ChatModelAdapter());
+
+  // Open the Hive box
+  await Hive.openBox<ChatModel>('chatBox');
   await FirebaseApi().initNotifications();
 
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -86,17 +100,11 @@ void main() async {
   //   androidProvider: AndroidProvider.debug,
   //   appleProvider: AppleProvider.appAttest,
   // );
-  await AwesomeNotifications().initialize(null, [
-    NotificationChannel(
-      channelKey: 'basic_channel',
-      channelName: 'Basic notifications',
-      channelDescription: 'Notificationg channel for basic tests',
-    )
-  ]);
-  DependencyInjection.init();
+
   // await Future.delayed(const Duration(seconds: 1));
+
   runApp(
-    const ProviderScope(child: MainApp()),
+    Phoenix(child: const ProviderScope(child: MainApp())),
   );
 }
 
@@ -140,13 +148,7 @@ class _MainAppState extends State<MainApp> {
         ),
       );
     });
-    AwesomeNotifications().isNotificationAllowed().then(
-      (isAllowed) {
-        if (!isAllowed) {
-          AwesomeNotifications().requestPermissionToSendNotifications();
-        }
-      },
-    );
+
     super.initState();
   }
 
@@ -156,187 +158,197 @@ class _MainAppState extends State<MainApp> {
     //   DeviceOrientation.portraitUp,
     //   DeviceOrientation.portraitDown,
     // ]);
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
+    return ZegoUIKitPrebuiltLiveStreamingMiniPopScope(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
 
-        if (!currentFocus.hasPrimaryFocus &&
-            currentFocus.focusedChild != null) {
-          FocusManager.instance.primaryFocus?.unfocus();
-        }
-      },
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => RegistrationBloc(
-              repo: RegistrationRepository(),
-              registrationState: const RegistrationState(),
+          if (!currentFocus.hasPrimaryFocus &&
+              currentFocus.focusedChild != null) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          }
+        },
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => RegistrationBloc(
+                repo: RegistrationRepository(),
+                registrationState: const RegistrationState(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => CheckEmailBloc(
-              checkEmailState: const CheckEmailState(),
-              repo: CheckNumberRepository(),
+            BlocProvider(
+              create: (context) => CheckEmailBloc(
+                checkEmailState: const CheckEmailState(),
+                repo: CheckNumberRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => LoginBloc(
-              loginState: const LoginState(),
-              repo: LoginRepository(),
+            BlocProvider(
+              create: (context) => LoginBloc(
+                loginState: const LoginState(),
+                repo: LoginRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => ChooseCityBloc(
-              chooseCityState: const ChooseCityState(),
-              repo: ChooseCityRepository(),
+            BlocProvider(
+              create: (context) => ChooseCityBloc(
+                chooseCityState: const ChooseCityState(),
+                repo: ChooseCityRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => ProfileAddInfoBloc(
-              profileAddInfoState: const ProfileAddInfoState(),
-              repo: AddProfileInfoRepository(),
+            BlocProvider(
+              create: (context) => ProfileAddInfoBloc(
+                profileAddInfoState: const ProfileAddInfoState(),
+                repo: AddProfileInfoRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => MainPageBloc(
-              mainPageState: const MainPageState(),
-              repo: UserGetRepository(),
+            BlocProvider(
+              create: (context) => MainPageBloc(
+                mainPageState: const MainPageState(),
+                repo: UserGetRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => ProfilePreviewBloc(
-              previewState: const ProfilePreviewState(),
-              repo: ProfilePreviewRepository(),
+            BlocProvider(
+              create: (context) => ProfilePreviewBloc(
+                previewState: const ProfilePreviewState(),
+                repo: ProfilePreviewRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => ProfilePageBloc(
-              profilePageState: const ProfilePageState(),
-              repo: ProfileRepository(),
+            BlocProvider(
+              create: (context) => ProfilePageBloc(
+                profilePageState: const ProfilePageState(),
+                repo: ProfileRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => SettingsBloc(
-              settingsState: const SettingsState(),
-              repo: UserLogOutRepository(),
+            BlocProvider(
+              create: (context) => SettingsBloc(
+                settingsState: const SettingsState(),
+                repo: UserLogOutRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => EditProfileBloc(
-              editProfileState: const EditProfileState(),
-              repo: EditProfileRepository(),
+            BlocProvider(
+              create: (context) => EditProfileBloc(
+                editProfileState: const EditProfileState(),
+                repo: EditProfileRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => LikePageBloc(
-              likePageState: const LikePageState(),
-              repo: LikeRepository(),
+            BlocProvider(
+              create: (context) => LikePageBloc(
+                likePageState: const LikePageState(),
+                repo: LikeRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => ChatPageBloc(
-              chatPageState: const ChatPageState(),
-              repo: ChatRepository(),
+            BlocProvider(
+              create: (context) => ChatPageBloc(
+                chatPageState: const ChatPageState(),
+                repo: ChatRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => GetUserIdBloc(
-              getUserIdState: const GetUserIdState(),
-              repo: GetUserIdRepo(),
+            BlocProvider(
+              create: (context) => GetUserIdBloc(
+                getUserIdState: const GetUserIdState(),
+                repo: GetUserIdRepo(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => BlockUserBloc(
-              blockUserState: const BlockUserState(),
-              repo: BlockRepository(),
+            BlocProvider(
+              create: (context) => BlockUserBloc(
+                blockUserState: const BlockUserState(),
+                repo: BlockRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => MessageBloc(
-              messageState: const MessageState(),
-              repo: MessageRepository(),
+            BlocProvider(
+              create: (context) => MessageBloc(
+                messageState: const MessageState(),
+                repo: MessageRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => SearchBloc(
-              searchState: const SearchState(),
-              repo: SearchRepository(),
+            BlocProvider(
+              create: (context) => SearchBloc(
+                searchState: const SearchState(),
+                repo: SearchRepository(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => SwipeBloc(
-              swipeState: const SwipeState(),
+            BlocProvider(
+              create: (context) => SwipeBloc(
+                swipeState: const SwipeState(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => ReportBloc(
-              repo: ReportRepository(),
-              reportState: const ReportState(),
+            BlocProvider(
+              create: (context) => ReportBloc(
+                repo: ReportRepository(),
+                reportState: const ReportState(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => AddImageBloc(
-              repo: AddImageRepository(),
-              addImageState: const AddImageState(),
+            BlocProvider(
+              create: (context) => AddImageBloc(
+                repo: AddImageRepository(),
+                addImageState: const AddImageState(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => ShowGiftsBloc(
-              repo: GetGiftRepository(),
-              showGiftsState: const ShowGiftsState(),
+            BlocProvider(
+              create: (context) => ShowGiftsBloc(
+                repo: GetGiftRepository(),
+                showGiftsState: const ShowGiftsState(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => JuzBloc(
-              repo: JuzRepository(),
-              juzState: const JuzState(),
+            BlocProvider(
+              create: (context) => JuzBloc(
+                repo: JuzRepository(),
+                juzState: const JuzState(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => StreamBloc(
-              repo: StreamRepository(),
-              streamState: const StreamState(),
+            BlocProvider(
+              create: (context) => StreamBloc(
+                repo: StreamRepository(),
+                streamState: const StreamState(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => LiveBloc(
-              repo: LiveRepository(),
-              liveState: const LiveState(),
+            BlocProvider(
+              create: (context) => LiveBloc(
+                repo: LiveRepository(),
+                liveState: const LiveState(),
+              ),
             ),
-          ),
-          BlocProvider(
-            create: (context) => SubscribersBloc(
-              repository: SubscribersRepository(),
-              subscribersState: const SubscribersState(),
+            BlocProvider(
+              create: (context) => SubscribersBloc(
+                repository: SubscribersRepository(),
+                subscribersState: const SubscribersState(),
+              ),
             ),
-          ),
-        ],
+            BlocProvider(
+              create: (context) => SubscriptionBloc(
+                repository: SubscriptionRepository(),
+                subscribersState: const SubscriptionState(),
+              ),
+            ),
+          ],
 
-        // For building models: flutter pub run build_runner build --delete-conflicting-outputs
-        // For changing app icon: flutter pub run flutter_launcher_icons:main
-        // For apk: flutter build apk --split-per-abi
+          // For building models: flutter pub run build_runner build --delete-conflicting-outputs
+          // For changing app icon: flutter pub run flutter_launcher_icons:main
+          // For apk: flutter build apk --split-per-abi
 
-        child: GetMaterialApp(
-          theme: lightTheme,
-          debugShowCheckedModeBanner: false,
-          supportedLocales: L10n.all,
-          locale: _locale,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          routes: {
-            '/': (context) => const ChooseLoginMethod(),
-            '/login': (context) => const LoginByEmail(),
-            '/registration': (context) => const UserAuthDataPage(),
-            '/main': (context) => const MainScreen(),
-            '/privacy': (context) => const PrivacyPage(),
-            '/terms': (context) => const TermsPage(),
-            '/choose': (context) => const ChoosePage(),
-            '/search': (context) => const SearchPage(),
-            '/settings': (context) => const SettingsPage(),
-            '/notification': (context) => const NotificationPage(),
-            '/subscribers': (context) => const SubscribersPage(),
-          },
-          initialRoute: '/',
+          child: GetMaterialApp(
+            navigatorObservers: [MyNavigatorObserver()],
+            theme: lightTheme,
+            debugShowCheckedModeBanner: false,
+            supportedLocales: L10n.all,
+            locale: _locale,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            routes: {
+              '/': (context) => const ChooseLoginMethod(),
+              '/login': (context) => const LoginByEmail(),
+              '/registration': (context) => const UserAuthDataPage(),
+              '/main': (context) => const MainScreen(),
+              // '/privacy': (context) => const PrivacyPage(),
+              // '/terms': (context) => const TermsPage(),
+              '/choose': (context) => const ChoosePage(),
+              '/search': (context) => const SearchPage(),
+              '/settings': (context) => const SettingsPage(),
+              '/notification': (context) => const NotificationPage(),
+              '/subscribers': (context) => const SubscribersPage(),
+              '/subscribtions': (context) => const SubscribtionsPage(),
+            },
+            initialRoute: '/',
+          ),
         ),
       ),
     );

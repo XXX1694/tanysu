@@ -18,7 +18,14 @@ class SendGiftButton extends StatelessWidget {
         height: 50,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: accentColor,
+          gradient: LinearGradient(
+            colors: [
+              secondColor,
+              Colors.red.shade300,
+            ], // Gradient for the inner icon
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
           borderRadius: BorderRadius.circular(100),
         ),
         child: Row(

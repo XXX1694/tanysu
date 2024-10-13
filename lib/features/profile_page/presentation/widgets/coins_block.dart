@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tanysu/core/constants/colors.dart';
-import 'package:tanysu/features/payment/presentation/pages/choose_payment_method.dart';
+import 'package:tanysu/core/functions/show_snack_bar.dart';
 import 'package:tanysu/l10n/translate.dart';
 
 class CoinsBlock extends StatelessWidget {
@@ -79,11 +79,13 @@ class CoinsBlock extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              showPaymentMethod(
-                context,
-                500,
-                1000,
-              );
+              showSnackBar(context,
+                  text: translation(context).payment_not_working);
+              // showPaymentMethod(
+              //   context,
+              //   500,
+              //   1000,
+              // );
             },
           ),
           const SizedBox(height: 16),
@@ -127,11 +129,13 @@ class CoinsBlock extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              showPaymentMethod(
-                context,
-                1000,
-                1800,
-              );
+              showSnackBar(context,
+                  text: translation(context).payment_not_working);
+              // showPaymentMethod(
+              //   context,
+              //   1000,
+              //   1800,
+              // );
             },
           ),
           const SizedBox(height: 16),
@@ -175,11 +179,13 @@ class CoinsBlock extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              showPaymentMethod(
-                context,
-                2000,
-                3000,
-              );
+              showSnackBar(context,
+                  text: translation(context).payment_not_working);
+              // showPaymentMethod(
+              //   context,
+              //   2000,
+              //   3000,
+              // );
             },
           ),
         ],

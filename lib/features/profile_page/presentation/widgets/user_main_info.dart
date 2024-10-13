@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tanysu/features/like_page/presentation/pages/like_page.dart';
 import 'package:tanysu/l10n/translate.dart';
@@ -19,8 +20,9 @@ class UserMainInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        GestureDetector(
-          onTap: () {
+        CupertinoButton(
+          padding: const EdgeInsets.all(0),
+          onPressed: () {
             Navigator.pushNamed(context, '/subscribers');
           },
           child: Column(
@@ -42,11 +44,12 @@ class UserMainInfo extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(width: 52),
+        const SizedBox(width: 44),
 
-        GestureDetector(
-          onTap: () {
-            // Navigator.pushNamed(context, '/subscribers');
+        CupertinoButton(
+          padding: const EdgeInsets.all(0),
+          onPressed: () {
+            Navigator.pushNamed(context, '/subscribtions');
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,9 +70,10 @@ class UserMainInfo extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(width: 52),
-        GestureDetector(
-          onTap: () {
+        const SizedBox(width: 44),
+        CupertinoButton(
+          padding: const EdgeInsets.all(0),
+          onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(

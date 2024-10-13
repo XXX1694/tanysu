@@ -142,6 +142,8 @@ class _MessagePageState extends State<MessagePage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
+        shadowColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
         title: GestureDetector(

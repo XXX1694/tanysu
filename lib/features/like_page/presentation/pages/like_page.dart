@@ -4,6 +4,7 @@ import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/like_page/presentation/bloc/like_page_bloc.dart';
@@ -47,12 +48,14 @@ class _LikePageState extends State<LikePage> {
         elevation: 0,
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text(
-          'PANDEYA',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-              ),
+        title: const GradientText(
+          'Tanysu',
+          gradient: LinearGradient(
+            colors: <Color>[
+              mainColor,
+              secondColor,
+            ],
+          ),
         ),
       ),
       body: SafeArea(
@@ -169,6 +172,34 @@ class _LikePageState extends State<LikePage> {
               ],
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class GradientText extends StatelessWidget {
+  final String text;
+  final Gradient gradient;
+
+  const GradientText(
+    this.text, {
+    super.key,
+    required this.gradient,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (bounds) => gradient.createShader(
+        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.montserratAlternates(
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );

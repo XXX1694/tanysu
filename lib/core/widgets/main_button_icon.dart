@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tanysu/core/constants/colors.dart';
 
 class MainButtonIcon extends StatelessWidget {
   const MainButtonIcon({
@@ -19,12 +20,15 @@ class MainButtonIcon extends StatelessWidget {
         width: double.infinity,
         height: 50,
         decoration: BoxDecoration(
-          color: Colors.transparent,
-          border: Border.all(
-            color: Colors.black,
-            width: 1,
-          ),
           borderRadius: BorderRadius.circular(100),
+          gradient: const LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              mainColor,
+              secondColor,
+            ],
+          ),
         ),
         child: Stack(
           children: [
@@ -38,7 +42,8 @@ class MainButtonIcon extends StatelessWidget {
                     icon,
                     height: 24,
                     width: 24,
-                    color: Colors.black,
+                    // ignore: deprecated_member_use
+                    color: Colors.white,
                   ),
                   const Spacer(),
                 ],
@@ -48,7 +53,7 @@ class MainButtonIcon extends StatelessWidget {
               child: Text(
                 text,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.w600,
                     ),
               ),

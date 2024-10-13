@@ -101,7 +101,7 @@ class _CuprtinoActionSheetBuilderState
             content: NotificationContent(
               id: 10,
               channelKey: 'basic_channel',
-              title: 'Tanysu',
+              title: 'PANDEYA',
               body: translation(context).user_blocked,
             ),
           );
@@ -113,7 +113,7 @@ class _CuprtinoActionSheetBuilderState
             content: NotificationContent(
               id: 10,
               channelKey: 'basic_channel',
-              title: 'Tanysu',
+              title: 'PANDEYA',
               body: translation(context).user_blocked,
             ),
           );
@@ -124,7 +124,7 @@ class _CuprtinoActionSheetBuilderState
             content: NotificationContent(
               id: 10,
               channelKey: 'basic_channel',
-              title: 'Tanysu',
+              title: 'PANDEYA',
               body: translation(context).user_block_error,
             ),
           );
@@ -364,7 +364,7 @@ class _BlockPartState extends State<BlockPart> {
             content: NotificationContent(
               id: 10,
               channelKey: 'basic_channel',
-              title: 'Tanysu',
+              title: 'PANDEYA',
               body: translation(context).user_blocked,
             ),
           );
@@ -376,7 +376,7 @@ class _BlockPartState extends State<BlockPart> {
             content: NotificationContent(
               id: 10,
               channelKey: 'basic_channel',
-              title: 'Tanysu',
+              title: 'PANDEYA',
               body: translation(context).user_blocked,
             ),
           );
@@ -387,7 +387,7 @@ class _BlockPartState extends State<BlockPart> {
             content: NotificationContent(
               id: 10,
               channelKey: 'basic_channel',
-              title: 'Tanysu',
+              title: 'PANDEYA',
               body: translation(context).user_block_error,
             ),
           );

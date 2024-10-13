@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/core/functions/show_snack_bar.dart';
 import 'package:tanysu/core/widgets/main_button.dart';
@@ -114,7 +115,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   content: NotificationContent(
                     id: 10,
                     channelKey: 'basic_channel',
-                    title: 'PANDEYA',
+                    title: 'Tanysu',
                     body: translation(context).image_uploaded,
                   ),
                 );
@@ -126,12 +127,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 backgroundColor: Colors.white,
                 appBar: AppBar(
                   backgroundColor: Colors.white,
-                  title: Text(
-                    'PANDEYA',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                        ),
+                  title: const GradientText(
+                    'Tanysu',
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        mainColor,
+                        secondColor,
+                      ],
+                    ),
                   ),
                   centerTitle: true,
                   foregroundColor: Colors.black,
@@ -179,7 +182,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 juzController.text,
                                 0,
                                 false,
-                                state.model.followeings,
+                                state.model.following_count,
                                 state.model.new_likes,
                               ),
                             ),
@@ -429,6 +432,34 @@ class _EditProfilePageState extends State<EditProfilePage> {
           );
         }
       },
+    );
+  }
+}
+
+class GradientText extends StatelessWidget {
+  final String text;
+  final Gradient gradient;
+
+  const GradientText(
+    this.text, {
+    super.key,
+    required this.gradient,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (bounds) => gradient.createShader(
+        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.montserratAlternates(
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
     );
   }
 }

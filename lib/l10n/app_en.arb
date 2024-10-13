@@ -6,7 +6,7 @@
     "agreement1": "By tapping ‘Sign in’ you agree to our",
     "agreement2": "Terms.",
     "agreement3": "Learn how we process your data in our",
-    "agreement4": "Privacy Policy",
+    "agreement4": "EULA",
 
     "with_apple": "Apple",
     "with_google": "Google",
@@ -241,5 +241,12 @@
     "card_date": "Date",
     "card_cvv": "CVV",
 
-    "pay_money": "Pay"
+    "pay_money": "Pay",
+
+    "allow_main_text": "Allow camera and microphone usage for:",
+    "allow_second_text": "You can change this option later in the Settings app",
+    "allow_list_1": "- To start a live stream",
+    "allow_list_2": "- To use your smartphone camera",
+    "allow_list_3": "- To use your smartphone microphone",
+    "allow": "Allow"
 }

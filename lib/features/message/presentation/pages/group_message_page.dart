@@ -8,6 +8,7 @@ import 'package:tanysu/features/message/data/models/message_model.dart';
 import 'package:tanysu/features/message/presentation/bloc/message_bloc.dart';
 import 'package:tanysu/features/message/presentation/widgets/group_message_block.dart';
 import 'package:tanysu/features/message/presentation/widgets/group_message_field.dart';
+import 'package:tanysu/features/message/presentation/widgets/group_message_placeholder_block.dart';
 
 // ignore: depend_on_referenced_packages
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -39,15 +40,19 @@ class _PublicMessagePageState extends State<PublicMessagePage> {
   int page = 1;
   void sendMessage() {
     if (textController.text.isNotEmpty) {
-      channel.sink.add(
-        jsonEncode(
-          {
-            "type": "message",
-            "message": textController.text,
-            "user_id": widget.userId,
-          },
-        ),
-      );
+      try {
+        channel.sink.add(
+          jsonEncode(
+            {
+              "type": "message",
+              "message": textController.text,
+              "user_id": widget.userId,
+            },
+          ),
+        );
+      } catch (e) {
+        print(e.toString());
+      }
       textController.text = '';
     }
   }
@@ -69,7 +74,7 @@ class _PublicMessagePageState extends State<PublicMessagePage> {
   }
 
   void reload() {
-    bloc.add(GetAllGroupMessages(page: page));
+    bloc.add(UpdateAllGroupMessages(page: page));
   }
 
   @override
@@ -78,7 +83,7 @@ class _PublicMessagePageState extends State<PublicMessagePage> {
     bloc = BlocProvider.of<MessageBloc>(context);
     bloc1 = BlocProvider.of<ChatPageBloc>(context);
     page = 1;
-    reload();
+    bloc.add(GetAllGroupMessages(page: page));
     channel = WebSocketChannel.connect(
       Uri.parse(
           'wss://tanysu.net/ws/v3/chat/${widget.chatId}/${widget.userId}/'),
@@ -134,50 +139,54 @@ class _PublicMessagePageState extends State<PublicMessagePage> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  Expanded(
-                    child: BlocConsumer<MessageBloc, MessageState>(
-                      listener: (context, state) {
-                        if (state is MessageGot) {
-                          messages += state.messages;
+                  StreamBuilder(
+                      stream: channel.stream,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          Map<String, dynamic> info = jsonDecode(snapshot.data);
+                          debugPrint(info.toString());
+                          if (info['message_type'] == 'chat_message') {
+                            messages.add(
+                              MessageModel(
+                                chat: widget.chatId,
+                                content: info['message'],
+                                sender: info['user'],
+                                timestamp: info['timestamp'],
+                                message_type: info['message_type'],
+                                is_read: false,
+                                id: info['message_id'] ?? 0,
+                                name: info['name'] ?? '',
+                                photo: info['photo'] ?? '',
+                                profile_id: info['profile_id'] ?? 0,
+                                is_svg: false,
+                              ),
+                            );
+                          }
                         }
-                      },
-                      builder: (context, state) {
-                        return StreamBuilder(
-                          stream: channel.stream,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              Map<String, dynamic> info =
-                                  jsonDecode(snapshot.data);
-                              debugPrint(info.toString());
-                              if (info['message_type'] == 'chat_message') {
-                                messages.add(
-                                  MessageModel(
-                                    chat: widget.chatId,
-                                    content: info['message'],
-                                    sender: info['user'],
-                                    timestamp: info['timestamp'],
-                                    message_type: info['message_type'],
-                                    is_read: false,
-                                    id: info['message_id'] ?? 0,
-                                    name: info['name'] ?? '',
-                                    photo: info['photo'] ?? '',
-                                    profile_id: info['profile_id'] ?? 0,
-                                    is_svg: false,
-                                  ),
+                        return Expanded(
+                          child: BlocConsumer<MessageBloc, MessageState>(
+                            listener: (context, state) {
+                              if (state is MessageGot) {
+                                messages = state.messages;
+                              } else if (state is MessageUpdated) {
+                                messages += state.messages;
+                              }
+                            },
+                            builder: (context, state) {
+                              if (state is MessageGetting && page == 1) {
+                                return const GroupMessageBlockPlaceholder();
+                              } else {
+                                return GroupMessageBlock(
+                                  userId: widget.userId,
+                                  messages: messages,
+                                  deleteMessageFunction: deleteMessage,
+                                  scrollController: _scrollController,
                                 );
                               }
-                            }
-                            return GroupMessageBlock(
-                              userId: widget.userId,
-                              messages: messages,
-                              deleteMessageFunction: deleteMessage,
-                              scrollController: _scrollController,
-                            );
-                          },
+                            },
+                          ),
                         );
-                      },
-                    ),
-                  ),
+                      }),
                   GroupMessageField(
                     controller: textController,
                     sendMessageFunction: sendMessage,

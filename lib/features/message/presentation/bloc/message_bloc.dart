@@ -38,6 +38,18 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
         }
       },
     );
+    on<UpdateAllGroupMessages>(
+      (event, emit) async {
+        try {
+          List<MessageModel> res = await repo.getPublicChatInfo(
+            page: event.page,
+          );
+          emit(MessageUpdated(messages: res));
+        } catch (e) {
+          emit(MessageGetError());
+        }
+      },
+    );
     on<Reset>(
       (event, emit) => emit(MessageInitial()),
     );

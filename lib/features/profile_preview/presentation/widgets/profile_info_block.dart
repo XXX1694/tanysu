@@ -178,8 +178,8 @@ class _ProfileInfoBlockForSearchState extends State<ProfileInfoBlockForSearch> {
             liked
                 ? 'assets/icons/like_filled.svg'
                 : 'assets/icons/like_outlined.svg',
-            height: 36,
-            width: 36,
+            height: 32,
+            width: 32,
           ),
           onPressed: () async {
             !liked

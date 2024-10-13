@@ -10,8 +10,8 @@ class VerificationIcon extends StatelessWidget {
       onTap: () {},
       child: SvgPicture.asset(
         'assets/icons/not_verified.svg',
-        height: 24,
-        width: 24,
+        height: 28,
+        width: 28,
       ),
     );
   }

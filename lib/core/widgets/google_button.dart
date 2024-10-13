@@ -18,8 +18,15 @@ class GoogleButton extends StatelessWidget {
         width: double.infinity,
         height: 50,
         decoration: BoxDecoration(
-          color: mainColor,
           borderRadius: BorderRadius.circular(100),
+          gradient: const LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              mainColor,
+              secondColor,
+            ],
+          ),
         ),
         child: Stack(
           children: [
@@ -33,6 +40,7 @@ class GoogleButton extends StatelessWidget {
                     'assets/icons/enter_method/google.svg',
                     height: 24,
                     width: 24,
+                    // ignore: deprecated_member_use
                     color: Colors.white,
                   ),
                   const Spacer(),

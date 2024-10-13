@@ -37,7 +37,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
           children: [
             Center(
               child: Text(
-                'tanysu',
+                'PANDEYA',
                 style: GoogleFonts.montserratAlternates(
                   color: mainColor,
                   fontWeight: FontWeight.w700,

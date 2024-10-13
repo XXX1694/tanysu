@@ -30,7 +30,7 @@ class ProfileModel {
   final String? juz;
   final int? likes;
   final bool subscribed;
-  final int? followeings;
+  final int? following_count;
   final int? new_likes;
 
   ProfileModel(
@@ -58,7 +58,7 @@ class ProfileModel {
     this.juz,
     this.likes,
     this.subscribed,
-    this.followeings,
+    this.following_count,
     this.new_likes,
   );
   factory ProfileModel.fromJson(Map<String, dynamic> json) =>

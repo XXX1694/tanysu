@@ -63,12 +63,13 @@ class _ProfilePreviewPageBasicState extends State<ProfilePreviewPageBasic> {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.transparent,
-              title: Text(
-                'tanysu',
-                style: GoogleFonts.montserratAlternates(
-                  color: mainColor,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
+              title: const GradientText(
+                'Tanysu',
+                gradient: LinearGradient(
+                  colors: <Color>[
+                    mainColor,
+                    secondColor,
+                  ],
                 ),
               ),
               centerTitle: true,
@@ -128,20 +129,21 @@ class _ProfilePreviewPageBasicState extends State<ProfilePreviewPageBasic> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              width: 310,
+                              height: double.infinity,
+                              width: double.infinity,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: CachedNetworkImage(
                                   imageUrl: e['image_url'],
                                   placeholder: (context, url) =>
                                       const ShrimerPlaceholder(
-                                    height: 210,
-                                    width: 165,
+                                    height: double.infinity,
+                                    width: double.infinity,
                                   ),
                                   errorWidget: (context, url, error) =>
                                       const ErrorPlaceholder(
-                                    height: 210,
-                                    width: 165,
+                                    height: double.infinity,
+                                    width: double.infinity,
                                   ),
                                   fit: BoxFit.cover,
                                 ),
@@ -150,7 +152,10 @@ class _ProfilePreviewPageBasicState extends State<ProfilePreviewPageBasic> {
                           )
                           .toList(),
                       options: CarouselOptions(
-                        height: 405,
+                        autoPlay: true,
+                        autoPlayAnimationDuration: const Duration(seconds: 1),
+                        autoPlayInterval: const Duration(seconds: 3),
+                        height: 420,
                         enlargeCenterPage: true,
                         enableInfiniteScroll: false,
                       ),
@@ -175,8 +180,8 @@ class _ProfilePreviewPageBasicState extends State<ProfilePreviewPageBasic> {
                           const SizedBox(width: 16),
                           SvgPicture.asset(
                             'assets/icons/not_verified.svg',
-                            height: 34,
-                            width: 34,
+                            height: 32,
+                            width: 32,
                           ),
                         ],
                       ),
@@ -249,6 +254,34 @@ class _ProfilePreviewPageBasicState extends State<ProfilePreviewPageBasic> {
           );
         }
       },
+    );
+  }
+}
+
+class GradientText extends StatelessWidget {
+  final String text;
+  final Gradient gradient;
+
+  const GradientText(
+    this.text, {
+    super.key,
+    required this.gradient,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (bounds) => gradient.createShader(
+        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.montserratAlternates(
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
     );
   }
 }

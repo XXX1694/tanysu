@@ -16,4 +16,9 @@ class MessageGot extends MessageState {
   const MessageGot({required this.messages});
 }
 
+class MessageUpdated extends MessageState {
+  final List<MessageModel> messages;
+  const MessageUpdated({required this.messages});
+}
+
 class MessageGetError extends MessageState {}

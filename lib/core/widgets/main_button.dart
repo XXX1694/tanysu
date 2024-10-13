@@ -24,9 +24,16 @@ class MainButton extends StatelessWidget {
       pressedOpacity: status == 'passive' ? 1.0 : 0.54,
       child: Container(
         width: double.infinity,
-        height: 50,
+        height: 48,
         decoration: BoxDecoration(
-          color: mainColor,
+          gradient: const LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              mainColor,
+              secondColor,
+            ],
+          ),
           borderRadius: BorderRadius.circular(100),
         ),
         child: Center(

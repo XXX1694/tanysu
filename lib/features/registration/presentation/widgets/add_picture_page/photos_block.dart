@@ -22,11 +22,13 @@ class _PhotosBlockState extends State<PhotosBlock> {
   Widget build(BuildContext context) {
     return GridView.builder(
       itemCount: widget.path.length,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 20,
-        childAspectRatio: 15 / 20,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
+        mainAxisExtent: 220,
       ),
       itemBuilder: (context, index) => SizedBox(
         height: double.infinity,
@@ -76,7 +78,7 @@ class _PhotosBlockState extends State<PhotosBlock> {
             ),
             Align(
               alignment: Alignment.bottomRight,
-              child: InkWell(
+              child: GestureDetector(
                 onTap: () async {
                   if (widget.path[index].text.isEmpty) {
                     widget.path[index].text = await pickUploadImage();
@@ -90,9 +92,19 @@ class _PhotosBlockState extends State<PhotosBlock> {
                   height: 30,
                   width: 30,
                   decoration: BoxDecoration(
+                    gradient: widget.path[index].text.isEmpty
+                        ? const LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [
+                              mainColor,
+                              secondColor,
+                            ],
+                          )
+                        : null,
                     color: widget.path[index].text.isEmpty
-                        ? mainColor
-                        : accentColor,
+                        ? Colors.white
+                        : secondColor,
                     borderRadius: BorderRadius.circular(100),
                   ),
                   child: Center(

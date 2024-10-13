@@ -63,7 +63,7 @@ class _ChooseRegistrationMethodState extends State<ChooseRegistrationMethod> {
           children: [
             Center(
               child: Text(
-                'tanysu',
+                'PANDEYA',
                 style: GoogleFonts.montserratAlternates(
                   color: mainColor,
                   fontWeight: FontWeight.w700,

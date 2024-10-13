@@ -6,7 +6,7 @@ import 'package:tanysu/features/profile_preview/data/models/profile_model.dart';
 final _storage = SharedPreferences.getInstance();
 
 class ProfileRepository {
-  getMyData() async {
+  Future<ProfileModel?> getMyData() async {
     final storage = await _storage;
     final url = mainUrl;
     String finalUrl = '${url}profile/me/';
@@ -14,7 +14,7 @@ class ProfileRepository {
     String? token = storage.getString('auth_token');
     if (token == null) return null;
     // print(finalUrl);
-    // print(token);
+    print(token);
     dio.options.headers["authorization"] = "Token $token";
     try {
       final response = await dio.get(

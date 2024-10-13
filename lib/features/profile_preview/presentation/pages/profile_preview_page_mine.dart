@@ -3,6 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/core/widgets/placeholers.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/user_main_info.dart';
 import 'package:tanysu/features/profile_preview/data/models/profile_model.dart';
@@ -23,12 +25,14 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
-          'PANDEYA',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-              ),
+        title: const GradientText(
+          'Tanysu',
+          gradient: LinearGradient(
+            colors: <Color>[
+              mainColor,
+              secondColor,
+            ],
+          ),
         ),
         centerTitle: true,
         foregroundColor: Colors.black,
@@ -48,20 +52,21 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        width: 310,
+                        height: double.infinity,
+                        width: double.infinity,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: CachedNetworkImage(
                             imageUrl: e['image_url'] ?? '',
                             placeholder: (context, url) =>
                                 const ShrimerPlaceholder(
-                              height: 210,
-                              width: 165,
+                              height: double.infinity,
+                              width: double.infinity,
                             ),
                             errorWidget: (context, url, error) =>
                                 const ErrorPlaceholder(
-                              height: 210,
-                              width: 165,
+                              height: double.infinity,
+                              width: double.infinity,
                             ),
                             fit: BoxFit.cover,
                           ),
@@ -70,7 +75,10 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
                     )
                     .toList(),
                 options: CarouselOptions(
-                  height: 405,
+                  autoPlay: true,
+                  autoPlayAnimationDuration: const Duration(seconds: 1),
+                  autoPlayInterval: const Duration(seconds: 3),
+                  height: 420,
                   enlargeCenterPage: true,
                   enableInfiniteScroll: false,
                 ),
@@ -103,7 +111,7 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
                     UserMainInfoMine(
                       followers: widget.profile.followers_count ?? 0,
                       likes: widget.profile.likes ?? 0,
-                      followeings: widget.profile.followeings ?? 0,
+                      followeings: widget.profile.following_count ?? 0,
                       newLikes: widget.profile.new_likes ?? 0,
                     ),
                     const SizedBox(height: 20),
@@ -145,6 +153,34 @@ class _ProfilePreviewPageMineState extends State<ProfilePreviewPageMine> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class GradientText extends StatelessWidget {
+  final String text;
+  final Gradient gradient;
+
+  const GradientText(
+    this.text, {
+    super.key,
+    required this.gradient,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (bounds) => gradient.createShader(
+        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.montserratAlternates(
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );

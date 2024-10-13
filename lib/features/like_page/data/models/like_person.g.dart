@@ -8,9 +8,9 @@ part of 'like_person.dart';
 
 LikePersonModel _$LikePersonModelFromJson(Map<String, dynamic> json) =>
     LikePersonModel(
-      json['id'] as int?,
+      (json['id'] as num?)?.toInt(),
       json['image'] as Map<String, dynamic>?,
-      json['age'] as int?,
+      (json['age'] as num?)?.toInt(),
       json['first_name'] as String?,
       json['online'] as bool?,
     );

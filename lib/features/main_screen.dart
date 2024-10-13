@@ -1,8 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/core/functions/generate_string.dart';
 import 'package:tanysu/features/chat_page/presentation/pages/chat_page.dart';
@@ -10,6 +13,7 @@ import 'package:tanysu/features/main_page/presentation/pages/main_page_new.dart'
 import 'package:tanysu/features/profile_page/presentation/bloc/profile_page_bloc.dart';
 
 import 'package:tanysu/features/profile_page/presentation/pages/profile_page.dart';
+import 'package:tanysu/features/stream/presentation/pages/allow_page.dart';
 import 'package:tanysu/features/stream/presentation/pages/live_page.dart';
 import 'package:tanysu/features/stream/presentation/pages/stream_page.dart';
 import 'package:tanysu/l10n/translate.dart';
@@ -133,20 +137,20 @@ class _MainScreenState extends State<MainScreen> {
                         ref: ref,
                         active: currentIndex == 0,
                       ),
-                      // _buildNavItem(
-                      //   activeIcon: SvgPicture.asset(
-                      //     'assets/icons/navigation_icons/swipe_filled.svg',
-                      //     height: 24,
-                      //     width: 24,
-                      //   ),
-                      //   icon: SvgPicture.asset(
-                      //     'assets/icons/navigation_icons/swipe_outlined.svg',
-                      //   ),
-                      //   label: translation(context).swipe,
-                      //   index: 1,
-                      //   ref: ref,
-                      //   active: currentIndex == 1,
-                      // ),
+                      _buildNavItem(
+                        activeIcon: SvgPicture.asset(
+                          'assets/icons/navigation_icons/swipe_filled.svg',
+                          height: 24,
+                          width: 24,
+                        ),
+                        icon: SvgPicture.asset(
+                          'assets/icons/navigation_icons/swipe_outlined.svg',
+                        ),
+                        label: translation(context).swipe,
+                        index: 1,
+                        ref: ref,
+                        active: currentIndex == 1,
+                      ),
                       GestureDetector(
                         onTap: () {
                           showDialog(
@@ -290,20 +294,36 @@ class _MainScreenState extends State<MainScreen> {
     required bool isHost,
     required int profileId,
     required String name,
-  }) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => LivePage(
-          liveID: generateUniqueId(16),
-          name: name,
-          profileId: profileId,
-          isHost: isHost,
+  }) async {
+    var statusCamera = await Permission.camera.status;
+    var statusMicrophone = await Permission.microphone.status;
+    if (statusMicrophone.isGranted && statusCamera.isGranted) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LivePage(
+            liveID: generateUniqueId(16),
+            name: name,
+            profileId: profileId,
+            isHost: isHost,
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AllowPage(
+            liveID: generateUniqueId(16),
+            name: name,
+            profileId: profileId,
+            isHost: isHost,
+          ),
+        ),
+        (context) => false,
+      );
+    }
   }
-}
 
 // import 'package:flutter/material.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -482,3 +502,4 @@ class _MainScreenState extends State<MainScreen> {
 //     // );
 //   }
 // }
+}

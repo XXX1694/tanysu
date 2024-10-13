@@ -21,4 +21,11 @@ class GetAllGroupMessages extends MessageEvent {
   });
 }
 
+class UpdateAllGroupMessages extends MessageEvent {
+  final int page;
+  const UpdateAllGroupMessages({
+    required this.page,
+  });
+}
+
 class Reset extends MessageEvent {}

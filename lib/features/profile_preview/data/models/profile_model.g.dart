@@ -8,11 +8,11 @@ part of 'profile_model.dart';
 
 ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) => ProfileModel(
       json['is_liked'] as bool,
-      json['id'] as int?,
+      (json['id'] as num?)?.toInt(),
       (json['images'] as List<dynamic>?)
           ?.map((e) => e as Map<String, dynamic>)
           .toList(),
-      json['age'] as int?,
+      (json['age'] as num?)?.toInt(),
       json['city_name'] as String?,
       json['first_name'] as String?,
       (json['tags'] as List<dynamic>)
@@ -20,23 +20,23 @@ ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) => ProfileModel(
           .toList(),
       json['about_me'] as String?,
       json['birth_date'] as String?,
-      json['city'] as int?,
+      (json['city'] as num?)?.toInt(),
       json['company_name'] as String?,
-      json['followers_count'] as int?,
+      (json['followers_count'] as num?)?.toInt(),
       json['gender'] as String?,
       json['is_verified'] as bool?,
       json['matched'] as bool?,
       json['profession'] as String?,
-      json['reason'] as int?,
+      (json['reason'] as num?)?.toInt(),
       json['school_name'] as String?,
       json['try_to_find'] as String?,
-      json['user'] as int?,
-      json['completeness'] as int?,
+      (json['user'] as num?)?.toInt(),
+      (json['completeness'] as num?)?.toInt(),
       json['juz'] as String?,
-      json['likes'] as int?,
+      (json['likes'] as num?)?.toInt(),
       json['subscribed'] as bool,
-      json['followeings'] as int?,
-      json['new_likes'] as int?,
+      (json['following_count'] as num?)?.toInt(),
+      (json['new_likes'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ProfileModelToJson(ProfileModel instance) =>
@@ -65,6 +65,6 @@ Map<String, dynamic> _$ProfileModelToJson(ProfileModel instance) =>
       'juz': instance.juz,
       'likes': instance.likes,
       'subscribed': instance.subscribed,
-      'followeings': instance.followeings,
+      'following_count': instance.following_count,
       'new_likes': instance.new_likes,
     };

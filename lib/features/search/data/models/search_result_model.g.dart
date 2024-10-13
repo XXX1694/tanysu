@@ -8,8 +8,8 @@ part of 'search_result_model.dart';
 
 SearchResultModel _$SearchResultModelFromJson(Map<String, dynamic> json) =>
     SearchResultModel(
-      id: json['id'] as int,
-      age: json['age'] as int?,
+      id: (json['id'] as num).toInt(),
+      age: (json['age'] as num?)?.toInt(),
       city_name: json['city_name'] as String?,
       first_name: json['first_name'] as String?,
       image: json['image'] as Map<String, dynamic>,

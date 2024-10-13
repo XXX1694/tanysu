@@ -23,19 +23,48 @@ class _PartnerListState extends State<PartnerList> {
             height: 50,
             width: double.infinity,
             decoration: BoxDecoration(
-              border: Border.all(
-                color: selected == 0 ? mainColor : Colors.black54,
-                width: 2,
-              ),
               borderRadius: BorderRadius.circular(100),
+              gradient: selected == 0
+                  ? const LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        mainColor,
+                        secondColor,
+                      ],
+                    )
+                  : null,
+              border: selected != 0
+                  ? Border.all(
+                      color: Colors.black54,
+                      width: 2,
+                    )
+                  : null,
             ),
-            child: Center(
-              child: Text(
-                translation(context).woman,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: selected == 0 ? mainColor : Colors.black54,
-                      fontWeight: FontWeight.w700,
-                    ),
+            padding: const EdgeInsets.all(2),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Center(
+                child: selected == 0
+                    ? GradientText(
+                        translation(context).woman,
+                        gradient: const LinearGradient(
+                          colors: <Color>[
+                            mainColor,
+                            secondColor,
+                          ],
+                        ),
+                      )
+                    : Text(
+                        translation(context).woman,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
               ),
             ),
           ),
@@ -58,19 +87,48 @@ class _PartnerListState extends State<PartnerList> {
             height: 50,
             width: double.infinity,
             decoration: BoxDecoration(
-              border: Border.all(
-                color: selected == 1 ? mainColor : Colors.black54,
-                width: 2,
-              ),
               borderRadius: BorderRadius.circular(100),
+              gradient: selected == 1
+                  ? const LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        mainColor,
+                        secondColor,
+                      ],
+                    )
+                  : null,
+              border: selected != 1
+                  ? Border.all(
+                      color: Colors.black54,
+                      width: 2,
+                    )
+                  : null,
             ),
-            child: Center(
-              child: Text(
-                translation(context).man,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: selected == 1 ? mainColor : Colors.black54,
-                      fontWeight: FontWeight.w700,
-                    ),
+            padding: const EdgeInsets.all(2),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Center(
+                child: selected == 1
+                    ? GradientText(
+                        translation(context).man,
+                        gradient: const LinearGradient(
+                          colors: <Color>[
+                            mainColor,
+                            secondColor,
+                          ],
+                        ),
+                      )
+                    : Text(
+                        translation(context).man,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
               ),
             ),
           ),
@@ -93,19 +151,48 @@ class _PartnerListState extends State<PartnerList> {
             height: 50,
             width: double.infinity,
             decoration: BoxDecoration(
-              border: Border.all(
-                color: selected == 2 ? mainColor : Colors.black54,
-                width: 2,
-              ),
               borderRadius: BorderRadius.circular(100),
+              gradient: selected == 2
+                  ? const LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        mainColor,
+                        secondColor,
+                      ],
+                    )
+                  : null,
+              border: selected != 2
+                  ? Border.all(
+                      color: Colors.black54,
+                      width: 2,
+                    )
+                  : null,
             ),
-            child: Center(
-              child: Text(
-                translation(context).everyone,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: selected == 2 ? mainColor : Colors.black54,
-                      fontWeight: FontWeight.w700,
-                    ),
+            padding: const EdgeInsets.all(2),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Center(
+                child: selected == 2
+                    ? GradientText(
+                        translation(context).everyone,
+                        gradient: const LinearGradient(
+                          colors: <Color>[
+                            mainColor,
+                            secondColor,
+                          ],
+                        ),
+                      )
+                    : Text(
+                        translation(context).everyone,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
               ),
             ),
           ),
@@ -122,6 +209,33 @@ class _PartnerListState extends State<PartnerList> {
           },
         ),
       ],
+    );
+  }
+}
+
+class GradientText extends StatelessWidget {
+  final String text;
+  final Gradient gradient;
+
+  const GradientText(
+    this.text, {
+    super.key,
+    required this.gradient,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (bounds) => gradient.createShader(
+        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+      ),
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
+      ),
     );
   }
 }

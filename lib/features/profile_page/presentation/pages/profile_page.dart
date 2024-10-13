@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/features/profile_page/presentation/bloc/profile_page_bloc.dart';
-import 'package:tanysu/features/profile_page/presentation/widgets/coins_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/name_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/photo_block.dart';
 import 'package:tanysu/features/profile_page/presentation/widgets/user_main_info.dart';
@@ -37,17 +37,21 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
-          'PANDEYA',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-              ),
+        title: const GradientText(
+          'Tanysu',
+          gradient: LinearGradient(
+            colors: <Color>[
+              mainColor,
+              secondColor,
+            ],
+          ),
         ),
         surfaceTintColor: Colors.transparent,
+        centerTitle: true,
         actions: [
-          GestureDetector(
-            onTap: () {
+          CupertinoButton(
+            padding: const EdgeInsets.all(0),
+            onPressed: () {
               Navigator.pushNamed(context, '/notification');
             },
             child: SvgPicture.asset(
@@ -56,9 +60,9 @@ class _ProfilePageState extends State<ProfilePage> {
               width: 24,
             ),
           ),
-          const SizedBox(width: 16),
-          GestureDetector(
-            onTap: () {
+          CupertinoButton(
+            padding: const EdgeInsets.all(0),
+            onPressed: () {
               Navigator.pushNamed(context, '/settings');
             },
             child: SvgPicture.asset(
@@ -67,7 +71,6 @@ class _ProfilePageState extends State<ProfilePage> {
               width: 24,
             ),
           ),
-          const SizedBox(width: 20),
         ],
       ),
       body: SafeArea(
@@ -119,76 +122,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       UserMainInfo(
                         followers: state.model.followers_count ?? 0,
                         likes: state.model.likes ?? 0,
-                        followeings: state.model.followeings ?? 0,
+                        followeings: state.model.following_count ?? 0,
                         newLikes: state.model.new_likes ?? 0,
                       ),
                       const SizedBox(height: 20),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 35),
-                        child: Divider(
-                          color: Colors.black26,
-                          height: 1,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 35),
-                      //   child: SizedBox(
-                      //     width: double.infinity,
-                      //     child: CupertinoButton(
-                      //       padding: const EdgeInsets.symmetric(
-                      //         horizontal: 16,
-                      //         vertical: 12,
-                      //       ),
-                      //       color: mainColor20,
-                      //       onPressed: () {
-                      //         Navigator.push(
-                      //           context,
-                      //           MaterialPageRoute(
-                      //             builder: (context) => const LikePage(),
-                      //           ),
-                      //         );
-                      //       },
-                      //       child: Row(
-                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //         children: [
-                      //           Text(
-                      //             'Мои лайки',
-                      //             style: GoogleFonts.montserratAlternates(
-                      //               color: mainColor,
-                      //               fontSize: 16,
-                      //               fontWeight: FontWeight.w600,
-                      //             ),
-                      //           ),
-                      //           Container(
-                      //             height: 32,
-                      //             width: 32,
-                      //             decoration: BoxDecoration(
-                      //               color: mainColor20,
-                      //               borderRadius: BorderRadius.circular(100),
-                      //             ),
-                      //             child: Center(
-                      //               child: Text(
-                      //                 (state.model.likes ?? 0).toString(),
-                      //                 style: GoogleFonts.montserratAlternates(
-                      //                   color: mainColor,
-                      //                   fontSize: 16,
-                      //                   fontWeight: FontWeight.w600,
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //           )
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // const SizedBox(height: 16),
-                      CoinsBlock(
-                        coins: 0,
-                        userName: state.model.first_name ?? "No name",
-                      ),
-                      const SizedBox(height: 40),
+                      // CoinsBlock(
+                      //   coins: 0,
+                      //   userName: state.model.first_name ?? '',
+                      // )
                     ],
                   ),
                 ),
@@ -199,6 +140,34 @@ class _ProfilePageState extends State<ProfilePage> {
               );
             }
           },
+        ),
+      ),
+    );
+  }
+}
+
+class GradientText extends StatelessWidget {
+  final String text;
+  final Gradient gradient;
+
+  const GradientText(
+    this.text, {
+    super.key,
+    required this.gradient,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (bounds) => gradient.createShader(
+        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.montserratAlternates(
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );

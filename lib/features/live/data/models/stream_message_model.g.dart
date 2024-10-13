@@ -11,7 +11,7 @@ StreamMessageModel _$StreamMessageModelFromJson(Map<String, dynamic> json) =>
       message: json['message'] as String?,
       name: json['name'] as String?,
       photo: json['photo'] as String?,
-      profile_id: json['profile_id'] as int?,
+      profile_id: (json['profile_id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$StreamMessageModelToJson(StreamMessageModel instance) =>

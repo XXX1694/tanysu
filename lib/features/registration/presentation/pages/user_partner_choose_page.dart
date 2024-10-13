@@ -55,14 +55,14 @@ class _UserPartnerChoosePageState extends State<UserPartnerChoosePage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 35),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
             children: [
-              const SizedBox(height: 60),
-              const ChoosePartnerMain(),
-              const SizedBox(height: 40),
-              PartnerList(controller: tryToFindController),
               const Spacer(),
+              const ChoosePartnerMain(),
+              const Spacer(),
+              PartnerList(controller: tryToFindController),
+              const Spacer(flex: 2),
               MainButton(
                 text: translation(context).next,
                 onPressed: () {

@@ -59,7 +59,7 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
               content: NotificationContent(
                 id: 10,
                 channelKey: 'basic_channel',
-                title: 'Tanysu',
+                title: 'PANDEYA',
                 body: translation(context).user_reported,
               ),
             );
@@ -70,7 +70,7 @@ class _ChooseReportPageState extends State<ChooseReportPage> {
               content: NotificationContent(
                 id: 10,
                 channelKey: 'basic_channel',
-                title: 'Tanysu',
+                title: 'PANDEYA',
                 body: translation(context).user_report_error,
               ),
             );

@@ -9,10 +9,11 @@ class ChoosePartnerMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       translation(context).choose_partner_main,
-      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
             color: Colors.black,
             fontWeight: FontWeight.w700,
           ),
+      textAlign: TextAlign.center,
     );
   }
 }

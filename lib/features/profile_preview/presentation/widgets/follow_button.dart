@@ -42,9 +42,9 @@ class _FollowButtonState extends State<FollowButton> {
         width: 128,
         decoration: BoxDecoration(
             color: !follow ? Colors.transparent : mainColor,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-                color: !follow ? Colors.black38 : Colors.transparent)),
+            borderRadius: BorderRadius.circular(100),
+            border:
+                Border.all(color: !follow ? secondColor : Colors.transparent)),
         child: Center(
           child: Text(
             follow

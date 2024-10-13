@@ -47,7 +47,7 @@ class MessageRepository {
         finalUrl,
         queryParameters: {
           "page": page,
-          "page_size": 20,
+          "page_size": 50,
         },
       );
       // print(response.data);

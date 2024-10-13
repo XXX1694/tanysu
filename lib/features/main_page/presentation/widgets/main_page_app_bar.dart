@@ -15,7 +15,7 @@ class MainPageAppBar extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'tanysu',
+              'PANDEYA',
               style: GoogleFonts.montserratAlternates(
                 color: mainColor,
                 fontSize: 22,

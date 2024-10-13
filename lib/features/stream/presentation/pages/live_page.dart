@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:tanysu/features/block_user/presentation/widgets/show_block.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
 
@@ -47,17 +49,51 @@ class _LivePageState extends State<LivePage> {
               print(snapshot.data);
             }
             return SafeArea(
-              child: ZegoUIKitPrebuiltLiveStreaming(
-                appID:
-                    249797448, // Fill in the appID that you get from ZEGOCLOUD Admin Console.
-                appSign:
-                    'a8d3f6de3e464385099caf470a53373573263131eab9cf129c5b2509e3aa4911', // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
-                userID: widget.profileId.toString(),
-                userName: widget.name,
-                liveID: widget.liveID,
-                config: widget.isHost
-                    ? ZegoUIKitPrebuiltLiveStreamingConfig.host()
-                    : ZegoUIKitPrebuiltLiveStreamingConfig.audience(),
+              child: Stack(
+                children: [
+                  ZegoUIKitPrebuiltLiveStreaming(
+                    appID:
+                        928839839, // Fill in the appID that you get from ZEGOCLOUD Admin Console.
+                    appSign:
+                        '79b4d4ff45ecc941b89e9755e20d8ce9ded2a6c8316585a61c45731d7c97bd1f', // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
+                    userID: widget.profileId.toString(),
+                    userName: widget.name,
+                    liveID: widget.liveID,
+                    config: widget.isHost
+                        ? ZegoUIKitPrebuiltLiveStreamingConfig.host()
+                        : ZegoUIKitPrebuiltLiveStreamingConfig.audience(),
+                  ),
+                  !widget.isHost
+                      ? Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 24,
+                            ),
+                            child: GestureDetector(
+                              child: SizedBox(
+                                height: 24,
+                                width: 24,
+                                child: Center(
+                                  child: SvgPicture.asset(
+                                    'assets/icons/more.svg',
+                                    height: 15,
+                                  ),
+                                ),
+                              ),
+                              onTap: () {
+                                showBlockIOS(
+                                  context,
+                                  widget.name,
+                                  widget.profileId,
+                                );
+                              },
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
+                ],
               ),
             );
           } else {

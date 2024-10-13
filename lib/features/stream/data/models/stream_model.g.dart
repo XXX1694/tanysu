@@ -7,12 +7,12 @@ part of 'stream_model.dart';
 // **************************************************************************
 
 StreamModel _$StreamModelFromJson(Map<String, dynamic> json) => StreamModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       profile: json['profile'] as Map<String, dynamic>?,
       link: json['link'] as String?,
       description: json['description'] as String?,
       room_id: json['room_id'] as String?,
-      spectators: json['spectators'] as int?,
+      spectators: (json['spectators'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$StreamModelToJson(StreamModel instance) =>

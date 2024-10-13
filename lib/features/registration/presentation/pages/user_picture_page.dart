@@ -64,7 +64,7 @@ class _UserPicturePageState extends State<UserPicturePage> {
         backgroundColor: Colors.white,
         elevation: 0,
         foregroundColor: Colors.black,
-        surfaceTintColor: Colors.black,
+        surfaceTintColor: Colors.transparent,
         title: Text(
           translation(context).registration,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -82,7 +82,7 @@ class _UserPicturePageState extends State<UserPicturePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 60),
+                  SizedBox(height: 40),
                   PicMainText(),
                   // SizedBox(height: 22),
                   // PicSecondText(),

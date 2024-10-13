@@ -7,11 +7,11 @@ part of 'juz_model.dart';
 // **************************************************************************
 
 JuzModel _$JuzModelFromJson(Map<String, dynamic> json) => JuzModel(
-      json['id'] as int?,
+      (json['id'] as num?)?.toInt(),
       json['children'] as List<dynamic>?,
       json['icon'] as String?,
       json['name'] as String?,
-      json['parent'] as int?,
+      (json['parent'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$JuzModelToJson(JuzModel instance) => <String, dynamic>{

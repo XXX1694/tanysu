@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:tanysu/core/constants/colors.dart';
 import 'package:tanysu/core/widgets/placeholers.dart';
@@ -34,6 +35,8 @@ class ProfilePreviewPageMain extends StatefulWidget {
 
 class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
   late ProfilePreviewBloc bloc;
+  String firstName = '';
+  int id = 0;
   @override
   void initState() {
     bloc = BlocProvider.of<ProfilePreviewBloc>(context);
@@ -43,68 +46,60 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfilePreviewBloc, ProfilePreviewState>(
-      builder: (context, state) {
-        if (state is ProfilePreviewDataGetting) {
-          return Scaffold(
-            body: Column(
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Platform.isAndroid
-                        ? const CircularProgressIndicator(
-                            color: mainColor,
-                            strokeWidth: 3,
-                          )
-                        : const CupertinoActivityIndicator(
-                            color: mainColor,
-                          ),
-                  ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: const GradientText(
+          'Tanysu',
+          gradient: LinearGradient(
+            colors: <Color>[
+              mainColor,
+              secondColor,
+            ],
+          ),
+        ),
+        centerTitle: true,
+        foregroundColor: Colors.black,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          CupertinoButton(
+            padding: const EdgeInsets.all(0),
+            child: SizedBox(
+              height: 24,
+              width: 24,
+              child: Center(
+                child: SvgPicture.asset(
+                  'assets/icons/more.svg',
+                  height: 15,
                 ),
-              ],
-            ),
-          );
-        } else if (state is ProfilePreviewDataGot) {
-          return Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              title: Text(
-                'PANDEYA',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                    ),
               ),
-              centerTitle: true,
-              foregroundColor: Colors.black,
-              surfaceTintColor: Colors.transparent,
-              elevation: 0,
-              actions: [
-                CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  child: SizedBox(
-                    height: 24,
-                    width: 24,
-                    child: Center(
-                      child: SvgPicture.asset(
-                        'assets/icons/more.svg',
-                        height: 15,
-                      ),
-                    ),
-                  ),
-                  onPressed: () {
-                    showBlockIOS(
-                      context,
-                      state.model.first_name ?? '',
-                      state.model.id ?? 0,
-                    );
-                  },
-                ),
-              ],
             ),
-            body: SafeArea(
-              child: SingleChildScrollView(
+            onPressed: () {
+              showBlockIOS(context, firstName, id);
+            },
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: BlocBuilder<ProfilePreviewBloc, ProfilePreviewState>(
+          builder: (context, state) {
+            if (state is ProfilePreviewDataGetting) {
+              return Center(
+                child: Platform.isAndroid
+                    ? const CircularProgressIndicator(
+                        color: mainColor,
+                        strokeWidth: 3,
+                      )
+                    : const CupertinoActivityIndicator(
+                        color: mainColor,
+                      ),
+              );
+            } else if (state is ProfilePreviewDataGot) {
+              firstName = state.model.first_name ?? '';
+              id = state.model.id ?? 0;
+              return SingleChildScrollView(
                 child: Column(
                   children: [
                     const SizedBox(height: 12),
@@ -116,20 +111,22 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              width: 310,
+                              width: double.infinity,
+                              height: double.infinity,
+                              // margin: const EdgeInsets.symmetric(horizontal: 8),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: CachedNetworkImage(
                                   imageUrl: e['image_url'],
                                   placeholder: (context, url) =>
                                       const ShrimerPlaceholder(
-                                    height: 210,
-                                    width: 165,
+                                    height: double.infinity,
+                                    width: double.infinity,
                                   ),
                                   errorWidget: (context, url, error) =>
                                       const ErrorPlaceholder(
-                                    height: 210,
-                                    width: 165,
+                                    height: double.infinity,
+                                    width: double.infinity,
                                   ),
                                   fit: BoxFit.cover,
                                 ),
@@ -138,7 +135,10 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
                           )
                           .toList(),
                       options: CarouselOptions(
-                        height: 405,
+                        autoPlay: true,
+                        autoPlayAnimationDuration: const Duration(seconds: 1),
+                        autoPlayInterval: const Duration(seconds: 3),
+                        height: 420,
                         enlargeCenterPage: true,
                         enableInfiniteScroll: false,
                       ),
@@ -218,23 +218,43 @@ class _ProfilePreviewPageMainState extends State<ProfilePreviewPageMain> {
                     ),
                   ],
                 ),
-              ),
-            ),
-          );
-        } else {
-          return Scaffold(
-            body: Column(
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Text(translation(context).error),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-      },
+              );
+            } else {
+              return Center(
+                child: Text(translation(context).error),
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class GradientText extends StatelessWidget {
+  final String text;
+  final Gradient gradient;
+
+  const GradientText(
+    this.text, {
+    super.key,
+    required this.gradient,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (bounds) => gradient.createShader(
+        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.montserratAlternates(
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
     );
   }
 }
